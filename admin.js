@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initAuth();
   initNavigation();
   initModals();
-  initPhotoUploader();
+  initGalleryUploader();
   renderAll();
 });
 
@@ -213,209 +213,263 @@ function renderDashboardStats() {
 }
 
 /* ==========================================================================
-   5. GESTION DE LA GALERIE PHOTOS (AJOUT, MODIFICATION, SUPPRESSION)
+   5. GESTION DE LA GALERIE PHOTOS (TÉLÉVERSEMENT DIRECT SUR IMGBB SANS FORMULAIRE)
    ========================================================================== */
+const IMGBB_STORAGE_KEY = '11E_TABERNACLE_IMGBB_KEY';
+
+function getImgbbKey() {
+  return localStorage.getItem(IMGBB_STORAGE_KEY) || appData?.siteInfo?.imgbbKey || '';
+}
+
+function saveImgbbKey() {
+  const input = document.getElementById('imgbb-api-key');
+  if (!input) return;
+  const key = input.value.trim();
+  if (!key) {
+    alert('Veuillez entrer une clé API ImgBB valide.');
+    return;
+  }
+  localStorage.setItem(IMGBB_STORAGE_KEY, key);
+  if (!appData.siteInfo) appData.siteInfo = {};
+  appData.siteInfo.imgbbKey = key;
+  saveDataLocally(false);
+  showToast('Clé API ImgBB enregistrée avec succès !', 'success');
+}
+
+function initImgbbKeyInput() {
+  const input = document.getElementById('imgbb-api-key');
+  if (input) {
+    input.value = getImgbbKey();
+  }
+}
+
 function renderGalleryList() {
   const container = document.getElementById('gallery-items-container');
+  const countLabel = document.getElementById('gallery-count-label');
   if (!container) return;
 
   const photos = appData.gallery || [];
+  if (countLabel) countLabel.textContent = photos.length;
+
   if (photos.length === 0) {
     container.innerHTML = `
-      <div class="col-span-full text-center py-12 bg-white/70 rounded-2xl border-2 border-dashed border-purple-200">
-        <p class="text-slate-500 font-medium">Aucune photo dans la galerie.</p>
-        <button onclick="openAddPhotoModal()" class="mt-4 px-5 py-2.5 rounded-full btn-gold-primary text-xs font-bold shadow-md">
-          Ajouter la première photo
+      <div class="col-span-full text-center py-12 admin-glass-panel rounded-2xl border-2 border-dashed border-purple-800">
+        <div class="w-16 h-16 rounded-full mx-auto mb-3 bg-purple-900/60 flex items-center justify-center text-amber-300">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <p class="text-slate-300 font-semibold mb-1">Aucune photo dans la galerie pour le moment.</p>
+        <p class="text-xs text-slate-400 mb-4">Téléversez vos photos ci-dessus pour les ajouter instantanément.</p>
+        <button onclick="document.getElementById('gallery-multi-upload').click()" class="px-5 py-2.5 rounded-full btn-gold-primary text-xs font-bold shadow-md cursor-pointer">
+          Sélectionner des photos
         </button>
       </div>
     `;
     return;
   }
 
-  container.innerHTML = photos.map((item, index) => {
-    const categoryLabels = {
-      'assemblee': 'Assemblée & Fraternité',
-      'ministere': 'Ministère & Cantiques',
-      'travaux': 'Chantier & Travaux',
-      'message': 'Colonne de Feu & Nuée',
-      'enseignements': 'Révélations'
-    };
-    const catName = categoryLabels[item.category] || item.category;
-
-    return `
-      <div class="bg-white rounded-2xl border border-purple-100 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition-all group">
-        <div class="relative h-44 bg-slate-900 overflow-hidden">
-          <img src="${item.image}" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-          <div class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-brand-purpleDark/90 border border-amber-400/40 text-amber-300 text-[10px] font-bold uppercase tracking-wider">
-            ${escapeHtml(item.badge || 'Photo')}
-          </div>
-          <div class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full bg-black/60 text-white text-[10px] font-semibold">
-            ${index + 1}/${photos.length}
-          </div>
-        </div>
+  container.innerHTML = photos.map((item, index) => `
+    <div class="group relative rounded-2xl overflow-hidden bg-slate-900 border border-purple-800/80 hover:border-amber-400 transition-all shadow-lg flex flex-col justify-between">
+      <div class="relative aspect-square overflow-hidden bg-black/60">
+        <img src="${escapeHtml(item.image)}" alt="Photo ${index + 1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
         
-        <div class="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold text-amber-600 uppercase tracking-wider block">${catName}</span>
-            <h4 class="font-heading font-bold text-slate-900 text-sm mt-0.5 leading-snug line-clamp-1">${escapeHtml(item.title)}</h4>
-            <p class="text-xs text-slate-600 mt-1 line-clamp-2 leading-relaxed">${escapeHtml(item.caption || '')}</p>
-          </div>
+        <!-- Badge index -->
+        <div class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/75 text-amber-300 text-[10px] font-bold font-mono">
+          #${photos.length - index}
+        </div>
 
-          <div class="mt-4 pt-3 border-t border-purple-50 flex items-center justify-between gap-2">
-            <button onclick="openEditPhotoModal('${item.id}')" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 text-brand-purpleDark text-xs font-bold transition-colors">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-              <span>Modifier</span>
-            </button>
-            <button onclick="confirmDeletePhoto('${item.id}')" class="p-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 transition-colors" title="Supprimer la photo">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-            </button>
-          </div>
+        <!-- Boutons d'action rapides (Voir & Supprimer) -->
+        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2.5 p-2 backdrop-blur-[2px]">
+          <a href="${escapeHtml(item.image)}" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-purple-900/90 hover:bg-purple-700 text-amber-300 border border-amber-400/40 shadow-lg transition-transform hover:scale-110" title="Voir l'image en grand">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          </a>
+
+          <button onclick="confirmDeletePhoto('${item.id}')" class="p-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white shadow-lg transition-transform hover:scale-110 cursor-pointer" title="Supprimer définitivement de la galerie">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+          </button>
         </div>
       </div>
-    `;
-  }).join('');
-}
 
-function openAddPhotoModal() {
-  currentEditingPhotoId = null;
-  const modal = document.getElementById('photo-modal');
-  const title = document.getElementById('photo-modal-title');
-  const form = document.getElementById('photo-form');
-  
-  if (title) title.textContent = 'Ajouter une photo à la Galerie';
-  if (form) form.reset();
-
-  const preview = document.getElementById('photo-preview-img');
-  const previewContainer = document.getElementById('photo-preview-container');
-  if (preview) preview.src = '';
-  if (previewContainer) previewContainer.classList.add('hidden');
-
-  modal?.classList.remove('hidden');
-}
-
-function openEditPhotoModal(id) {
-  currentEditingPhotoId = id;
-  const photo = appData.gallery.find(p => p.id === id);
-  if (!photo) return;
-
-  const modal = document.getElementById('photo-modal');
-  const title = document.getElementById('photo-modal-title');
-
-  if (title) title.textContent = 'Modifier la photo';
-
-  document.getElementById('photo-title').value = photo.title || '';
-  document.getElementById('photo-category').value = photo.category || 'assemblee';
-  document.getElementById('photo-badge').value = photo.badge || '';
-  document.getElementById('photo-subtitle').value = photo.subtitle || '';
-  document.getElementById('photo-caption').value = photo.caption || '';
-  document.getElementById('photo-image-url').value = photo.image || '';
-
-  const preview = document.getElementById('photo-preview-img');
-  const previewContainer = document.getElementById('photo-preview-container');
-  if (preview && photo.image) {
-    preview.src = photo.image;
-    previewContainer?.classList.remove('hidden');
-  }
-
-  modal?.classList.remove('hidden');
+      <!-- Bas de carte simple avec date et bouton supprimer -->
+      <div class="p-2.5 bg-brand-purpleDark/95 flex items-center justify-between border-t border-purple-900/60">
+        <span class="text-[10px] text-slate-400 font-mono">${escapeHtml(item.date || '')}</span>
+        <button onclick="confirmDeletePhoto('${item.id}')" class="text-xs text-red-400 hover:text-red-300 font-bold inline-flex items-center gap-1 cursor-pointer">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+          <span>Supprimer</span>
+        </button>
+      </div>
+    </div>
+  `).join('');
 }
 
 function confirmDeletePhoto(id) {
   const photo = appData.gallery.find(p => p.id === id);
   if (!photo) return;
 
-  if (confirm(`Confirmez-vous la suppression de la photo « ${photo.title} » ?`)) {
+  if (confirm(`Voulez-vous vraiment supprimer cette photo de la galerie ?`)) {
     appData.gallery = appData.gallery.filter(p => p.id !== id);
     saveDataLocally();
     renderGalleryList();
     renderDashboardStats();
-    showToast('Photo supprimée avec succès', 'info');
+    showToast('Photo supprimée avec succès de la galerie', 'info');
   }
 }
 
-function initPhotoUploader() {
-  const fileInput = document.getElementById('photo-file-input');
-  const urlInput = document.getElementById('photo-image-url');
-  const previewContainer = document.getElementById('photo-preview-container');
-  const previewImg = document.getElementById('photo-preview-img');
-  const photoForm = document.getElementById('photo-form');
+function initGalleryUploader() {
+  const dropzone = document.getElementById('gallery-dropzone');
+  const fileInput = document.getElementById('gallery-multi-upload');
+  const statusContainer = document.getElementById('gallery-upload-status');
+  const statusText = document.getElementById('upload-status-text');
+  const statusPercent = document.getElementById('upload-status-percent');
+  const progressBar = document.getElementById('upload-progress-bar');
 
-  fileInput?.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  initImgbbKeyInput();
 
-    if (file.size > 5 * 1024 * 1024) {
-      alert('Veuillez choisir une image inférieure à 5 Mo.');
-      return;
-    }
+  if (!dropzone || !fileInput) return;
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const dataUrl = event.target.result;
-      if (urlInput) urlInput.value = dataUrl;
-      if (previewImg) previewImg.src = dataUrl;
-      if (previewContainer) previewContainer.classList.remove('hidden');
-    };
-    reader.readAsDataURL(file);
+  // Clic sur la dropzone ouvre le sélecteur de fichier (sauf si on clique sur un lien/input interne)
+  dropzone.addEventListener('click', (e) => {
+    if (e.target.closest('a') || e.target.closest('button') || e.target.closest('input')) return;
+    fileInput.click();
   });
 
-  urlInput?.addEventListener('input', () => {
-    const url = urlInput.value.trim();
-    if (url) {
-      if (previewImg) previewImg.src = url;
-      if (previewContainer) previewContainer.classList.remove('hidden');
+  // Glisser-déposer (Drag & Drop)
+  ['dragenter', 'dragover'].forEach(eventName => {
+    dropzone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.add('border-amber-400', 'bg-purple-900/50', 'scale-[1.01]');
+    });
+  });
+
+  ['dragleave', 'dragend', 'drop'].forEach(eventName => {
+    dropzone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.remove('border-amber-400', 'bg-purple-900/50', 'scale-[1.01]');
+    });
+  });
+
+  dropzone.addEventListener('drop', (e) => {
+    const dt = e.dataTransfer;
+    const files = dt ? dt.files : null;
+    if (files && files.length > 0) {
+      handleFilesUpload(files);
     }
   });
 
-  photoForm?.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const title = document.getElementById('photo-title').value.trim();
-    const category = document.getElementById('photo-category').value;
-    const badge = document.getElementById('photo-badge').value.trim() || 'Galerie';
-    const subtitle = document.getElementById('photo-subtitle').value.trim() || '11e Heure Tabernacle';
-    const caption = document.getElementById('photo-caption').value.trim();
-    const image = document.getElementById('photo-image-url').value.trim();
-
-    if (!title || !image) {
-      alert('Veuillez renseigner un titre et sélectionner une image.');
-      return;
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files && fileInput.files.length > 0) {
+      handleFilesUpload(fileInput.files);
     }
+  });
 
-    if (currentEditingPhotoId) {
-      // Modification
-      const photo = appData.gallery.find(p => p.id === currentEditingPhotoId);
-      if (photo) {
-        photo.title = title;
-        photo.category = category;
-        photo.badge = badge;
-        photo.subtitle = subtitle;
-        photo.caption = caption;
-        photo.image = image;
+  async function handleFilesUpload(fileList) {
+    let key = getImgbbKey();
+    if (!key) {
+      const enteredKey = prompt(
+        "Pour téléverser vos photos sur le Cloud ImgBB gratuitement et sans limite :\n\n" +
+        "Veuillez coller votre clé API ImgBB (obtenez-la en 1 clic sur https://api.imgbb.com) :"
+      );
+      if (enteredKey && enteredKey.trim()) {
+        key = enteredKey.trim();
+        localStorage.setItem(IMGBB_STORAGE_KEY, key);
+        if (!appData.siteInfo) appData.siteInfo = {};
+        appData.siteInfo.imgbbKey = key;
+        initImgbbKeyInput();
+      } else {
+        alert("La clé API ImgBB est nécessaire pour l'hébergement cloud permanent. Rendez-vous sur api.imgbb.com pour l'obtenir gratuitement.");
+        return;
       }
-      showToast('Photo mise à jour avec succès', 'success');
-    } else {
-      // Ajout nouvelle photo
-      const newPhoto = {
-        id: 'gal-' + Date.now(),
-        title,
-        category,
-        badge,
-        subtitle,
-        caption,
-        image,
-        date: new Date().toISOString().split('T')[0]
-      };
-      appData.gallery.unshift(newPhoto);
-      showToast('Nouvelle photo ajoutée à la galerie', 'success');
+    }
+
+    const files = Array.from(fileList).filter(f => f.type.startsWith('image/'));
+    if (files.length === 0) {
+      alert('Veuillez sélectionner au moins un fichier image valide (JPG, PNG, WEBP).');
+      return;
+    }
+
+    if (statusContainer) {
+      statusContainer.classList.remove('hidden');
+    }
+
+    let successCount = 0;
+    const total = files.length;
+
+    for (let i = 0; i < total; i++) {
+      const file = files[i];
+      const percent = Math.round((i / total) * 100);
+
+      if (statusText) {
+        statusText.innerHTML = `
+          <svg class="w-4 h-4 animate-spin text-amber-400" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+          Envoi vers ImgBB de la photo ${i + 1} sur ${total}...
+        `;
+      }
+      if (statusPercent) statusPercent.textContent = `${percent}%`;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        const response = await fetch(`https://api.imgbb.com/1/upload?key=${encodeURIComponent(key)}`, {
+          method: 'POST',
+          body: formData
+        });
+
+        const json = await response.json();
+
+        if (json.success && json.data) {
+          const directUrl = json.data.url || json.data.display_url;
+          const cleanName = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ').trim();
+
+          const newPhoto = {
+            id: 'gal_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+            title: cleanName || "11e Heure Tabernacle",
+            category: "assemblee",
+            badge: "Photo",
+            subtitle: "Pointe-Noire • Congo",
+            caption: "",
+            image: directUrl,
+            deleteUrl: json.data.delete_url || "",
+            date: new Date().toISOString().split('T')[0]
+          };
+
+          if (!appData.gallery) appData.gallery = [];
+          appData.gallery.unshift(newPhoto);
+          successCount++;
+        } else {
+          const err = json.error?.message || 'Échec du téléversement ImgBB';
+          console.error(`Erreur pour ${file.name}:`, err);
+          showToast(`Erreur (${file.name}) : ${err}`, 'error');
+        }
+      } catch (uploadErr) {
+        console.error('Erreur réseau lors de l\'upload ImgBB:', uploadErr);
+        showToast(`Erreur réseau pour ${file.name}`, 'error');
+      }
+    }
+
+    if (progressBar) progressBar.style.width = '100%';
+    if (statusPercent) statusPercent.textContent = '100%';
+    if (statusText) {
+      statusText.innerHTML = `✅ ${successCount} photo(s) téléversée(s) avec succès sur ImgBB !`;
     }
 
     saveDataLocally();
     renderGalleryList();
     renderDashboardStats();
-    document.getElementById('photo-modal')?.classList.add('hidden');
-  });
+
+    setTimeout(() => {
+      if (statusContainer) statusContainer.classList.add('hidden');
+      if (fileInput) fileInput.value = '';
+    }, 2500);
+
+    if (successCount > 0) {
+      showToast(`${successCount} photo(s) ajoutée(s) à la galerie !`, 'success');
+    }
+  }
 }
+
 
 /* ==========================================================================
    6. GESTION DES PROGRAMMES ET HORAIRES DES CULTES

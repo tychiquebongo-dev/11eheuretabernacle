@@ -316,13 +316,13 @@
         <div class="p-6 sm:p-8 rounded-3xl admin-glass-panel border-2 border-amber-400/30">
           <h3 class="font-heading font-bold text-lg text-white mb-4">Actions Rapides</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <button onclick="openAddPhotoModal()" class="p-4 rounded-2xl bg-purple-900/40 hover:bg-purple-800/60 border border-amber-400/30 text-left transition-all group flex items-start gap-3">
+            <button onclick="document.querySelector('[data-target=\'section-galerie\']').click(); document.getElementById('gallery-multi-upload').click();" class="p-4 rounded-2xl bg-purple-900/40 hover:bg-purple-800/60 border border-amber-400/30 text-left transition-all group flex items-start gap-3">
               <div class="p-2.5 rounded-xl bg-amber-400 text-purple-950 font-bold shrink-0">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
               </div>
               <div>
-                <span class="font-heading font-bold text-sm text-white group-hover:text-amber-300 block">Ajouter une Photo</span>
-                <span class="text-xs text-slate-400">Insérez une nouvelle image avec légende et catégorie dans la galerie</span>
+                <span class="font-heading font-bold text-sm text-white group-hover:text-amber-300 block">Uploader des Photos</span>
+                <span class="text-xs text-slate-400">Téléversez directement vos photos sur ImgBB sans aucun formulaire</span>
               </div>
             </button>
 
@@ -351,23 +351,87 @@
       </section>
 
       <!-- ====================================================================
-           SECTION 2 : GESTION DE LA GALERIE PHOTOS
+           SECTION 2 : GESTION DE LA GALERIE PHOTOS (TÉLÉVERSEMENT DIRECT IMGBB)
            ==================================================================== -->
       <section id="section-galerie" class="admin-section hidden space-y-6 animate-fade-in">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-purple-900/60">
           <div>
-            <h2 class="font-heading text-2xl font-extrabold text-white">Gestion de la Galerie Photos</h2>
-            <p class="text-xs sm:text-sm text-slate-400">Ajoutez, modifiez ou supprimez les images de la vie de l'église et des cultes.</p>
+            <h2 class="font-heading text-2xl font-extrabold text-white">Galerie Photos (Hébergement ImgBB)</h2>
+            <p class="text-xs sm:text-sm text-slate-400">Glissez-déposez ou sélectionnez vos photos. Elles sont automatiquement hébergées sur le Cloud ImgBB et visibles par tous.</p>
           </div>
-          <button onclick="openAddPhotoModal()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-gold-primary text-xs font-heading font-bold shadow-lg">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-            <span>Ajouter une photo</span>
+          <button type="button" onclick="document.getElementById('gallery-multi-upload').click()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-gold-primary text-xs font-heading font-bold shadow-lg cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+            <span>Uploader des photos</span>
           </button>
         </div>
 
-        <!-- Grille des photos actuelles -->
-        <div id="gallery-items-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          <!-- Injecté dynamiquement par admin.js -->
+        <!-- ZONE DE TÉLÉVERSEMENT DIRECT (DRAG & DROP SANS FORMULAIRE) -->
+        <div id="gallery-dropzone" class="relative p-8 sm:p-12 rounded-3xl border-2 border-dashed border-amber-400/50 hover:border-amber-400 bg-gradient-to-b from-purple-950/40 via-brand-purpleDeep/60 to-purple-950/40 transition-all duration-300 text-center cursor-pointer group shadow-xl">
+          <input type="file" id="gallery-multi-upload" accept="image/*" multiple class="hidden">
+          
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl mx-auto mb-4 bg-gradient-to-tr from-amber-500 to-purple-600 flex items-center justify-center text-purple-950 font-bold shadow-2xl group-hover:scale-110 transition-transform">
+            <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+            </svg>
+          </div>
+
+          <h3 class="font-heading text-lg sm:text-xl font-extrabold text-white mb-1 group-hover:text-amber-300 transition-colors">
+            Glissez vos photos ici ou cliquez pour choisir
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-300 max-w-md mx-auto mb-4">
+            Sélectionnez une ou plusieurs photos à la fois depuis votre téléphone ou PC. Téléversement automatique vers ImgBB sans aucun champ à remplir.
+          </p>
+
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold font-heading">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Parcourir les fichiers (JPG, PNG, WEBP)
+          </span>
+
+          <!-- ÉTAT ET PROGRESSION DU TÉLÉVERSEMENT IMGBB -->
+          <div id="gallery-upload-status" class="hidden mt-6 p-4 rounded-2xl bg-brand-purpleDark/90 border border-amber-400/40 max-w-lg mx-auto text-left animate-fade-in">
+            <div class="flex items-center justify-between text-xs font-heading font-bold mb-2">
+              <span id="upload-status-text" class="text-amber-300 flex items-center gap-2">
+                <svg class="w-4 h-4 animate-spin text-amber-400" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                Envoi vers ImgBB en cours...
+              </span>
+              <span id="upload-status-percent" class="text-white">0%</span>
+            </div>
+            <div class="w-full h-2.5 rounded-full bg-purple-950 overflow-hidden border border-purple-800">
+              <div id="upload-progress-bar" class="h-full bg-gradient-to-r from-amber-500 to-amber-300 transition-all duration-200" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BARRE DE GESTION DE LA CLÉ API IMGBB -->
+        <div class="p-4 rounded-2xl admin-glass-panel border border-purple-800/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2 text-slate-300">
+            <span class="p-1.5 rounded-lg bg-amber-400/20 text-amber-300 font-bold">🔑</span>
+            <div>
+              <span class="font-bold text-white block">Clé API ImgBB (Cloud Gratuit) :</span>
+              <span class="text-[11px] text-slate-400">Nécessaire pour l'hébergement illimité et permanent des photos</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 w-full md:w-auto">
+            <input type="text" id="imgbb-api-key" placeholder="Collez votre clé API ImgBB ici..." class="w-full md:w-64 px-3 py-1.5 rounded-lg admin-input text-xs">
+            <button type="button" onclick="saveImgbbKey()" class="px-3.5 py-1.5 rounded-lg btn-gold-primary text-xs font-bold shrink-0">
+              Enregistrer
+            </button>
+            <a href="https://api.imgbb.com/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-purple-900/60 hover:bg-purple-800 text-amber-300 border border-purple-700 font-bold shrink-0 text-center" title="Obtenir une clé gratuite sur ImgBB">
+              Obtenir ma clé gratuite &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- GRILLE DES PHOTOS ACTUELLES -->
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-heading font-bold text-base text-white">Photos dans la Galerie (<span id="gallery-count-label">0</span>)</h3>
+            <span class="text-xs text-slate-400">Cliquez sur une photo pour l'agrandir ou sur la corbeille pour la supprimer.</span>
+          </div>
+
+          <div id="gallery-items-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- Injecté dynamiquement par admin.js sans aucun champ de saisie -->
+          </div>
         </div>
       </section>
 
@@ -680,88 +744,6 @@
     </main>
   </div>
 
-  <!-- ========================================================================
-       MODALE 1 : AJOUTER / MODIFIER UNE PHOTO DE LA GALERIE
-       ======================================================================== -->
-  <div id="photo-modal" class="admin-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden overflow-y-auto">
-    <div class="w-full max-w-lg rounded-3xl p-6 sm:p-8 admin-glass-panel border-2 border-amber-400/40 shadow-2xl my-8 relative">
-      
-      <div class="flex items-center justify-between pb-4 mb-4 border-b border-purple-900/60">
-        <h3 id="photo-modal-title" class="font-heading font-bold text-lg text-white">Ajouter une photo à la Galerie</h3>
-        <button type="button" class="modal-close p-1.5 rounded-lg text-slate-400 hover:text-white">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-      </div>
-
-      <form id="photo-form" class="space-y-4 text-left">
-        <div>
-          <label for="photo-title" class="block text-xs font-heading font-bold text-slate-300 uppercase mb-1">Titre de la photo * :</label>
-          <input type="text" id="photo-title" required placeholder="Ex: Culte d'adoration, Chantier du Tabernacle..." class="w-full px-4 py-2.5 rounded-xl admin-input text-sm">
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label for="photo-category" class="block text-xs font-heading font-bold text-slate-300 uppercase mb-1">Catégorie * :</label>
-            <select id="photo-category" class="w-full px-3 py-2.5 rounded-xl admin-input text-sm">
-              <option value="assemblee">Assemblée & Fraternité</option>
-              <option value="ministere">Ministère & Cantiques</option>
-              <option value="travaux">Chantier & Travaux</option>
-              <option value="message">Colonne de Feu & Nuée</option>
-              <option value="enseignements">Révélations</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="photo-badge" class="block text-xs font-heading font-bold text-slate-300 uppercase mb-1">Badge d'accent :</label>
-            <input type="text" id="photo-badge" placeholder="Ex: Culte Spécial, Voungou 1..." class="w-full px-3 py-2.5 rounded-xl admin-input text-sm">
-          </div>
-        </div>
-
-        <div>
-          <label for="photo-subtitle" class="block text-xs font-heading font-bold text-slate-300 uppercase mb-1">Sous-titre / Lieu :</label>
-          <input type="text" id="photo-subtitle" placeholder="Ex: Pointe-Noire &bull; Voungou 1" class="w-full px-4 py-2.5 rounded-xl admin-input text-sm">
-        </div>
-
-        <div>
-          <label for="photo-caption" class="block text-xs font-heading font-bold text-slate-300 uppercase mb-1">Légende & Description détaillée :</label>
-          <textarea id="photo-caption" rows="2" placeholder="Description de la photo pour la visionneuse..." class="w-full px-4 py-2.5 rounded-xl admin-input text-sm"></textarea>
-        </div>
-
-        <!-- Sélection Image : Fichier Local OU Lien URL -->
-        <div class="p-4 rounded-xl bg-purple-950/50 border border-purple-800 space-y-3">
-          <label class="block text-xs font-heading font-bold text-amber-300 uppercase">Image de la photo * :</label>
-          
-          <div>
-            <label class="block text-[11px] text-slate-400 mb-1">Option 1 : Choisir un fichier depuis votre téléphone ou ordinateur :</label>
-            <input type="file" id="photo-file-input" accept="image/*" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-400 file:text-purple-950 hover:file:bg-amber-300 cursor-pointer">
-          </div>
-
-          <div>
-            <label for="photo-image-url" class="block text-[11px] text-slate-400 mb-1">Option 2 : Ou entrer le chemin / URL de l'image :</label>
-            <input type="text" id="photo-image-url" placeholder="assets/images/... ou https://..." class="w-full px-3 py-2 rounded-lg admin-input text-xs">
-          </div>
-
-          <!-- Aperçu instantané -->
-          <div id="photo-preview-container" class="hidden pt-2">
-            <span class="block text-[11px] font-bold text-slate-400 mb-1">Aperçu :</span>
-            <div class="w-full h-36 rounded-xl overflow-hidden bg-black/60 border border-purple-700">
-              <img id="photo-preview-img" src="" alt="Aperçu" class="w-full h-full object-cover">
-            </div>
-          </div>
-        </div>
-
-        <div class="flex items-center justify-end gap-3 pt-3">
-          <button type="button" class="modal-close px-4 py-2.5 rounded-xl bg-purple-900/60 hover:bg-purple-800 text-xs font-bold text-slate-300">
-            Annuler
-          </button>
-          <button type="submit" class="px-5 py-2.5 rounded-xl btn-gold-primary text-xs font-heading font-bold shadow-lg">
-            Enregistrer la photo
-          </button>
-        </div>
-      </form>
-
-    </div>
-  </div>
 
   <!-- ========================================================================
        MODALE 2 : AJOUTER / MODIFIER UN PROGRAMME DE CULTE
