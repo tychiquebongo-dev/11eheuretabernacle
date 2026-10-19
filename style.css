@@ -102,32 +102,31 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  background-image: url('assets/images/ciel-nuages-bg.jpg');
+  background-image: url('assets/images/la-nuee-surnaturelle-1963.jpg');
   background-size: cover;
-  background-position: center center;
+  background-position: center 25%;
   transform: scale(1); /* Cadrage normal fixe sans zoom arrière ni mouvement perpétuel */
   animation: none;
-  filter: blur(1.5px) brightness(1.26) saturate(1.20);
+  filter: brightness(1.10) contrast(1.08) saturate(1.12);
   transform-origin: center center;
 }
 
-/* Hero Overlays: Lumineux, bleu ciel céleste et contrasté */
+/* Hero Overlays: Translucide, laisse la Nuée surnaturelle visible tout en assurant un contraste parfait */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(4, 20, 44, 0.72) 0%,
-    rgba(2, 132, 199, 0.58) 55%,
-    rgba(56, 189, 248, 0.48) 100%
+    rgba(4, 20, 44, 0.55) 0%,
+    rgba(2, 44, 80, 0.40) 40%,
+    rgba(4, 20, 44, 0.65) 100%
   );
-  backdrop-filter: blur(1px);
 }
 
 .hero-overlay-shimmer {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.40) 0%, rgba(186, 230, 253, 0.22) 45%, transparent 80%);
+  background: radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.25) 0%, rgba(186, 230, 253, 0.12) 45%, transparent 75%);
   pointer-events: none;
 }
 
