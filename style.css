@@ -1,29 +1,40 @@
 /* ==========================================================================
-   11e HEURE TABERNACLE - STYLES OFFICIELS & DESIGN SYSTÈME
-   Direction artistique : Blanc pur, Bleu Ciel spirituel, Bleu Profond d'autorité
-   Auteur : Full Stack UI/UX Designer & Développeur Web
+   11e HEURE TABERNACLE - DESIGN SYSTÈME ROYAL : VIOLET & OR DORÉ
+   Direction artistique : Violet Céleste Impérial, Or Lumineux & Blanc de Sainteté
+   Typographies : Montserrat (Titres & Boutons) + Poppins (Textes) + Cinzel (Spirituel)
+   Auteur : Full Stack UI/UX Designer
    ========================================================================== */
 
-/* --- Variables CSS & Design Tokens --- */
+/* --- Variables CSS & Design Tokens Spirituels --- */
 :root {
   --color-white: #ffffff;
-  --color-sky-50: #f0f9ff;
-  --color-sky-100: #e0f2fe;
-  --color-sky-200: #bae6fd;
-  --color-sky-300: #7dd3fc;
-  --color-sky-400: #38bdf8;
-  --color-sky-500: #0ea5e9;
-  --color-sky-600: #0284c7;
-  --color-deep-700: #0369a1;
-  --color-deep-800: #075985;
-  --color-deep-900: #0c4a6e;
-  --color-deep-950: #082f49;
-  --color-midnight: #0a192f;
+  --color-cream: #fdfcfa;
   
-  --color-gold-400: #facc15;
-  --color-gold-500: #eab308;
-  --color-gold-600: #ca8a04;
+  /* Nuances Violet Impérial & Améthyste Céleste */
+  --color-purple-950: #12072b;
+  --color-purple-900: #1a0b36;
+  --color-purple-850: #240d4a;
+  --color-purple-800: #2e1065;
+  --color-purple-700: #3b0764;
+  --color-purple-600: #581c87;
+  --color-purple-500: #7e22ce;
+  --color-purple-400: #a855f7;
+  --color-purple-300: #c084fc;
+  --color-purple-200: #e9d5ff;
+  --color-purple-100: #f3e8ff;
+  --color-purple-50: #faf5ff;
 
+  /* Nuances Or Doré Céleste & Ambre Royal */
+  --color-gold-100: #fef9c3;
+  --color-gold-200: #fef08a;
+  --color-gold-300: #fde047;
+  --color-gold-400: #facc15;
+  --color-gold-500: #f59e0b;
+  --color-gold-600: #d97706;
+  --color-gold-700: #b45309;
+  --color-gold-800: #92400e;
+
+  /* Neutres */
   --color-gray-50: #f8fafc;
   --color-gray-100: #f1f5f9;
   --color-gray-200: #e2e8f0;
@@ -31,14 +42,18 @@
   --color-gray-700: #334155;
   --color-gray-800: #1e293b;
 
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+  /* Typographies Premium */
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
   --font-spiritual: 'Cinzel', serif;
 
-  --shadow-subtle: 0 4px 20px -2px rgba(2, 132, 199, 0.08);
-  --shadow-card: 0 10px 25px -5px rgba(2, 132, 199, 0.1), 0 8px 10px -6px rgba(12, 74, 110, 0.05);
-  --shadow-hover: 0 20px 30px -10px rgba(2, 132, 199, 0.2), 0 10px 10px -5px rgba(12, 74, 110, 0.04);
-  --shadow-glow: 0 0 25px rgba(56, 189, 248, 0.35);
+  /* Ombres & Lueurs Spirituelles */
+  --shadow-subtle: 0 4px 20px -2px rgba(46, 16, 101, 0.08);
+  --shadow-card: 0 10px 25px -5px rgba(46, 16, 101, 0.08), 0 8px 10px -6px rgba(18, 7, 43, 0.04);
+  --shadow-hover: 0 20px 35px -10px rgba(88, 28, 135, 0.22), 0 10px 10px -5px rgba(245, 158, 11, 0.12);
+  --shadow-gold-glow: 0 0 25px rgba(245, 158, 11, 0.45);
+  --shadow-purple-glow: 0 0 30px rgba(126, 34, 206, 0.35);
 
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -61,32 +76,92 @@ body {
   line-height: 1.6;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar Violet & Or */
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-sky-50);
+  background: var(--color-purple-950);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-sky-300);
+  background: linear-gradient(180deg, var(--color-purple-600), var(--color-gold-500));
   border-radius: 5px;
+  border: 2px solid var(--color-purple-950);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-sky-500);
+  background: linear-gradient(180deg, var(--color-purple-500), var(--color-gold-400));
 }
 
-/* --- Typographies --- */
+/* --- Typographies Utilitaires --- */
 .font-spiritual {
   font-family: var(--font-spiritual);
+}
+.font-heading {
+  font-family: var(--font-heading);
 }
 .font-serif {
   font-family: var(--font-serif);
 }
 
-/* --- Fond d'écran céleste unique sur la section Accueil (#accueil) --- */
+/* --- Boutons Clés de Haut Niveau (CTA Hierarchy) --- */
 
-/* --- Hero Section (Arrière-plan stable à échelle normale) --- */
+/* 1. Bouton Or Doré Lumineux (CTA Principal Incontournable) */
+.btn-gold-primary {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  color: #12072b !important;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  border: 1px solid rgba(254, 240, 138, 0.85);
+  box-shadow: 0 10px 25px -4px rgba(245, 158, 11, 0.45), 0 0 15px rgba(250, 204, 21, 0.2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-gold-primary:hover {
+  background: linear-gradient(135deg, #fef08a 0%, #fbbf24 50%, #f59e0b 100%);
+  color: #12072b !important;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px -5px rgba(245, 158, 11, 0.65), 0 0 25px rgba(250, 204, 21, 0.4);
+  filter: brightness(1.06);
+}
+
+/* 2. Bouton Secondaire Céleste (Translucide Violet & Bordure Or) */
+.btn-royal-outline {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(251, 191, 36, 0.55);
+  color: #ffffff !important;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+.btn-royal-outline:hover {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: #fbbf24;
+  color: #fef08a !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -4px rgba(126, 34, 206, 0.35);
+}
+
+/* 3. Bouton WhatsApp Pastoral (Vert Émeraude Vibrant avec Ombre) */
+.btn-whatsapp-emerald {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff !important;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  border: 1px solid rgba(167, 243, 208, 0.5);
+  box-shadow: 0 10px 25px -4px rgba(16, 185, 129, 0.4);
+  transition: all 0.25s ease;
+}
+
+.btn-whatsapp-emerald:hover {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -4px rgba(16, 185, 129, 0.55);
+}
+
+/* --- Section Hero (Arrière-plan stable avec fondation Violet Nuit & Nuée) --- */
 .hero-wrapper {
   position: relative;
   min-height: 100vh;
@@ -105,28 +180,28 @@ body {
   background-image: url('assets/images/la-nuee-surnaturelle-1963.jpg');
   background-size: cover;
   background-position: center 25%;
-  transform: scale(1); /* Cadrage normal fixe sans zoom arrière ni mouvement perpétuel */
+  transform: scale(1);
   animation: none;
-  filter: brightness(1.10) contrast(1.08) saturate(1.12);
+  filter: brightness(1.05) contrast(1.10) saturate(1.15);
   transform-origin: center center;
 }
 
-/* Hero Overlays: Translucide, laisse la Nuée surnaturelle visible tout en assurant un contraste parfait */
+/* Hero Overlays : Violet Royal Céleste & Halo Doré Surnaturel */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(4, 20, 44, 0.55) 0%,
-    rgba(2, 44, 80, 0.40) 40%,
-    rgba(4, 20, 44, 0.65) 100%
+    rgba(18, 7, 43, 0.84) 0%,
+    rgba(45, 18, 84, 0.62) 45%,
+    rgba(18, 7, 43, 0.90) 100%
   );
 }
 
 .hero-overlay-shimmer {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.25) 0%, rgba(186, 230, 253, 0.12) 45%, transparent 75%);
+  background: radial-gradient(circle at 50% 28%, rgba(254, 240, 138, 0.20) 0%, rgba(126, 34, 206, 0.15) 45%, transparent 75%);
   pointer-events: none;
 }
 
@@ -246,29 +321,29 @@ body {
   }
 }
 
-/* --- High-Legibility & Clean Section Styles (Fond ciel uniquement sur Accueil) --- */
+/* --- High-Legibility & Clean Section Styles (Violet & Or) --- */
 .content-section-glass {
   background-color: #ffffff !important;
 }
 
 .content-section-glass-alt {
-  background-color: #f8fafc !important;
+  background-color: #faf5ff !important;
 }
 
 .card-high-contrast {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(186, 230, 253, 0.9) !important;
-  box-shadow: 0 8px 25px -4px rgba(2, 132, 199, 0.08), 0 4px 6px -2px rgba(12, 74, 110, 0.03) !important;
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(126, 34, 206, 0.18) !important;
+  box-shadow: 0 10px 25px -4px rgba(46, 16, 101, 0.08), 0 4px 6px -2px rgba(245, 158, 11, 0.04) !important;
 }
 
 .card-high-contrast:hover {
-  border-color: rgba(56, 189, 248, 0.95) !important;
-  box-shadow: 0 16px 35px -6px rgba(2, 132, 199, 0.16) !important;
+  border-color: rgba(245, 158, 11, 0.75) !important;
+  box-shadow: 0 16px 35px -6px rgba(88, 28, 135, 0.22), 0 0 15px rgba(245, 158, 11, 0.15) !important;
 }
 
-/* --- MAGNIFICENT NAVBAR: Royal Midnight-Sapphire, Glassmorphism & Gold Aura --- */
+/* --- MAGNIFICENT NAVBAR: Royal Velvet Purple, Glassmorphism & Gold Aura --- */
 .glass-header {
   position: fixed;
   top: 0;
@@ -277,26 +352,26 @@ body {
   z-index: 50;
   background: linear-gradient(
     135deg,
-    rgba(8, 25, 48, 0.94) 0%,
-    rgba(10, 36, 72, 0.91) 48%,
-    rgba(14, 46, 88, 0.94) 100%
+    rgba(18, 7, 43, 0.95) 0%,
+    rgba(26, 11, 54, 0.92) 48%,
+    rgba(36, 13, 74, 0.95) 100%
   );
   backdrop-filter: blur(20px) saturate(190%);
   -webkit-backdrop-filter: blur(20px) saturate(190%);
-  border-bottom: 1px solid rgba(234, 179, 8, 0.38);
-  box-shadow: 0 4px 30px rgba(4, 16, 36, 0.55), 0 0 25px rgba(56, 189, 248, 0.12);
+  border-bottom: 1px solid rgba(245, 158, 11, 0.45);
+  box-shadow: 0 4px 30px rgba(18, 7, 43, 0.65), 0 0 25px rgba(126, 34, 206, 0.2);
   transition: all var(--transition-normal);
 }
 
 .glass-header.scrolled {
   background: linear-gradient(
     135deg,
-    rgba(5, 17, 34, 0.98) 0%,
-    rgba(7, 28, 56, 0.97) 50%,
-    rgba(9, 36, 72, 0.98) 100%
+    rgba(14, 5, 34, 0.98) 0%,
+    rgba(20, 8, 42, 0.97) 50%,
+    rgba(26, 11, 54, 0.98) 100%
   );
-  border-bottom: 1px solid rgba(250, 204, 21, 0.6);
-  box-shadow: 0 10px 35px -5px rgba(2, 12, 28, 0.75), 0 0 30px rgba(234, 179, 8, 0.22);
+  border-bottom: 1px solid rgba(251, 191, 36, 0.75);
+  box-shadow: 0 10px 35px -5px rgba(10, 3, 25, 0.85), 0 0 30px rgba(245, 158, 11, 0.3);
 }
 
 /* Hairline Dynamic Scroll Progress Bar under the navbar */
@@ -306,8 +381,8 @@ body {
   left: 0;
   height: 2.5px;
   width: 0%;
-  background: linear-gradient(90deg, #38bdf8 0%, #eab308 50%, #facc15 100%);
-  box-shadow: 0 0 12px rgba(250, 204, 21, 0.9), 0 0 6px rgba(56, 189, 248, 0.9);
+  background: linear-gradient(90deg, #c084fc 0%, #f59e0b 50%, #fef08a 100%);
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.9), 0 0 6px rgba(168, 85, 247, 0.8);
   transition: width 0.08s ease-out;
   z-index: 60;
   pointer-events: none;
@@ -315,62 +390,64 @@ body {
 
 /* Desktop Nav Links in magnificent navbar */
 .desktop-nav-link {
-  color: rgba(241, 245, 249, 0.88);
+  color: rgba(243, 232, 255, 0.9);
   border-radius: 9999px;
   position: relative;
+  font-family: var(--font-heading);
   transition: all var(--transition-fast);
 }
 
 .desktop-nav-link:hover {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 0 14px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.2);
 }
 
 .desktop-nav-link.active {
   color: #fef08a !important; /* bright gold */
-  background: linear-gradient(135deg, rgba(234, 179, 8, 0.25), rgba(56, 189, 248, 0.2)) !important;
-  border: 1px solid rgba(250, 204, 21, 0.6) !important;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(126, 34, 206, 0.25)) !important;
+  border: 1px solid rgba(250, 204, 21, 0.7) !important;
   font-weight: 700 !important;
-  box-shadow: 0 0 16px rgba(250, 204, 21, 0.32) !important;
+  box-shadow: 0 0 18px rgba(250, 204, 21, 0.35) !important;
 }
 
 /* Bouton Spécial 'Rejoins-nous' dans la barre de navigation */
 .nav-cta-btn {
-  background: linear-gradient(135deg, #f59e0b 0%, #eab308 50%, #d97706 100%) !important;
-  color: #020617 !important;
-  border: 1px solid rgba(254, 240, 138, 0.8) !important;
-  box-shadow: 0 4px 18px rgba(234, 179, 8, 0.35) !important;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%) !important;
+  color: #12072b !important;
+  border: 1px solid rgba(254, 240, 138, 0.85) !important;
+  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.45) !important;
   font-weight: 800 !important;
+  font-family: var(--font-heading) !important;
 }
 
 .nav-cta-btn:hover {
-  filter: brightness(1.12) !important;
+  filter: brightness(1.1) !important;
   transform: translateY(-1.5px) !important;
-  box-shadow: 0 8px 25px rgba(234, 179, 8, 0.5) !important;
-  color: #020617 !important;
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6) !important;
+  color: #12072b !important;
 }
 
 .nav-cta-btn.active {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%) !important;
-  color: #020617 !important;
+  background: linear-gradient(135deg, #fef08a 0%, #fbbf24 50%, #f59e0b 100%) !important;
+  color: #12072b !important;
   border: 1.5px solid #ffffff !important;
   box-shadow: 0 0 22px rgba(250, 204, 21, 0.7) !important;
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(224, 242, 254, 0.9);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(126, 34, 206, 0.15);
   box-shadow: var(--shadow-card);
 }
 
 .glass-badge {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  color: var(--color-white);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  color: #fef08a;
 }
 
 /* --- Dynamic Scroll Reveal Animations --- */
@@ -400,13 +477,13 @@ body {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #0c4a6e, #0284c7);
-  color: #ffffff;
+  background: linear-gradient(135deg, #2e1065, #7e22ce);
+  color: #fef08a;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 25px -4px rgba(2, 132, 199, 0.5);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 25px -4px rgba(46, 16, 101, 0.6), 0 0 15px rgba(245, 158, 11, 0.3);
+  border: 2px solid rgba(251, 191, 36, 0.7);
   cursor: pointer;
   opacity: 0;
   visibility: hidden;
@@ -422,8 +499,9 @@ body {
 
 .back-to-top-btn:hover {
   transform: translateY(-4px) scale(1.08);
-  box-shadow: 0 14px 28px -4px rgba(2, 132, 199, 0.65);
-  background: linear-gradient(135deg, #0284c7, #38bdf8);
+  box-shadow: 0 14px 28px -4px rgba(126, 34, 206, 0.75), 0 0 20px rgba(250, 204, 21, 0.5);
+  background: linear-gradient(135deg, #7e22ce, #a855f7);
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {
@@ -441,14 +519,15 @@ body {
   bottom: 5.5rem;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
-  background: linear-gradient(135deg, #082f49, #0c4a6e);
-  color: #f8fafc;
+  background: linear-gradient(135deg, #1a0b36, #2d1254);
+  color: #fef08a;
   padding: 0.85rem 1.75rem;
   border-radius: 9999px;
-  box-shadow: 0 15px 35px -5px rgba(2, 44, 89, 0.5), 0 0 20px rgba(234, 179, 8, 0.3);
-  border: 1px solid rgba(250, 204, 21, 0.5);
+  box-shadow: 0 15px 35px -5px rgba(18, 7, 43, 0.7), 0 0 20px rgba(245, 158, 11, 0.35);
+  border: 1px solid rgba(250, 204, 21, 0.6);
   font-size: 0.9rem;
   font-weight: 600;
+  font-family: var(--font-heading);
   z-index: 1050;
   opacity: 0;
   pointer-events: none;
@@ -466,7 +545,7 @@ body {
 
 /* FAQ Interactive Accordion */
 .faq-accordion-item {
-  border: 1px solid rgba(224, 242, 254, 0.9);
+  border: 1px solid rgba(126, 34, 206, 0.16);
   border-radius: 1.25rem;
   background: #ffffff;
   overflow: hidden;
@@ -474,13 +553,13 @@ body {
 }
 
 .faq-accordion-item:hover {
-  border-color: var(--color-sky-300);
+  border-color: rgba(245, 158, 11, 0.65);
   box-shadow: var(--shadow-card);
 }
 
 .faq-accordion-item.open {
-  border-color: var(--color-sky-400);
-  box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.12);
+  border-color: #f59e0b;
+  box-shadow: 0 10px 25px -5px rgba(88, 28, 135, 0.15);
 }
 
 .faq-accordion-header {
@@ -495,7 +574,7 @@ body {
 }
 
 .faq-accordion-header:hover {
-  background-color: rgba(240, 249, 255, 0.6);
+  background-color: rgba(250, 245, 255, 0.8);
 }
 
 .faq-accordion-content {
@@ -518,7 +597,7 @@ body {
 
 .faq-accordion-item.open .faq-chevron {
   transform: rotate(180deg);
-  color: var(--color-sky-500);
+  color: #d97706;
 }
 
 /* --- Card Hover & Interactive Effects --- */
@@ -528,24 +607,27 @@ body {
 .card-hover:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-hover);
-  border-color: var(--color-sky-300);
+  border-color: rgba(245, 158, 11, 0.7);
 }
 
 /* --- Spiritual Glow & Accents --- */
-.glow-sky {
-  box-shadow: 0 0 35px -5px rgba(56, 189, 248, 0.45);
+.glow-gold {
+  box-shadow: 0 0 35px -5px rgba(245, 158, 11, 0.45);
+}
+
+.glow-purple {
+  box-shadow: 0 0 35px -5px rgba(126, 34, 206, 0.45);
 }
 
 .glow-text-gold {
-  text-shadow: 0 2px 10px rgba(234, 179, 8, 0.35);
+  text-shadow: 0 2px 14px rgba(245, 158, 11, 0.45);
 }
 
-/* --- Section Dividers --- */
-
-/* --- Modernized Gallery & Lightbox Styles --- */
+/* --- Modernized Gallery & Lightbox Styles (Violet & Or) --- */
 .gallery-tab {
   transition: all var(--transition-fast);
   cursor: pointer;
+  font-family: var(--font-heading);
 }
 
 .gallery-tab:hover {
@@ -553,10 +635,10 @@ body {
 }
 
 .gallery-tab.active {
-  background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%) !important;
-  color: #ffffff !important;
-  border-color: #38bdf8 !important;
-  box-shadow: 0 4px 12px rgba(3, 105, 161, 0.35) !important;
+  background: linear-gradient(135deg, #2e1065 0%, #581c87 100%) !important;
+  color: #fef08a !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3) !important;
 }
 
 .gallery-tab .count-badge {
@@ -564,25 +646,25 @@ body {
 }
 
 .gallery-tab.active .count-badge {
-  background-color: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
+  background-color: rgba(245, 158, 11, 0.3);
+  color: #fef08a;
 }
 
 .gallery-card-modern {
   position: relative;
   overflow: hidden;
   border-radius: 1.5rem;
-  background: #0f172a;
-  border: 2px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+  background: #12072b;
+  border: 2px solid rgba(126, 34, 206, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(18, 7, 43, 0.2);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
   cursor: pointer;
 }
 
 .gallery-card-modern:hover {
   transform: translateY(-6px);
-  border-color: rgba(56, 189, 248, 0.7);
-  box-shadow: 0 25px 35px -10px rgba(14, 165, 233, 0.25), 0 12px 16px -8px rgba(14, 165, 233, 0.15);
+  border-color: rgba(245, 158, 11, 0.85);
+  box-shadow: 0 20px 40px -10px rgba(88, 28, 135, 0.35), 0 0 20px rgba(245, 158, 11, 0.25);
 }
 
 .gallery-card-modern img {
@@ -676,11 +758,11 @@ body {
 }
 
 .lightbox-nav-btn:hover {
-  background: #38bdf8;
-  color: #0369a1;
-  border-color: #38bdf8;
+  background: #f59e0b;
+  color: #12072b;
+  border-color: #fbbf24;
   transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.55);
 }
 
 .lightbox-prev {

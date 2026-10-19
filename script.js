@@ -537,19 +537,19 @@ function initGalleryAndLightbox() {
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => {
-        b.classList.remove('active', 'bg-sky-900', 'text-white');
+        b.classList.remove('active');
         const badge = b.querySelector('.count-badge');
         if (badge) {
-          badge.classList.remove('bg-white/20');
-          badge.classList.add('bg-sky-100', 'text-sky-800');
+          badge.classList.remove('bg-amber-400', 'text-purple-950');
+          badge.classList.add('bg-purple-100', 'text-brand-purpleDark');
         }
       });
 
-      btn.classList.add('active', 'bg-sky-900', 'text-white');
+      btn.classList.add('active');
       const activeBadge = btn.querySelector('.count-badge');
       if (activeBadge) {
-        activeBadge.classList.add('bg-white/20');
-        activeBadge.classList.remove('bg-sky-100', 'text-sky-800');
+        activeBadge.classList.add('bg-amber-400', 'text-purple-950');
+        activeBadge.classList.remove('bg-purple-100', 'text-brand-purpleDark');
       }
 
       const filter = btn.getAttribute('data-filter') || 'all';

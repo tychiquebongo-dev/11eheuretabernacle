@@ -19,10 +19,10 @@
   <link rel="icon" type="image/png" href="assets/images/logo.png">
   <link rel="apple-touch-icon" href="assets/images/logo.png">
 
-  <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+  <!-- Google Fonts: Montserrat, Poppins, Cinzel & Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -33,20 +33,27 @@
           colors: {
             brand: {
               white: '#ffffff',
-              skyLight: '#f0f9ff',
-              skyMuted: '#e0f2fe',
-              skyAccent: '#38bdf8',
-              skyPrimary: '#0284c7',
-              deep: '#0369a1',
-              navy: '#0c4a6e',
-              midnight: '#082f49',
-              gold: '#eab308'
+              purpleDark: '#12072b',
+              purpleDeep: '#1a0b36',
+              purpleMid: '#2d1254',
+              purpleRoyal: '#4c1d95',
+              purpleAccent: '#7c3aed',
+              purpleLight: '#a855f7',
+              purpleSoft: '#faf5ff',
+              goldLight: '#fef08a',
+              gold: '#f59e0b',
+              goldBright: '#fbbf24',
+              goldDark: '#d97706',
+              goldDeep: '#b45309',
+              emerald: '#10b981',
+              emeraldDark: '#059669'
             }
           },
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            serif: ['"Playfair Display"', 'Georgia', 'serif'],
-            spiritual: ['"Cinzel"', 'serif']
+            sans: ['"Poppins"', 'sans-serif'],
+            heading: ['"Montserrat"', 'sans-serif'],
+            spiritual: ['"Cinzel"', 'serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif']
           }
         }
       }
@@ -56,7 +63,7 @@
   <!-- Feuille de styles personnalisée -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-sky-50/30 text-slate-900 antialiased selection:bg-sky-200 selection:text-sky-900">
+<body class="bg-purple-950/5 text-slate-900 antialiased selection:bg-purple-200 selection:text-purple-950 font-sans">
 
   <!-- ========================================================================
        BARRE DE NAVIGATION PRINCIPALE (HEADER)
@@ -70,14 +77,14 @@
         
         <!-- Logo & Titre de l'église (Brillant Or & Saphir) -->
         <a href="#accueil" class="flex items-center gap-2.5 sm:gap-3.5 group focus:outline-none focus:ring-2 focus:ring-amber-400 rounded-lg p-1" aria-label="11e Heure Tabernacle - Accueil">
-          <div class="w-10 h-10 sm:w-12 sm:h-12 md:w-13 md:h-13 flex-shrink-0 relative transition-transform duration-300 group-hover:scale-105 rounded-full overflow-hidden shadow-lg ring-2 ring-amber-400/90 shadow-amber-400/20 bg-brand-midnight">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 md:w-13 md:h-13 flex-shrink-0 relative transition-transform duration-300 group-hover:scale-105 rounded-full overflow-hidden shadow-lg ring-2 ring-amber-400/90 shadow-amber-400/20 bg-brand-purpleDeep">
             <img src="assets/images/logo.png" alt="Emblème officiel 11e Heure Tabernacle" class="w-full h-full object-cover">
           </div>
           <div class="flex flex-col">
             <span class="font-spiritual font-extrabold text-sm sm:text-lg md:text-xl text-white tracking-tight leading-tight group-hover:text-amber-300 transition-colors drop-shadow">
               11<sup>e</sup> HEURE TABERNACLE
             </span>
-            <span class="text-[10px] sm:text-xs font-semibold text-sky-300 tracking-wider uppercase flex items-center gap-1.5">
+            <span class="text-[10px] sm:text-xs font-semibold text-purple-200 tracking-wider uppercase flex items-center gap-1.5 font-heading">
               <span>Pointe-Noire</span>
               <span class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shadow-sm shadow-amber-400 animate-pulse"></span>
               <span class="text-amber-300 font-bold">Congo</span>
@@ -86,14 +93,14 @@
         </a>
 
         <!-- Navigation Bureau (Desktop : Accueil, À propos, Nos programmes, Galerie, Rejoins-nous) -->
-        <nav class="hidden md:flex items-center gap-1.5 lg:gap-3 xl:gap-4" aria-label="Navigation principale">
+        <nav class="hidden md:flex items-center gap-1.5 lg:gap-3 xl:gap-4 font-heading" aria-label="Navigation principale">
           <a href="#accueil" class="desktop-nav-link active px-3 xl:px-3.5 py-2 text-sm xl:text-base font-semibold transition-colors">Accueil</a>
           <a href="#apropos" class="desktop-nav-link px-3 xl:px-3.5 py-2 text-sm xl:text-base font-medium transition-colors">À propos</a>
           <a href="#horaires" class="desktop-nav-link px-3 xl:px-3.5 py-2 text-sm xl:text-base font-medium transition-colors">Nos programmes</a>
           <a href="#galerie" class="desktop-nav-link px-3 xl:px-3.5 py-2 text-sm xl:text-base font-medium transition-colors">Galerie</a>
           <a href="#contact" class="desktop-nav-link nav-cta-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-slate-950 text-sm font-extrabold shadow-lg shadow-amber-500/30 ring-1 ring-amber-300/80 hover:brightness-110 hover:shadow-xl hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 ml-1">
             <span>Rejoins-nous</span>
-            <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 text-purple-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
             </svg>
           </a>
@@ -113,19 +120,19 @@
     </div>
 
     <!-- Tiroir Navigation Mobile -->
-    <div id="mobile-menu" class="hidden md:hidden bg-gradient-to-b from-[#081a33]/98 via-[#051326]/98 to-[#030c18]/98 backdrop-blur-2xl border-b border-amber-400/30 shadow-2xl px-4 pt-3 pb-6 text-white">
+    <div id="mobile-menu" class="hidden md:hidden bg-gradient-to-b from-[#12072b]/98 via-[#1e0b36]/98 to-[#2d1254]/98 backdrop-blur-2xl border-b border-amber-400/40 shadow-2xl px-4 pt-3 pb-6 text-white font-heading">
       <div class="flex flex-col space-y-2">
         <a href="#accueil" class="mobile-nav-link px-4 py-3 rounded-xl text-base font-semibold text-amber-300 bg-white/10 border border-amber-400/25">Accueil</a>
-        <a href="#apropos" class="mobile-nav-link px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">À propos</a>
-        <a href="#horaires" class="mobile-nav-link px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">Nos programmes</a>
-        <a href="#galerie" class="mobile-nav-link px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">Galerie</a>
-        <a href="#contact" class="mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-base font-bold bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 shadow-lg shadow-amber-500/25">
+        <a href="#apropos" class="mobile-nav-link px-4 py-3 rounded-xl text-base font-medium text-purple-100 hover:bg-white/10 hover:text-white">À propos</a>
+        <a href="#horaires" class="mobile-nav-link px-4 py-3 rounded-xl text-base font-medium text-purple-100 hover:bg-white/10 hover:text-white">Nos programmes</a>
+        <a href="#galerie" class="mobile-nav-link px-4 py-3 rounded-xl text-base font-medium text-purple-100 hover:bg-white/10 hover:text-white">Galerie</a>
+        <a href="#contact" class="mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-base font-bold btn-gold-primary shadow-lg shadow-amber-500/25">
           <span>Rejoins-nous</span>
-          <svg class="w-5 h-5 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          <svg class="w-5 h-5 text-purple-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
         
-        <div class="pt-3 border-t border-white/15">
-          <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold text-sm shadow-lg shadow-green-600/30">
+        <div class="pt-3 border-t border-purple-400/20">
+          <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl btn-whatsapp-emerald text-white font-bold text-sm shadow-lg shadow-green-600/30">
             <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
             <span>Contacter sur WhatsApp (+242)</span>
           </a>
@@ -164,57 +171,64 @@
           
           <!-- Badge Dynamique : Prochain Culte / En Direct (Pointe-Noire UTC+1) -->
           <div class="flex justify-center lg:justify-start mb-5">
-            <div id="live-worship-ticker" class="inline-flex items-center gap-2.5 px-4 sm:px-5 py-2 rounded-full bg-slate-950/80 border border-amber-400/60 text-white shadow-xl shadow-sky-950/50 backdrop-blur-md text-xs sm:text-sm font-semibold cursor-pointer hover:border-amber-300 hover:scale-105 transition-all group" onclick="document.getElementById('horaires').scrollIntoView({behavior: 'smooth'})" title="Cliquez pour consulter le programme complet des cultes">
+            <div id="live-worship-ticker" class="inline-flex items-center gap-2.5 px-4 sm:px-5 py-2 rounded-full bg-purple-950/85 border border-amber-400/60 text-white shadow-xl shadow-purple-950/70 backdrop-blur-md text-xs sm:text-sm font-semibold font-heading cursor-pointer hover:border-amber-300 hover:scale-105 transition-all group" onclick="document.getElementById('horaires').scrollIntoView({behavior: 'smooth'})" title="Cliquez pour consulter le programme complet des cultes">
               <span id="live-worship-dot" class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping shrink-0"></span>
-              <span id="live-worship-text" class="text-sky-100 group-hover:text-amber-300 transition-colors">Calcul du prochain culte en direct...</span>
+              <span id="live-worship-text" class="text-amber-200 group-hover:text-amber-100 transition-colors">Calcul du prochain culte en direct...</span>
               <svg class="w-4 h-4 text-amber-400 ml-1 group-hover:translate-x-0.5 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 5l7 7-7 7"/></svg>
             </div>
           </div>
 
           <!-- En-tête : Emblème officiel et Badge Spirituel -->
-          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-5 sm:mb-6">
-            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden shadow-2xl ring-4 ring-amber-400/80 p-0.5 bg-brand-midnight/80 backdrop-blur-md shrink-0">
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-4 sm:mb-5">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden shadow-2xl ring-4 ring-amber-400/90 p-0.5 bg-brand-purpleDeep backdrop-blur-md shrink-0">
               <img src="assets/images/logo.png" alt="Emblème officiel 11e Heure Tabernacle" class="w-full h-full object-cover rounded-full">
             </div>
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-badge text-[11px] sm:text-xs font-semibold tracking-wide uppercase">
-              <span class="w-2 h-2 rounded-full bg-sky-300 animate-ping"></span>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-badge text-[11px] sm:text-xs font-semibold tracking-wide uppercase font-heading bg-purple-900/40 border border-amber-400/40">
+              <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
               <span>Église du Message du Temps de la Fin &bull; Pointe-Noire, Congo</span>
             </div>
           </div>
 
-          <!-- Nom de l'église -->
-          <h1 class="font-spiritual text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-white mb-2 sm:mb-3 drop-shadow-md">
+          <!-- Hook Spirituel Percutant (Proclamation Céleste) -->
+          <p class="font-heading font-extrabold text-amber-300 text-xs sm:text-sm md:text-base tracking-widest uppercase mb-2 drop-shadow flex items-center justify-center lg:justify-start gap-2">
+            <span>« Au Temps du Soir, la Lumière Paraîtra »</span>
+            <span class="text-white/40 hidden sm:inline">&bull;</span>
+            <span class="text-amber-200 font-semibold hidden sm:inline">Zacharie 14:7</span>
+          </p>
+
+          <!-- Nom de l'église (Grand Titre Souverain) -->
+          <h1 class="font-spiritual text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white mb-2 sm:mb-3 drop-shadow-2xl">
             11<sup>e</sup> HEURE TABERNACLE
           </h1>
 
           <!-- Nom du pasteur -->
-          <p class="text-sky-200 text-xs sm:text-base md:text-lg lg:text-xl font-medium tracking-wide mb-3 sm:mb-5">
-            Sous la direction pastorale du <span class="font-bold text-white">Pasteur Odilon Detchibs</span>
+          <p class="text-purple-200 text-xs sm:text-base md:text-lg lg:text-xl font-medium tracking-wide mb-3 sm:mb-5 font-heading">
+            Sous la direction pastorale du <span class="font-bold text-amber-300 drop-shadow">Pasteur Odilon Detchibs</span>
           </p>
 
-          <!-- Slogan officiel -->
-          <div class="mb-5 sm:mb-6">
-            <p class="font-serif italic text-base sm:text-lg md:text-xl lg:text-2xl text-sky-100 font-normal leading-relaxed drop-shadow">
-              « Une foi restaurée, un amour renouvelé, une espérance vivante. »
+          <!-- Slogan officiel dans encart translucide Violet & Or -->
+          <div class="mb-5 sm:mb-6 p-4 rounded-2xl bg-purple-950/60 border border-amber-400/30 backdrop-blur-md max-w-xl mx-auto lg:mx-0 shadow-xl">
+            <p class="font-serif italic text-base sm:text-lg md:text-xl text-amber-100 font-normal leading-relaxed drop-shadow">
+              « Une foi restaurée, un amour renouvelé, une espérance vivante pour l'Enlèvement de l'Épouse. »
             </p>
           </div>
 
-          <!-- Court texte de bienvenue -->
-          <p class="text-xs sm:text-sm md:text-base text-slate-200 font-light mb-7 sm:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
-            Bienvenue dans la maison du Seigneur à Pointe-Noire. Venez expérimenter l'amour divin, la communion fraternelle sincère et la puissance vivifiante du Saint-Esprit.
+          <!-- Message d'accueil & Appel Spirituel -->
+          <p class="text-xs sm:text-sm md:text-base text-purple-100/90 font-light mb-7 sm:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0 font-sans">
+            Bienvenue dans la maison du Seigneur à Pointe-Noire (Voungou 1). Venez vivre l'authenticité de la Parole révélée dans sa pureté apostolique, la communion fraternelle sincère et la puissance vivifiante du Saint-Esprit.
           </p>
 
-          <!-- Deux Boutons d'Action Clés -->
+          <!-- Deux Boutons d'Action Clés Hiérarchisés (Or Royal + Émeraude WhatsApp) -->
           <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full">
-            <a href="#apropos" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-white text-brand-midnight font-bold text-sm sm:text-base hover:bg-sky-50 hover:shadow-xl hover:shadow-sky-500/20 hover:-translate-y-0.5 transition-all duration-200">
-              <span>Découvrir notre église</span>
-              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-brand-skyPrimary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            <a href="#horaires" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 sm:px-9 py-3.5 sm:py-4 rounded-full btn-gold-primary text-sm sm:text-base font-extrabold shadow-xl">
+              <span>Découvrir nos cultes</span>
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
               </svg>
             </a>
-            <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-green-500 hover:bg-green-600 text-white font-bold text-sm sm:text-base shadow-lg shadow-green-600/30 hover:-translate-y-0.5 transition-all duration-200">
+            <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full btn-whatsapp-emerald text-sm sm:text-base font-bold shadow-lg">
               <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-              <span>Nous contacter sur WhatsApp</span>
+              <span>Échanger avec le Pasteur</span>
             </a>
           </div>
 
@@ -228,27 +242,27 @@
   <!-- ========================================================================
        SECTION À PROPOS (HISTOIRE, IDENTITÉ & 6 VALEURS FONDAMENTALES)
        ======================================================================== -->
-  <section id="apropos" class="py-14 sm:py-20 lg:py-28 content-section-glass relative border-b border-sky-100/70">
+  <section id="apropos" class="py-14 sm:py-20 lg:py-28 content-section-glass relative border-b border-purple-100/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
         <!-- Colonne Gauche : Composition Visuelle Spirituelle -->
         <div class="lg:col-span-5 relative reveal-on-scroll">
-          <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-amber-400/80 bg-slate-100">
             <img src="assets/images/assemblee-pasteur-odilon.jpg" alt="Assemblée 11e Heure Tabernacle avec le Pasteur Odilon Detchibs à Pointe-Noire" class="w-full h-64 sm:h-80 md:h-96 lg:h-[480px] object-cover object-center transform hover:scale-105 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-midnight/80 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/85 via-transparent to-transparent"></div>
             
-            <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-3 sm:p-4 rounded-2xl bg-white/95 backdrop-blur-md shadow-lg border border-sky-100">
+            <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-3 sm:p-4 rounded-2xl bg-white/95 backdrop-blur-md shadow-lg border border-purple-100">
               <div class="flex items-center gap-3">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-sky-100 flex items-center justify-center text-brand-skyPrimary shrink-0">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-900 shrink-0 shadow-inner">
                   <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                   </svg>
                 </div>
                 <div>
-                  <h4 class="text-xs sm:text-sm font-bold text-slate-900">Pointe-Noire &bull; République du Congo</h4>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 font-heading">Pointe-Noire &bull; République du Congo</h4>
                   <p class="text-[11px] sm:text-xs text-slate-600 font-medium">Voungou 1, Bank de Vie (arrêt 1er Pont)</p>
                 </div>
               </div>
@@ -256,25 +270,25 @@
           </div>
 
           <!-- Badge Flottant du Message du Temps de la Fin -->
-          <div class="hidden md:flex absolute -top-5 -right-5 bg-gradient-to-br from-brand-skyPrimary to-brand-navy text-white p-4 rounded-2xl shadow-xl flex-col items-center text-center max-w-[175px]">
-            <span class="text-xs uppercase tracking-widest text-sky-200 font-semibold">Le Message du</span>
-            <span class="font-serif font-bold text-base text-yellow-300">Temps de la Fin</span>
-            <span class="text-[11px] text-sky-100 mt-1">Parole Révélée</span>
+          <div class="hidden md:flex absolute -top-5 -right-5 bg-gradient-to-br from-brand-purpleDeep to-brand-purpleRoyal text-white p-4 rounded-2xl shadow-xl flex-col items-center text-center max-w-[185px] border border-amber-400/50">
+            <span class="text-xs uppercase tracking-widest text-amber-200 font-semibold font-heading">Le Message du</span>
+            <span class="font-heading font-extrabold text-base text-yellow-300">Temps de la Fin</span>
+            <span class="text-[11px] text-purple-200 mt-1">Parole Révélée</span>
           </div>
         </div>
 
         <!-- Colonne Droite : Présentation & Valeurs -->
         <div class="lg:col-span-7 reveal-on-scroll delay-100">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-sky-200 text-brand-skyPrimary text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-50 border border-purple-200 text-purple-900 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm font-heading">
             <span>À Propos de Nous</span>
           </div>
 
-          <h2 class="font-serif text-3xl sm:text-4xl text-slate-950 font-bold leading-tight mb-5">
+          <h2 class="font-heading text-3xl sm:text-4xl text-slate-950 font-extrabold leading-tight mb-5">
             Le Message du Temps de la Fin
           </h2>
 
           <p class="text-slate-800 text-base sm:text-lg leading-relaxed mb-6 font-normal">
-            Nous croyons fermement, selon les Écritures (<span class="font-bold text-sky-900 bg-sky-100/90 px-2 py-0.5 rounded-md border border-sky-200">Malachie 4:5-6</span>, <span class="font-bold text-sky-900 bg-sky-100/90 px-2 py-0.5 rounded-md border border-sky-200">Apocalypse 10:7</span> et <span class="font-bold text-sky-900 bg-sky-100/90 px-2 py-0.5 rounded-md border border-sky-200">Matthieu 17:11</span>), que Dieu a envoyé à notre époque un prophète pour accomplir le ministère de la restauration de la foi apostolique originelle. Par le message puissant et scripturaire révélé par Son serviteur et prophète, <strong>William Marrion Branham</strong>, Dieu a ramené les cœurs des enfants à la foi des pères.
+            Nous croyons fermement, selon les Écritures (<span class="font-bold text-purple-950 bg-purple-100/90 px-2 py-0.5 rounded-md border border-purple-200">Malachie 4:5-6</span>, <span class="font-bold text-purple-950 bg-purple-100/90 px-2 py-0.5 rounded-md border border-purple-200">Apocalypse 10:7</span> et <span class="font-bold text-purple-950 bg-purple-100/90 px-2 py-0.5 rounded-md border border-purple-200">Matthieu 17:11</span>), que Dieu a envoyé à notre époque un prophète pour accomplir le ministère de la restauration de la foi apostolique originelle. Par le message puissant et scripturaire révélé par Son serviteur et prophète, <strong>William Marrion Branham</strong>, Dieu a ramené les cœurs des enfants à la foi des pères.
           </p>
 
           <!-- Appel prophétique solennel à sortir de la confusion -->
@@ -288,31 +302,31 @@
           <div class="space-y-4">
             
             <!-- Pilier 1 : La Révélation de la Parole -->
-            <div class="p-5 sm:p-6 rounded-2xl card-high-contrast card-hover flex flex-col sm:flex-row items-start gap-4 border border-sky-200/90 shadow-md">
-              <div class="w-12 h-12 rounded-2xl bg-sky-100 text-brand-skyPrimary flex items-center justify-center shrink-0 shadow-inner">
+            <div class="p-5 sm:p-6 rounded-2xl card-high-contrast card-hover flex flex-col sm:flex-row items-start gap-4 border border-purple-200/90 shadow-md">
+              <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-900 flex items-center justify-center shrink-0 shadow-inner">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                 </svg>
               </div>
               <div class="flex-1">
                 <div class="flex items-center gap-2 mb-1.5 flex-wrap">
-                  <span class="text-xs uppercase font-extrabold tracking-wider text-sky-700 bg-sky-50 px-2.5 py-0.5 rounded-full border border-sky-200">Pilier Scripturaire</span>
-                  <h3 class="font-serif text-lg sm:text-xl font-bold text-slate-950">La Révélation de la Parole</h3>
+                  <span class="text-xs uppercase font-extrabold tracking-wider text-purple-800 bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-200 font-heading">Pilier Scripturaire</span>
+                  <h3 class="font-heading text-lg sm:text-xl font-bold text-slate-950">La Révélation de la Parole</h3>
                 </div>
                 <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
                   Nous croyons que la Bible est la Parole absolue de Dieu, et que le Message du temps de la fin éclaire les mystères cachés depuis la fondation du monde (les sceaux, la semence du serpent, la divinité de notre Seigneur Jésus-Christ, la véritable eau du baptême au nom du Seigneur Jésus-Christ, etc.).
                 </p>
                 <div class="mt-3 flex flex-wrap gap-1.5">
-                  <span class="text-[11px] font-bold text-sky-900 bg-sky-100/90 px-2.5 py-1 rounded-lg border border-sky-200/60">Les 7 Sceaux</span>
-                  <span class="text-[11px] font-bold text-sky-900 bg-sky-100/90 px-2.5 py-1 rounded-lg border border-sky-200/60">La Semence du Serpent</span>
-                  <span class="text-[11px] font-bold text-sky-900 bg-sky-100/90 px-2.5 py-1 rounded-lg border border-sky-200/60">La Divinité de Jésus-Christ</span>
-                  <span class="text-[11px] font-bold text-sky-900 bg-sky-100/90 px-2.5 py-1 rounded-lg border border-sky-200/60">Baptême au Nom du Seigneur Jésus-Christ</span>
+                  <span class="text-[11px] font-bold text-purple-950 bg-purple-100/90 px-2.5 py-1 rounded-lg border border-purple-200/70">Les 7 Sceaux</span>
+                  <span class="text-[11px] font-bold text-purple-950 bg-purple-100/90 px-2.5 py-1 rounded-lg border border-purple-200/70">La Semence du Serpent</span>
+                  <span class="text-[11px] font-bold text-purple-950 bg-purple-100/90 px-2.5 py-1 rounded-lg border border-purple-200/70">La Divinité de Jésus-Christ</span>
+                  <span class="text-[11px] font-bold text-purple-950 bg-purple-100/90 px-2.5 py-1 rounded-lg border border-purple-200/70">Baptême au Nom du Seigneur Jésus-Christ</span>
                 </div>
               </div>
             </div>
 
             <!-- Pilier 2 : La Vie de Sanctification -->
-            <div class="p-5 sm:p-6 rounded-2xl card-high-contrast card-hover flex flex-col sm:flex-row items-start gap-4 border border-sky-200/90 shadow-md">
+            <div class="p-5 sm:p-6 rounded-2xl card-high-contrast card-hover flex flex-col sm:flex-row items-start gap-4 border border-amber-200/90 shadow-md">
               <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 shadow-inner">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
@@ -320,8 +334,8 @@
               </div>
               <div class="flex-1">
                 <div class="flex items-center gap-2 mb-1.5 flex-wrap">
-                  <span class="text-xs uppercase font-extrabold tracking-wider text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">Vie Chrétienne</span>
-                  <h3 class="font-serif text-lg sm:text-xl font-bold text-slate-950">La Vie de Sanctification</h3>
+                  <span class="text-xs uppercase font-extrabold tracking-wider text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200 font-heading">Vie Chrétienne</span>
+                  <h3 class="font-heading text-lg sm:text-xl font-bold text-slate-950">La Vie de Sanctification</h3>
                 </div>
                 <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
                   Nous aspirons à vivre une vie de piété, séparée du monde, guidée par le Saint-Esprit qui produit les fruits de la justice.
@@ -346,20 +360,20 @@
   <!-- ========================================================================
        SECTION NOTRE MISSION (VISION SPIRITUELLE & 3 CARTES MAJEURES)
        ======================================================================== -->
-  <section id="mission" class="py-14 sm:py-20 lg:py-28 content-section-glass-alt relative overflow-hidden border-b border-sky-100/70">
+  <section id="mission" class="py-14 sm:py-20 lg:py-28 content-section-glass-alt relative overflow-hidden border-b border-purple-100/70">
     
     <!-- Décoration d'arrière-plan discret -->
-    <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-sky-200/40 blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-blue-100/50 blur-3xl pointer-events-none"></div>
+    <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-purple-200/40 blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-amber-100/40 blur-3xl pointer-events-none"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <!-- En-tête de Section -->
       <div class="text-center max-w-3xl mx-auto mb-14 reveal-on-scroll">
-        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white shadow-sm border border-sky-200 text-brand-skyPrimary text-xs font-bold uppercase tracking-wider mb-3">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white shadow-sm border border-purple-200 text-purple-900 text-xs font-bold uppercase tracking-wider mb-3 font-heading">
           Vocation & Mandat Céleste
         </span>
-        <h2 class="font-serif text-3xl sm:text-4xl text-slate-950 font-bold leading-tight mb-4">
+        <h2 class="font-heading text-3xl sm:text-4xl text-slate-950 font-extrabold leading-tight mb-4">
           La Mission de 11<sup>e</sup> Heure Tabernacle
         </h2>
         <p class="text-slate-700 text-base sm:text-lg font-normal">
@@ -368,7 +382,7 @@
       </div>
 
       <!-- Grand Bloc Central : Citation solennelle de la mission -->
-      <div class="relative rounded-3xl bg-gradient-to-r from-brand-midnight via-brand-navy to-brand-skyPrimary p-8 sm:p-12 text-white shadow-2xl mb-14 overflow-hidden reveal-on-scroll delay-100">
+      <div class="relative rounded-3xl bg-gradient-to-r from-brand-purpleDark via-brand-purpleDeep to-brand-purpleMid p-8 sm:p-12 text-white shadow-2xl mb-14 overflow-hidden reveal-on-scroll delay-100 border border-amber-400/40">
         
         <!-- Portrait du Pasteur Odilon à droite de la Déclaration de foi et de vision (Lumineux, éclatant et bien visible) -->
         <div class="pastor-vision-photo-container" aria-hidden="true">
@@ -379,90 +393,90 @@
         </div>
 
         <div class="relative z-10 max-w-xl lg:max-w-2xl xl:max-w-3xl">
-          <div class="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-yellow-300 mb-6 border border-white/20">
+          <div class="w-12 h-12 rounded-2xl bg-amber-400/20 backdrop-blur-md flex items-center justify-center text-amber-300 mb-6 border border-amber-400/40">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
             </svg>
           </div>
           
-          <h3 class="text-xs uppercase tracking-widest text-sky-200 font-bold mb-3">Déclaration de foi et de vision :</h3>
+          <h3 class="text-xs uppercase tracking-widest text-amber-200 font-bold mb-3 font-heading">Déclaration de foi et de vision :</h3>
           
           <blockquote class="font-serif italic text-2xl sm:text-3xl md:text-4xl text-white font-medium leading-snug mb-6">
             « Restaurer la foi des apôtres, restaurer l’amour divin au moyen du Saint-Esprit, pour la restauration de la foi de l’enlèvement. »
           </blockquote>
 
-          <div class="flex items-center gap-3 text-sky-200 text-sm">
-            <span class="w-8 h-[2px] bg-yellow-400"></span>
-            <span class="font-medium">11e Heure Tabernacle &bull; Pointe-Noire</span>
+          <div class="flex items-center gap-3 text-purple-200 text-sm font-heading">
+            <span class="w-8 h-[2px] bg-amber-400"></span>
+            <span class="font-medium text-amber-300">11e Heure Tabernacle &bull; Pointe-Noire</span>
           </div>
         </div>
       </div>
 
-      <!-- 3 Cartes Majeures de la Mission (Cahier des charges G) -->
+      <!-- 3 Cartes Majeures de la Mission -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         <!-- Carte 1 -->
-        <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-8 border border-sky-200/90 shadow-xl shadow-sky-500/5 card-hover flex flex-col justify-between">
+        <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-8 border border-purple-200/90 shadow-xl shadow-purple-950/5 card-hover flex flex-col justify-between">
           <div>
-            <div class="w-14 h-14 rounded-2xl bg-sky-100 text-brand-skyPrimary flex items-center justify-center mb-6 shadow-inner">
+            <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-900 flex items-center justify-center mb-6 shadow-inner">
               <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
               </svg>
             </div>
-            <span class="text-xs font-extrabold text-sky-700 uppercase tracking-wider">Axe Fondateur 1</span>
-            <h3 class="font-serif text-xl font-bold text-slate-950 mt-1 mb-3">Restaurer la foi apostolique</h3>
+            <span class="text-xs font-extrabold text-purple-800 uppercase tracking-wider font-heading">Axe Fondateur 1</span>
+            <h3 class="font-heading text-xl font-bold text-slate-950 mt-1 mb-3">Restaurer la foi apostolique</h3>
             <p class="text-slate-700 text-sm leading-relaxed font-normal">
               Encourager les fidèles à approfondir leur foi dans la Parole de Dieu, en revenant aux vérités originelles enseignées par les apôtres de Jésus-Christ.
             </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-sky-100">
-            <span class="text-xs font-bold text-brand-skyPrimary flex items-center gap-1">
+          <div class="mt-6 pt-4 border-t border-purple-100">
+            <span class="text-xs font-bold text-purple-900 flex items-center gap-1 font-heading">
               <span>Sondage des Écritures</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </span>
           </div>
         </div>
 
         <!-- Carte 2 -->
-        <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-8 border border-sky-200/90 shadow-xl shadow-sky-500/5 card-hover flex flex-col justify-between">
+        <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-8 border border-purple-200/90 shadow-xl shadow-purple-950/5 card-hover flex flex-col justify-between">
           <div>
-            <div class="w-14 h-14 rounded-2xl bg-sky-100 text-brand-skyPrimary flex items-center justify-center mb-6 shadow-inner">
+            <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mb-6 shadow-inner">
               <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
               </svg>
             </div>
-            <span class="text-xs font-extrabold text-sky-700 uppercase tracking-wider">Axe Fondateur 2</span>
-            <h3 class="font-serif text-xl font-bold text-slate-950 mt-1 mb-3">Restaurer l’amour divin</h3>
+            <span class="text-xs font-extrabold text-amber-800 uppercase tracking-wider font-heading">Axe Fondateur 2</span>
+            <h3 class="font-heading text-xl font-bold text-slate-950 mt-1 mb-3">Restaurer l’amour divin</h3>
             <p class="text-slate-700 text-sm leading-relaxed font-normal">
               Cultiver l’amour pur, l’unité sincère et la communion fraternelle au moyen de l'effusion et de la présence sanctifiante du Saint-Esprit.
             </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-sky-100">
-            <span class="text-xs font-bold text-brand-skyPrimary flex items-center gap-1">
+          <div class="mt-6 pt-4 border-t border-purple-100">
+            <span class="text-xs font-bold text-amber-800 flex items-center gap-1 font-heading">
               <span>Communion de l'Esprit</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </span>
           </div>
         </div>
 
         <!-- Carte 3 -->
-        <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-8 border border-sky-200/90 shadow-xl shadow-sky-500/5 card-hover flex flex-col justify-between">
+        <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-8 border border-purple-200/90 shadow-xl shadow-purple-950/5 card-hover flex flex-col justify-between">
           <div>
-            <div class="w-14 h-14 rounded-2xl bg-sky-100 text-brand-skyPrimary flex items-center justify-center mb-6 shadow-inner">
+            <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-900 flex items-center justify-center mb-6 shadow-inner">
               <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
             </div>
-            <span class="text-xs font-extrabold text-sky-700 uppercase tracking-wider">Axe Fondateur 3</span>
-            <h3 class="font-serif text-xl font-bold text-slate-950 mt-1 mb-3">Préparer les croyants</h3>
+            <span class="text-xs font-extrabold text-purple-800 uppercase tracking-wider font-heading">Axe Fondateur 3</span>
+            <h3 class="font-heading text-xl font-bold text-slate-950 mt-1 mb-3">Préparer les croyants</h3>
             <p class="text-slate-700 text-sm leading-relaxed font-normal">
               Encourager une vie de foi, de consécration et de vigilance spirituelle constante dans la glorieuse espérance de l’enlèvement de l'Épouse.
             </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-sky-100">
-            <span class="text-xs font-bold text-brand-skyPrimary flex items-center gap-1">
+          <div class="mt-6 pt-4 border-t border-purple-100">
+            <span class="text-xs font-bold text-purple-900 flex items-center gap-1 font-heading">
               <span>Espérance Céleste</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </span>
           </div>
         </div>
@@ -475,140 +489,140 @@
   <!-- ========================================================================
        SECTION PROGRAMMES & HORAIRES DES CULTES HEBDOMADAIRES
        ======================================================================== -->
-  <section id="horaires" class="py-14 sm:py-20 lg:py-28 content-section-glass relative border-b border-sky-100/70">
+  <section id="horaires" class="py-14 sm:py-20 lg:py-28 content-section-glass relative border-b border-purple-100/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Titre de la section -->
       <div class="text-center max-w-3xl mx-auto mb-14 reveal-on-scroll">
-        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-sky-200 text-brand-skyPrimary text-xs font-bold uppercase tracking-wider mb-3 shadow-sm">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-50 border border-purple-200 text-purple-900 text-xs font-bold uppercase tracking-wider mb-3 shadow-sm font-heading">
           Rendez-vous Spirituels
         </span>
-        <h2 class="font-serif text-3xl sm:text-4xl text-slate-950 font-bold leading-tight mb-4">
+        <h2 class="font-heading text-3xl sm:text-4xl text-slate-950 font-extrabold leading-tight mb-4">
           Programmes & Horaires des Cultes
         </h2>
         <p class="text-slate-700 text-base sm:text-lg font-normal">
-          Rejoignez-nous chaque semaine à Pointe-Noire pour célébrer le Seigneur et méditer Sa Parole.
+          Rejoignez-nous chaque semaine à Pointe-Noire (Voungou 1) pour célébrer le Seigneur et sonder Sa Parole dans la révélation.
         </p>
       </div>
 
-      <!-- Grille des Horaires Officiels (Cahier des charges H) -->
+      <!-- Grille des Horaires Officiels -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 reveal-on-scroll delay-100">
         
         <!-- Mardi -->
-        <div class="bg-white/95 backdrop-blur-sm rounded-2xl border-2 border-sky-200/90 hover:border-brand-skyPrimary p-5 sm:p-6 shadow-md card-hover flex flex-col justify-between h-full">
+        <div class="bg-white/95 backdrop-blur-sm rounded-2xl border-2 border-purple-100 hover:border-purple-600 p-5 sm:p-6 shadow-md card-hover flex flex-col justify-between h-full">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="px-3 py-1 rounded-full bg-sky-100 text-brand-skyPrimary text-xs font-extrabold uppercase">Culte en semaine</span>
-              <div class="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center text-brand-skyPrimary shadow-inner">
+              <span class="px-3 py-1 rounded-full bg-purple-100 text-purple-900 text-xs font-extrabold uppercase font-heading">Culte en semaine</span>
+              <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-800 shadow-inner">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               </div>
             </div>
-            <h3 class="font-serif text-2xl font-bold text-slate-950 mb-2">Mardi</h3>
-            <div class="text-brand-skyPrimary font-bold text-lg mb-3">
+            <h3 class="font-heading text-2xl font-bold text-slate-950 mb-2">Mardi</h3>
+            <div class="text-purple-800 font-extrabold text-lg mb-3 font-heading">
               18h00 – 19h30
             </div>
             <p class="text-slate-700 text-sm leading-relaxed mb-6 font-normal">
               Culte d'édification et d'enseignement biblique. Un temps fort pour renouveler ses forces au milieu de la semaine.
             </p>
           </div>
-          <a href="#contact" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-50 hover:bg-brand-skyPrimary text-brand-midnight hover:text-white font-semibold text-xs transition-colors">
+          <a href="#contact" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-purple-50 hover:bg-purple-900 text-purple-950 hover:text-white font-bold text-xs font-heading transition-colors">
             <span>Comment nous rejoindre</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
         </div>
 
         <!-- Jeudi -->
-        <div class="bg-white/95 backdrop-blur-sm rounded-2xl border-2 border-sky-200/90 hover:border-brand-skyPrimary p-5 sm:p-6 shadow-md card-hover flex flex-col justify-between h-full">
+        <div class="bg-white/95 backdrop-blur-sm rounded-2xl border-2 border-purple-100 hover:border-purple-600 p-5 sm:p-6 shadow-md card-hover flex flex-col justify-between h-full">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="px-3 py-1 rounded-full bg-sky-100 text-brand-skyPrimary text-xs font-extrabold uppercase">Culte de la semaine</span>
-              <div class="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center text-brand-skyPrimary shadow-inner">
+              <span class="px-3 py-1 rounded-full bg-purple-100 text-purple-900 text-xs font-extrabold uppercase font-heading">Culte de la semaine</span>
+              <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-800 shadow-inner">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               </div>
             </div>
-            <h3 class="font-serif text-2xl font-bold text-slate-950 mb-2">Jeudi</h3>
-            <div class="text-brand-skyPrimary font-bold text-lg mb-3">
+            <h3 class="font-heading text-2xl font-bold text-slate-950 mb-2">Jeudi</h3>
+            <div class="text-purple-800 font-extrabold text-lg mb-3 font-heading">
               18h00 – 19h30
             </div>
             <p class="text-slate-700 text-sm leading-relaxed mb-6 font-normal">
-              Culte de la semaine : prière, communion fraternelle et méditation de la Parole pour renouveler les forces spirituelles.
+              Culte de la semaine : prière fervente, communion fraternelle et méditation de la Parole vivante.
             </p>
           </div>
-          <a href="#contact" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-50 hover:bg-brand-skyPrimary text-slate-900 hover:text-white font-semibold text-xs transition-colors">
+          <a href="#contact" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-purple-50 hover:bg-purple-900 text-purple-950 hover:text-white font-bold text-xs font-heading transition-colors">
             <span>Comment nous rejoindre</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
         </div>
 
         <!-- Dimanche matin - École du dimanche -->
-        <div class="bg-white/95 backdrop-blur-sm rounded-2xl border-2 border-sky-200/90 hover:border-brand-skyPrimary p-5 sm:p-6 shadow-md card-hover flex flex-col justify-between h-full">
+        <div class="bg-white/95 backdrop-blur-sm rounded-2xl border-2 border-amber-100 hover:border-amber-500 p-5 sm:p-6 shadow-md card-hover flex flex-col justify-between h-full">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-extrabold uppercase">Jeunesse & Enfants</span>
+              <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-extrabold uppercase font-heading">Jeunesse & Enfants</span>
               <div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-amber-700 shadow-inner">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
               </div>
             </div>
-            <h3 class="font-serif text-2xl font-bold text-slate-950 mb-2">École du Dimanche</h3>
-            <div class="text-brand-skyPrimary font-bold text-lg mb-3">
+            <h3 class="font-heading text-2xl font-bold text-slate-950 mb-2">École du Dimanche</h3>
+            <div class="text-amber-700 font-extrabold text-lg mb-3 font-heading">
               08h00 – 09h30
             </div>
             <p class="text-slate-700 text-sm leading-relaxed mb-6 font-normal">
               Enseignement biblique adapté aux enfants et à la jeunesse pour fonder les générations futures sur les valeurs chrétiennes.
             </p>
           </div>
-          <a href="#contact" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-50 hover:bg-brand-skyPrimary text-slate-900 hover:text-white font-semibold text-xs transition-colors">
+          <a href="#contact" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-600 text-amber-950 hover:text-white font-bold text-xs font-heading transition-colors">
             <span>Comment nous rejoindre</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
         </div>
 
-        <!-- Dimanche - Culte Principal -->
-        <div class="bg-gradient-to-b from-sky-50 to-white rounded-2xl border-2 border-brand-skyPrimary p-5 sm:p-6 shadow-xl card-hover flex flex-col justify-between h-full relative overflow-hidden">
-          <div class="absolute top-0 right-0 bg-brand-skyPrimary text-white text-[10px] font-black uppercase px-3 py-1 rounded-bl-xl tracking-wider">
+        <!-- Dimanche - Culte Principal (Vedette Royale) -->
+        <div class="bg-gradient-to-b from-[#1a0b36] via-[#240d4a] to-[#1a0b36] rounded-2xl border-2 border-amber-400 p-5 sm:p-6 shadow-2xl card-hover flex flex-col justify-between h-full relative overflow-hidden text-white">
+          <div class="absolute top-0 right-0 bg-amber-400 text-purple-950 text-[10px] font-black uppercase px-3.5 py-1 rounded-bl-xl tracking-wider font-heading shadow-md">
             Culte Principal
           </div>
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="px-3 py-1 rounded-full bg-brand-skyPrimary text-white text-xs font-extrabold uppercase">Célébration</span>
-              <div class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-brand-skyPrimary">
+              <span class="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-extrabold uppercase font-heading">Célébration</span>
+              <div class="w-10 h-10 rounded-full bg-amber-400/20 border border-amber-400/30 shadow-sm flex items-center justify-center text-amber-300">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
               </div>
             </div>
-            <h3 class="font-serif text-2xl font-bold text-slate-950 mb-2">Dimanche</h3>
-            <div class="text-brand-deep font-extrabold text-xl mb-3">
+            <h3 class="font-heading text-2xl font-extrabold text-white mb-2">Dimanche</h3>
+            <div class="text-amber-300 font-extrabold text-2xl mb-3 font-heading drop-shadow">
               10h00 – 12h30
             </div>
-            <p class="text-slate-700 text-sm leading-relaxed mb-6 font-normal">
-              Grand culte de célébration, louange, adoration, prédication puissante de la Parole et bénédiction des familles.
+            <p class="text-purple-100/90 text-sm leading-relaxed mb-6 font-normal">
+              Grand culte de célébration, louange, adoration, prédication puissante de la Parole et bénédiction solennelle des familles.
             </p>
           </div>
-          <a href="#contact" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brand-skyPrimary hover:bg-brand-deep text-white font-semibold text-xs shadow-md transition-colors">
+          <a href="#contact" class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl btn-gold-primary text-xs font-extrabold shadow-lg transition-transform">
             <span>Comment nous rejoindre</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            <svg class="w-4 h-4 text-purple-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
         </div>
 
       </div>
 
       <!-- Note d'invitation chaleureuse pour les visiteurs -->
-      <div class="rounded-2xl bg-gradient-to-r from-sky-50 via-white to-sky-50 border border-sky-200 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="rounded-2xl bg-gradient-to-r from-purple-50 via-white to-amber-50/50 border border-purple-200 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
         <div class="flex items-center gap-4">
-          <div class="w-12 h-12 rounded-full bg-sky-200/60 text-brand-skyPrimary flex items-center justify-center shrink-0">
+          <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-900 flex items-center justify-center shrink-0 shadow-inner">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </div>
           <div>
-            <h4 class="font-serif font-bold text-lg text-brand-midnight">Vous visitez 11e Heure Tabernacle pour la première fois ?</h4>
-            <p class="text-slate-600 text-sm mt-0.5">
+            <h4 class="font-heading font-bold text-lg text-slate-950">Vous visitez 11e Heure Tabernacle pour la première fois ?</h4>
+            <p class="text-slate-600 text-sm mt-0.5 font-sans">
               Vous êtes le bienvenu ! Nos portes et nos cœurs vous sont grands ouverts. Venez tel que vous êtes pour adorer le Seigneur avec nous.
             </p>
           </div>
         </div>
-        <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-midnight hover:bg-brand-navy text-white text-sm font-semibold transition-all">
+        <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-full btn-whatsapp-emerald text-sm font-bold shadow-lg transition-all">
           <span>Informer de votre visite</span>
-          <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
         </a>
       </div>
 
@@ -618,84 +632,84 @@
   <!-- ========================================================================
        SECTION VERSET BIBLIQUE DU JOUR (CONNECTÉ À L'API OFFICIELLE HELLOAO)
        ======================================================================== -->
-  <section id="verset" class="py-14 sm:py-20 lg:py-28 content-section-glass-alt relative border-b border-sky-100/70">
+  <section id="verset" class="py-14 sm:py-20 lg:py-28 content-section-glass-alt relative border-b border-amber-400/20">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Titre de section -->
       <div class="text-center mb-10 sm:mb-12 reveal-on-scroll">
-        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-sky-200 text-brand-skyPrimary text-xs font-bold uppercase tracking-wider mb-3 shadow-sm">
-          Pain Quotidien
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-purpleSoft border border-amber-300/80 text-brand-purpleDark text-xs font-heading font-extrabold uppercase tracking-wider mb-3 shadow-sm">
+          Pain Quotidien de l'Âme
         </span>
-        <h2 class="font-serif text-3xl sm:text-4xl text-slate-950 font-bold leading-tight mb-3">
+        <h2 class="font-heading text-3xl sm:text-4xl text-brand-purpleDark font-extrabold leading-tight mb-3">
           Le Verset Biblique du Jour
         </h2>
         <p class="text-slate-700 text-base font-normal">
-          Nourrissez votre esprit chaque jour avec la Parole vivante de Dieu.
+          Nourrissez votre esprit chaque jour avec la Parole vivante et infaillible de Dieu.
         </p>
       </div>
 
       <!-- Carte du Verset (Spécifications Cahier des charges I) -->
-      <div class="verse-container p-6 sm:p-10 md:p-12 relative bg-white/95 backdrop-blur-md border-2 border-sky-200/90 shadow-xl reveal-on-scroll delay-100">
-        <!-- Barre d'accentuation supérieure -->
+      <div class="verse-container p-6 sm:p-10 md:p-12 relative bg-white/95 backdrop-blur-md border-2 border-purple-200/90 shadow-2xl reveal-on-scroll delay-100 rounded-3xl">
+        <!-- Barre d'accentuation supérieure dorée -->
         <div class="verse-accent-bar"></div>
 
         <!-- En-tête de la carte : Icône Bible & Thème -->
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-sky-100">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-purple-100">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-sky-100 text-brand-skyPrimary flex items-center justify-center shadow-inner shrink-0">
+            <div class="w-12 h-12 rounded-2xl bg-brand-purpleDark text-amber-300 ring-2 ring-amber-400/40 flex items-center justify-center shadow-md shrink-0">
               <!-- Icône représentant une Bible -->
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
               </svg>
             </div>
             <div>
-              <span class="text-xs uppercase tracking-wider font-extrabold text-sky-600">Méditation Quotidienne</span>
-              <h3 id="daily-verse-theme" class="text-sm font-bold text-slate-800">L'Enlèvement de l'Église</h3>
+              <span class="text-xs uppercase tracking-wider font-heading font-extrabold text-amber-600">Méditation Quotidienne</span>
+              <h3 id="daily-verse-theme" class="text-base font-heading font-bold text-brand-purpleDark">L'Enlèvement de l'Église</h3>
             </div>
           </div>
 
-          <!-- Badge Référence -->
-          <div id="daily-verse-ref" class="px-4 py-1.5 rounded-full bg-brand-skyPrimary text-white font-bold text-sm tracking-wide shadow-sm self-start sm:self-auto">
+          <!-- Badge Référence Doré -->
+          <div id="daily-verse-ref" class="px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-purple-950 font-heading font-extrabold text-sm tracking-wide shadow-md self-start sm:self-auto border border-amber-300/60">
             1 Thessaloniciens 4:16-17
           </div>
         </div>
 
         <!-- Indicateur de Chargement -->
         <div id="verse-loading" class="hidden py-8 flex flex-col items-center justify-center space-y-3">
-          <div class="w-10 h-10 border-4 border-sky-200 border-t-brand-skyPrimary rounded-full animate-spin"></div>
+          <div class="w-10 h-10 border-4 border-purple-200 border-t-amber-500 rounded-full animate-spin"></div>
           <span class="text-xs font-semibold text-slate-500">Chargement de la sainte Écriture...</span>
         </div>
 
         <!-- Contenu du Verset -->
         <div id="verse-card-content" class="transition-opacity duration-300">
-          <blockquote id="daily-verse-text" class="font-serif italic text-lg sm:text-xl md:text-2xl text-slate-800 font-medium leading-relaxed my-4 sm:my-6 text-center">
+          <blockquote id="daily-verse-text" class="font-serif italic text-lg sm:text-xl md:text-2xl text-brand-purpleDark font-medium leading-relaxed my-4 sm:my-6 text-center">
             « Car le Seigneur lui-même, à un signal donné, à la voix d'un archange, et au son de la trompette de Dieu, descendra du ciel, et les morts en Christ ressusciteront premièrement. Ensuite, nous les vivants, qui serons restés, nous serons tous ensemble enlevés avec eux sur des nuées, à la rencontre du Seigneur dans les airs... »
           </blockquote>
         </div>
 
         <!-- Pied de Carte : Statut API & Actions Interactives Dynamiques -->
-        <div class="pt-6 mt-6 border-t border-sky-100 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="pt-6 mt-6 border-t border-purple-100 flex flex-col md:flex-row items-center justify-between gap-4">
           <div class="flex items-center gap-2 text-xs text-slate-500 text-center md:text-left">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm shrink-0"></span>
             <span id="verse-api-status">API HelloAO &bull; Louis Segond 1910 &bull; Pointe-Noire (GMT+1)</span>
           </div>
 
           <!-- Actions Interactives Verset -->
           <div class="flex flex-wrap items-center justify-center gap-2.5 w-full md:w-auto">
             <!-- Bouton Copier le verset -->
-            <button id="copy-verse-btn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 text-xs font-bold transition-all shadow-sm active:scale-95" title="Copier le texte du verset">
-              <svg class="w-3.5 h-3.5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <button id="copy-verse-btn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-purple-50 hover:bg-purple-100 text-brand-purpleDark border border-purple-200 text-xs font-bold transition-all shadow-sm active:scale-95" title="Copier le texte du verset">
+              <svg class="w-3.5 h-3.5 text-brand-purpleDark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
               <span>Copier</span>
             </button>
 
             <!-- Bouton Partager sur WhatsApp -->
-            <button id="share-verse-btn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-green-50 hover:bg-green-100 text-green-700 hover:text-green-800 text-xs font-bold transition-all shadow-sm active:scale-95" title="Partager ce verset sur WhatsApp">
-              <svg class="w-3.5 h-3.5 fill-current text-green-600" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+            <button id="share-verse-btn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-bold transition-all shadow-sm active:scale-95" title="Partager ce verset sur WhatsApp">
+              <svg class="w-3.5 h-3.5 fill-current text-emerald-600" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
               <span>Partager</span>
             </button>
 
             <!-- Bouton Découvrir un autre verset -->
-            <button id="refresh-verse-btn" type="button" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-sky-100 hover:bg-brand-skyPrimary text-brand-skyPrimary hover:text-white text-xs font-bold transition-all shadow-sm active:scale-95" title="Afficher un autre verset édifiant">
+            <button id="refresh-verse-btn" type="button" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-purpleDark hover:bg-brand-purpleRoyal text-amber-300 border border-amber-400/40 text-xs font-heading font-bold transition-all shadow-md active:scale-95" title="Afficher un autre verset édifiant">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
               </svg>
@@ -712,15 +726,15 @@
   <!-- ========================================================================
        SECTION GALERIE PHOTOS AVEC FILTRES ET VISIONNEUSE (LIGHTBOX)
        ======================================================================== -->
-  <section id="galerie" class="py-14 sm:py-20 lg:py-28 content-section-glass relative border-b border-sky-100/70">
+  <section id="galerie" class="py-14 sm:py-20 lg:py-28 content-section-glass relative border-b border-amber-400/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- En-tête de la Galerie -->
       <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12 reveal-on-scroll">
-        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-sky-200 text-brand-skyPrimary text-xs font-bold uppercase tracking-wider mb-3 shadow-sm">
-          Moments Précieux & Édification
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-purpleSoft border border-amber-300/80 text-brand-purpleDark text-xs font-heading font-extrabold uppercase tracking-wider mb-3 shadow-sm">
+          Moments Précieux & Témoignages
         </span>
-        <h2 class="font-serif text-3xl sm:text-4xl text-slate-950 font-bold leading-tight mb-4">
+        <h2 class="font-heading text-3xl sm:text-4xl text-brand-purpleDark font-extrabold leading-tight mb-4">
           Galerie de la Vie de l'Église
         </h2>
         <p class="text-slate-700 text-base sm:text-lg font-normal">
@@ -730,29 +744,29 @@
 
       <!-- Filtres de Catégories Interactifs avec Badges de Comptage -->
       <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-8 sm:mb-12">
-        <button type="button" class="gallery-tab active inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-sky-900 text-white border border-transparent shadow-sm" data-filter="all">
+        <button type="button" class="gallery-tab active inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-heading font-bold shadow-md" data-filter="all">
           <span>Toutes les photos</span>
-          <span class="count-badge px-2 py-0.5 rounded-full text-[11px] font-bold bg-white/20">11</span>
+          <span class="count-badge px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-400 text-purple-950">11</span>
         </button>
-        <button type="button" class="gallery-tab inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white border border-sky-200 text-slate-800 hover:bg-sky-50 shadow-sm" data-filter="assemblee">
+        <button type="button" class="gallery-tab inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-heading font-medium bg-white/90 border border-purple-200 text-purple-950 hover:bg-purple-50 hover:border-amber-400 shadow-sm transition-all" data-filter="assemblee">
           <span>Assemblée & Fraternité</span>
-          <span class="count-badge px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-100 text-sky-800">3</span>
+          <span class="count-badge px-2 py-0.5 rounded-full text-[11px] font-bold bg-purple-100 text-brand-purpleDark">3</span>
         </button>
-        <button type="button" class="gallery-tab inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white border border-sky-200 text-slate-800 hover:bg-sky-50 shadow-sm" data-filter="ministere">
+        <button type="button" class="gallery-tab inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-heading font-medium bg-white/90 border border-purple-200 text-purple-950 hover:bg-purple-50 hover:border-amber-400 shadow-sm transition-all" data-filter="ministere">
           <span>Ministère & Cantiques</span>
-          <span class="count-badge px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-100 text-sky-800">2</span>
+          <span class="count-badge px-2 py-0.5 rounded-full text-[11px] font-bold bg-purple-100 text-brand-purpleDark">2</span>
         </button>
-        <button type="button" class="gallery-tab inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white border border-sky-200 text-slate-800 hover:bg-sky-50 shadow-sm" data-filter="travaux">
+        <button type="button" class="gallery-tab inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-heading font-medium bg-white/90 border border-purple-200 text-purple-950 hover:bg-purple-50 hover:border-amber-400 shadow-sm transition-all" data-filter="travaux">
           <span>Chantier & Travaux</span>
-          <span class="count-badge px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-100 text-sky-800">2</span>
+          <span class="count-badge px-2 py-0.5 rounded-full text-[11px] font-bold bg-purple-100 text-brand-purpleDark">2</span>
         </button>
-        <button type="button" class="gallery-tab inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white border border-sky-200 text-slate-800 hover:bg-sky-50 shadow-sm" data-filter="message">
+        <button type="button" class="gallery-tab inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-heading font-medium bg-white/90 border border-purple-200 text-purple-950 hover:bg-purple-50 hover:border-amber-400 shadow-sm transition-all" data-filter="message">
           <span>Colonne de Feu & Nuée</span>
-          <span class="count-badge px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-100 text-sky-800">3</span>
+          <span class="count-badge px-2 py-0.5 rounded-full text-[11px] font-bold bg-purple-100 text-brand-purpleDark">3</span>
         </button>
-        <button type="button" class="gallery-tab inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white border border-sky-200 text-slate-800 hover:bg-sky-50 shadow-sm" data-filter="enseignements">
+        <button type="button" class="gallery-tab inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-heading font-medium bg-white/90 border border-purple-200 text-purple-950 hover:bg-purple-50 hover:border-amber-400 shadow-sm transition-all" data-filter="enseignements">
           <span>Révélations</span>
-          <span class="count-badge px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-100 text-sky-800">1</span>
+          <span class="count-badge px-2 py-0.5 rounded-full text-[11px] font-bold bg-purple-100 text-brand-purpleDark">1</span>
         </button>
       </div>
 
@@ -762,177 +776,177 @@
         <!-- Photo 1: L'Assemblée locale et le Pasteur Odilon -->
         <div class="gallery-item gallery-card-modern group h-72 sm:h-80" data-category="assemblee" data-badge="Assemblée Locale" data-title="L'Assemblée & le Pasteur Odilon" data-caption="Frères et serviteurs réunis autour du pasteur Odilon Detchibs à 11e Heure Tabernacle, Pointe-Noire (Voungou 1).">
           <img src="assets/images/assemblee-pasteur-odilon.jpg" alt="Assemblée 11e Heure Tabernacle réunie avec le Pasteur Odilon Detchibs" class="w-full h-full object-cover">
-          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/20 text-sky-200 text-[11px] font-bold uppercase tracking-wider">
+          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-brand-purpleDark/90 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-heading font-bold uppercase tracking-wider shadow-md">
             Assemblée Locale
           </div>
-          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-slate-900 shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-brand-purpleDark shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
           </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-5 text-white">
-            <span class="text-[11px] font-bold text-yellow-300 uppercase tracking-wide">Pointe-Noire &bull; Voungou 1</span>
-            <h4 class="font-serif text-lg font-bold leading-tight mt-0.5">L'Assemblée & le Pasteur Odilon</h4>
-            <p class="text-xs text-sky-100/90 mt-1 line-clamp-1">Frères et serviteurs réunis dans la foi apostolique</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/95 via-brand-purpleDark/40 to-transparent flex flex-col justify-end p-5 text-white">
+            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide font-heading">Pointe-Noire &bull; Voungou 1</span>
+            <h4 class="font-heading text-lg font-bold leading-tight mt-0.5 text-white">L'Assemblée & le Pasteur Odilon</h4>
+            <p class="text-xs text-purple-100/90 mt-1 line-clamp-1">Frères et serviteurs réunis dans la foi apostolique</p>
           </div>
         </div>
 
         <!-- Photo 2: Odilon De Tchib Ministries (NOUVEAU) -->
         <div class="gallery-item gallery-card-modern group h-72 sm:h-80" data-category="ministere" data-badge="Ministère Pastoral" data-title="Odilon De Tchib Ministries" data-caption="Odilon De Tchib Ministries — Ministère pastoral consacré à la prédication fidèle de la Parole de Dieu et du Message de restauration.">
           <img src="assets/images/pastor-odilon-ministries.jpg" alt="Odilon De Tchib Ministries - Ministère pastoral" class="w-full h-full object-cover object-top">
-          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/20 text-emerald-300 text-[11px] font-bold uppercase tracking-wider">
+          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-brand-purpleDark/90 backdrop-blur-md border border-emerald-400/50 text-emerald-300 text-[11px] font-heading font-bold uppercase tracking-wider shadow-md">
             Ministère Pastoral
           </div>
-          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-slate-900 shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-brand-purpleDark shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
           </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-5 text-white">
-            <span class="text-[11px] font-bold text-yellow-300 uppercase tracking-wide">Parole de Dieu Vivante</span>
-            <h4 class="font-serif text-lg font-bold leading-tight mt-0.5">Odilon De Tchib Ministries</h4>
-            <p class="text-xs text-sky-100/90 mt-1 line-clamp-1">Consécration pastorale et proclamation de l'Évangile</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/95 via-brand-purpleDark/40 to-transparent flex flex-col justify-end p-5 text-white">
+            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide font-heading">Parole de Dieu Vivante</span>
+            <h4 class="font-heading text-lg font-bold leading-tight mt-0.5 text-white">Odilon De Tchib Ministries</h4>
+            <p class="text-xs text-purple-100/90 mt-1 line-clamp-1">Consécration pastorale et proclamation de l'Évangile</p>
           </div>
         </div>
 
         <!-- Photo 3: Nouveau Chant YouTube "N'oublions pas la vision" (NOUVEAU) -->
         <div class="gallery-item gallery-card-modern group h-72 sm:h-80" data-category="ministere" data-badge="YouTube • Chant" data-title="« N'oublions pas la vision »" data-caption="« N'oublions pas la vision » — Chant d'adoration et d'édification spirituelle par le pasteur Odilon Detchibs, disponible sur YouTube (+242 06 937 69 67).">
           <img src="assets/images/chant-noublions-pas-la-vision.jpg" alt="Nouveau chant N'oublions pas la vision - Pasteur Odilon De Tchib sur YouTube" class="w-full h-full object-cover">
-          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-red-600/90 backdrop-blur-md border border-white/20 text-white text-[11px] font-extrabold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-red-600/90 backdrop-blur-md border border-white/20 text-white text-[11px] font-heading font-extrabold uppercase tracking-wider flex items-center gap-1.5 shadow-md">
             <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             <span>YouTube &bull; Louange</span>
           </div>
-          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-slate-900 shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-brand-purpleDark shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
           </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-5 text-white">
-            <span class="text-[11px] font-bold text-red-300 uppercase tracking-wide">Sortie Officielle &bull; Chaine YouTube</span>
-            <h4 class="font-serif text-lg font-bold leading-tight mt-0.5">« N'oublions pas la vision »</h4>
-            <p class="text-xs text-sky-100/90 mt-1 line-clamp-1">Chant d'édification par le pasteur Odilon Detchibs</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/95 via-brand-purpleDark/40 to-transparent flex flex-col justify-end p-5 text-white">
+            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide font-heading">Sortie Officielle &bull; Chaîne YouTube</span>
+            <h4 class="font-heading text-lg font-bold leading-tight mt-0.5 text-white">« N'oublions pas la vision »</h4>
+            <p class="text-xs text-purple-100/90 mt-1 line-clamp-1">Chant d'édification par le pasteur Odilon Detchibs</p>
           </div>
         </div>
 
         <!-- Photo 4: Les Bâtisseurs du Tabernacle (NOUVEAU) -->
         <div class="gallery-item gallery-card-modern group h-72 sm:h-80" data-category="travaux" data-badge="Chantier & Travaux" data-title="Les Bâtisseurs du Tabernacle" data-caption="Édification de la maison de l'Éternel : le pasteur Odilon Detchibs aux côtés des fidèles ouvriers bâtisseurs à Voungou 1, Pointe-Noire.">
           <img src="assets/images/travaux-construction-pasteur.jpg" alt="Le pasteur Odilon et les bâtisseurs sur le chantier du Tabernacle" class="w-full h-full object-cover">
-          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-amber-500/90 backdrop-blur-md border border-white/20 text-slate-950 text-[11px] font-extrabold uppercase tracking-wider">
+          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-purple-950 text-[11px] font-heading font-extrabold uppercase tracking-wider shadow-md">
             Édification & Bâtisseurs
           </div>
-          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-slate-900 shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-brand-purpleDark shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
           </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-5 text-white">
-            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide">Travaux du Sanctuaire &bull; Voungou 1</span>
-            <h4 class="font-serif text-lg font-bold leading-tight mt-0.5">Les Bâtisseurs du Tabernacle</h4>
-            <p class="text-xs text-sky-100/90 mt-1 line-clamp-1">Le pasteur Odilon et les frères à l'œuvre sur le chantier</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/95 via-brand-purpleDark/40 to-transparent flex flex-col justify-end p-5 text-white">
+            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide font-heading">Travaux du Sanctuaire &bull; Voungou 1</span>
+            <h4 class="font-heading text-lg font-bold leading-tight mt-0.5 text-white">Les Bâtisseurs du Tabernacle</h4>
+            <p class="text-xs text-purple-100/90 mt-1 line-clamp-1">Le pasteur Odilon et les frères à l'œuvre sur le chantier</p>
           </div>
         </div>
 
         <!-- Photo 5: Le Sanctuaire en construction à Voungou 1 (NOUVEAU) -->
         <div class="gallery-item gallery-card-modern group h-72 sm:h-80" data-category="travaux" data-badge="Maison de Prière" data-title="Chantier de 11e Heure Tabernacle" data-caption="Vue de l'édification du sanctuaire de 11e Heure Tabernacle à Voungou 1, Bank de Vie (arrêt 1er Pont). Un sanctuaire dédié à la gloire de Dieu.">
           <img src="assets/images/chantier-tabernacle-voungou.jpg" alt="Chantier de construction du Tabernacle à Voungou 1, Pointe-Noire" class="w-full h-full object-cover">
-          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/20 text-amber-300 text-[11px] font-bold uppercase tracking-wider">
+          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-brand-purpleDark/90 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-heading font-bold uppercase tracking-wider shadow-md">
             Maison de Prière
           </div>
-          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-slate-900 shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-brand-purpleDark shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
           </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-5 text-white">
-            <span class="text-[11px] font-bold text-yellow-300 uppercase tracking-wide">Arrêt 1er Pont &bull; Pointe-Noire</span>
-            <h4 class="font-serif text-lg font-bold leading-tight mt-0.5">Chantier de 11e Heure Tabernacle</h4>
-            <p class="text-xs text-sky-100/90 mt-1 line-clamp-1">Avancement des travaux de l'assemblée locale</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/95 via-brand-purpleDark/40 to-transparent flex flex-col justify-end p-5 text-white">
+            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide font-heading">Arrêt 1er Pont &bull; Pointe-Noire</span>
+            <h4 class="font-heading text-lg font-bold leading-tight mt-0.5 text-white">Chantier de 11e Heure Tabernacle</h4>
+            <p class="text-xs text-purple-100/90 mt-1 line-clamp-1">Avancement des travaux de l'assemblée locale</p>
           </div>
         </div>
 
         <!-- Photo 6: Communion fraternelle des serviteurs (NOUVEAU) -->
         <div class="gallery-item gallery-card-modern group h-72 sm:h-80" data-category="assemblee" data-badge="Communion Fraternelle" data-title="Unité & Communion des Frères" data-caption="Les serviteurs de Dieu et frères de l'assemblée réunis dans une chaleureuse communion fraternelle et spirituelle à Pointe-Noire.">
           <img src="assets/images/communion-fraternelle-ouvriers.jpg" alt="Communion fraternelle des serviteurs et frères de l'église" class="w-full h-full object-cover">
-          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/20 text-sky-200 text-[11px] font-bold uppercase tracking-wider">
+          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-brand-purpleDark/90 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-heading font-bold uppercase tracking-wider shadow-md">
             Communion Fraternelle
           </div>
-          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-slate-900 shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-brand-purpleDark shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
           </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-5 text-white">
-            <span class="text-[11px] font-bold text-yellow-300 uppercase tracking-wide">Pointe-Noire &bull; Vie de l'Église</span>
-            <h4 class="font-serif text-lg font-bold leading-tight mt-0.5">Unité & Communion des Frères</h4>
-            <p class="text-xs text-sky-100/90 mt-1 line-clamp-1">Les serviteurs marchant d'un même esprit dans la foi</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/95 via-brand-purpleDark/40 to-transparent flex flex-col justify-end p-5 text-white">
+            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide font-heading">Pointe-Noire &bull; Vie de l'Église</span>
+            <h4 class="font-heading text-lg font-bold leading-tight mt-0.5 text-white">Unité & Communion des Frères</h4>
+            <p class="text-xs text-purple-100/90 mt-1 line-clamp-1">Les serviteurs marchant d'un même esprit dans la foi</p>
           </div>
         </div>
 
         <!-- Photo 7: Pasteur Odilon Detchibs -->
         <div class="gallery-item gallery-card-modern group h-72 sm:h-80" data-category="assemblee" data-badge="Ministère Pastoral" data-title="Pasteur Odilon Detchibs" data-caption="Pasteur Odilon Detchibs — Berger principal et conducteur spirituel de 11e Heure Tabernacle à Pointe-Noire.">
           <img src="assets/images/pastor-odilon.jpg" alt="Pasteur Odilon Detchibs, pasteur principal" class="w-full h-full object-cover object-top">
-          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/20 text-yellow-300 text-[11px] font-bold uppercase tracking-wider">
+          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-brand-purpleDark/90 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-heading font-bold uppercase tracking-wider shadow-md">
             Berger Principal
           </div>
-          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-slate-900 shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-brand-purpleDark shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
           </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-5 text-white">
-            <span class="text-[11px] font-bold text-yellow-300 uppercase tracking-wide">Conducteur Spirituel</span>
-            <h4 class="font-serif text-lg font-bold leading-tight mt-0.5">Pasteur Odilon Detchibs</h4>
-            <p class="text-xs text-sky-100/90 mt-1 line-clamp-1">Berger dévoué de 11e Heure Tabernacle</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/95 via-brand-purpleDark/40 to-transparent flex flex-col justify-end p-5 text-white">
+            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide font-heading">Conducteur Spirituel</span>
+            <h4 class="font-heading text-lg font-bold leading-tight mt-0.5 text-white">Pasteur Odilon Detchibs</h4>
+            <p class="text-xs text-purple-100/90 mt-1 line-clamp-1">Berger dévoué de 11e Heure Tabernacle</p>
           </div>
         </div>
 
         <!-- Photo 8: William Marrion Branham et la Colonne de Feu -->
         <div class="gallery-item gallery-card-modern group h-72 sm:h-80" data-category="message" data-badge="Signe Surnaturel" data-title="La Colonne de Feu" data-caption="William Marrion Branham et la Colonne de Feu surnaturelle au-dessus de sa tête (Houston, Texas - Janvier 1950).">
           <img src="assets/images/colonne-de-feu-branham.jpg" alt="William Marrion Branham sous la Colonne de Feu surnaturelle" class="w-full h-full object-cover object-top">
-          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-amber-500/90 backdrop-blur-md border border-white/20 text-slate-950 text-[11px] font-extrabold uppercase tracking-wider">
+          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-purple-950 text-[11px] font-heading font-extrabold uppercase tracking-wider shadow-md">
             Signe Surnaturel
           </div>
-          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-slate-900 shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-brand-purpleDark shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
           </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-5 text-white">
-            <span class="text-[11px] font-bold text-yellow-300 uppercase tracking-wide">Houston, Texas &bull; 1950</span>
-            <h4 class="font-serif text-lg font-bold leading-tight mt-0.5">La Colonne de Feu</h4>
-            <p class="text-xs text-sky-100/90 mt-1 line-clamp-1">W. M. Branham et la lumière divine attestée</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/95 via-brand-purpleDark/40 to-transparent flex flex-col justify-end p-5 text-white">
+            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide font-heading">Houston, Texas &bull; 1950</span>
+            <h4 class="font-heading text-lg font-bold leading-tight mt-0.5 text-white">La Colonne de Feu</h4>
+            <p class="text-xs text-purple-100/90 mt-1 line-clamp-1">W. M. Branham et la lumière divine attestée</p>
           </div>
         </div>
 
         <!-- Photo 9: Hébreux 13:8 et la Nuée -->
         <div class="gallery-item gallery-card-modern group h-72 sm:h-80" data-category="message" data-badge="Parole Infaillible" data-title="Hébreux 13:8" data-caption="Hébreux 13:8 — Jésus-Christ est le même hier, aujourd'hui et éternellement : la continuité du ministère apostolique.">
           <img src="assets/images/hebreux-13-8-message.jpg" alt="Hébreux 13:8 - Jésus-Christ est le même hier aujourd'hui et éternellement" class="w-full h-full object-cover">
-          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/20 text-sky-200 text-[11px] font-bold uppercase tracking-wider">
+          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-brand-purpleDark/90 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-heading font-bold uppercase tracking-wider shadow-md">
             Parole Infaillible
           </div>
-          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-slate-900 shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-brand-purpleDark shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
           </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-5 text-white">
-            <span class="text-[11px] font-bold text-sky-300 uppercase tracking-wide">Message du Temps de la Fin</span>
-            <h4 class="font-serif text-lg font-bold leading-tight mt-0.5">Hébreux 13:8</h4>
-            <p class="text-xs text-sky-100/90 mt-1 line-clamp-1">Jésus-Christ le même hier, aujourd'hui et éternellement</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/95 via-brand-purpleDark/40 to-transparent flex flex-col justify-end p-5 text-white">
+            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide font-heading">Message du Temps de la Fin</span>
+            <h4 class="font-heading text-lg font-bold leading-tight mt-0.5 text-white">Hébreux 13:8</h4>
+            <p class="text-xs text-purple-100/90 mt-1 line-clamp-1">Jésus-Christ le même hier, aujourd'hui et éternellement</p>
           </div>
         </div>
 
         <!-- Photo 10: La Nuée de Gloire du 28 Février 1963 -->
         <div class="gallery-item gallery-card-modern group h-72 sm:h-80" data-category="message" data-badge="28 Février 1963" data-title="La Nuée de Gloire" data-caption="La Nuée de Gloire surnaturelle du 28 Février 1963 — L'apparition céleste prophétique et l'ouverture des mystères.">
           <img src="assets/images/nuee-de-gloire-1963.jpg" alt="La Nuée de Gloire surnaturelle du 28 Février 1963" class="w-full h-full object-cover object-top">
-          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-sky-500/90 backdrop-blur-md border border-white/20 text-white text-[11px] font-extrabold uppercase tracking-wider">
+          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-purple-950 text-[11px] font-heading font-extrabold uppercase tracking-wider shadow-md">
             28 Février 1963
           </div>
-          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-slate-900 shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-brand-purpleDark shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
           </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-5 text-white">
-            <span class="text-[11px] font-bold text-sky-300 uppercase tracking-wide">Signe Céleste &bull; Arizona</span>
-            <h4 class="font-serif text-lg font-bold leading-tight mt-0.5">La Nuée de Gloire</h4>
-            <p class="text-xs text-sky-100/90 mt-1 line-clamp-1">Apparition surnaturelle et ouverture des mystères</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/95 via-brand-purpleDark/40 to-transparent flex flex-col justify-end p-5 text-white">
+            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide font-heading">Signe Céleste &bull; Arizona</span>
+            <h4 class="font-heading text-lg font-bold leading-tight mt-0.5 text-white">La Nuée de Gloire</h4>
+            <p class="text-xs text-purple-100/90 mt-1 line-clamp-1">Apparition surnaturelle et ouverture des mystères</p>
           </div>
         </div>
 
         <!-- Photo 11: La Stature d'un Homme Parfait -->
         <div class="gallery-item gallery-card-modern group h-72 sm:h-80" data-category="enseignements" data-badge="2 Pierre 1:5-7" data-title="Stature d'un Homme Parfait" data-caption="La Stature d'un Homme Parfait (2 Pierre 1:5-7) — Pyramide des vertus chrétiennes et des sept âges de l'Église pour la foi de l'enlèvement.">
-          <img src="assets/images/stature-homme-parfait.jpg" alt="La Stature d'un Homme Parfait - Pyramide des vertus chrétiennes" class="w-full h-full object-contain p-2 bg-slate-950">
-          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/20 text-yellow-300 text-[11px] font-bold uppercase tracking-wider">
+          <img src="assets/images/stature-homme-parfait.jpg" alt="La Stature d'un Homme Parfait - Pyramide des vertus chrétiennes" class="w-full h-full object-contain p-2 bg-[#12072b]">
+          <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-brand-purpleDark/90 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-heading font-bold uppercase tracking-wider shadow-md">
             2 Pierre 1:5-7
           </div>
-          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-slate-900 shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-brand-purpleDark shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
           </div>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-5 text-white">
-            <span class="text-[11px] font-bold text-yellow-300 uppercase tracking-wide">Foi de l'Enlèvement</span>
-            <h4 class="font-serif text-lg font-bold leading-tight mt-0.5">Stature d'un Homme Parfait</h4>
-            <p class="text-xs text-sky-100/90 mt-1 line-clamp-1">Pyramide des vertus spirituelles et stature de Christ</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/95 via-brand-purpleDark/40 to-transparent flex flex-col justify-end p-5 text-white">
+            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide font-heading">Foi de l'Enlèvement</span>
+            <h4 class="font-heading text-lg font-bold leading-tight mt-0.5 text-white">Stature d'un Homme Parfait</h4>
+            <p class="text-xs text-purple-100/90 mt-1 line-clamp-1">Pyramide des vertus spirituelles et stature de Christ</p>
           </div>
         </div>
 
@@ -951,12 +965,12 @@
       <!-- Barre Supérieure de Contrôle -->
       <div class="lightbox-top-bar">
         <div class="flex items-center gap-2">
-          <span id="lightbox-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-sky-500/20 text-sky-300 border border-sky-400/30">Galerie</span>
-          <span id="lightbox-counter" class="text-xs font-bold text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded-full border border-slate-700">1 / 11</span>
+          <span id="lightbox-badge" class="px-3 py-1 rounded-full text-xs font-heading font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40">Galerie</span>
+          <span id="lightbox-counter" class="text-xs font-bold text-amber-200 bg-brand-purpleDark/90 px-2.5 py-1 rounded-full border border-amber-400/30">1 / 11</span>
         </div>
         <div class="flex items-center gap-2">
           <!-- Bouton Partager sur WhatsApp -->
-          <button id="lightbox-share" type="button" class="p-2 rounded-full bg-slate-800/80 hover:bg-emerald-600 text-white border border-slate-700 hover:border-emerald-500 transition-colors text-xs flex items-center gap-1.5 px-3" title="Partager sur WhatsApp">
+          <button id="lightbox-share" type="button" class="p-2 rounded-full bg-brand-purpleDark/90 hover:bg-emerald-600 text-white border border-amber-400/30 hover:border-emerald-500 transition-colors text-xs flex items-center gap-1.5 px-3" title="Partager sur WhatsApp">
             <svg class="w-4 h-4 fill-current text-emerald-400" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
             <span class="hidden sm:inline font-semibold">Partager</span>
           </button>
@@ -985,8 +999,8 @@
       <!-- Barre de Légende Inférieure Développée -->
       <div class="lightbox-caption-bar">
         <div>
-          <h4 id="lightbox-title" class="font-serif font-bold text-base sm:text-lg text-white">Titre de la photo</h4>
-          <p id="lightbox-caption" class="text-xs sm:text-sm text-slate-300 mt-0.5 leading-relaxed">Description de la photo</p>
+          <h4 id="lightbox-title" class="font-heading font-bold text-base sm:text-lg text-white">Titre de la photo</h4>
+          <p id="lightbox-caption" class="text-xs sm:text-sm text-purple-100/90 mt-0.5 leading-relaxed font-sans">Description de la photo</p>
         </div>
         <div id="lightbox-action-container" class="mt-2 sm:mt-0 shrink-0">
           <!-- Dynamically populated if action exists -->
@@ -1000,35 +1014,35 @@
   <!-- ========================================================================
        SECTION DÉDIÉE AU PASTEUR ODILON DETCHIBS
        ======================================================================== -->
-  <section id="pasteur" class="py-14 sm:py-20 lg:py-28 content-section-glass-alt relative border-b border-sky-100/70">
+  <section id="pasteur" class="py-14 sm:py-20 lg:py-28 content-section-glass-alt relative border-b border-amber-400/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="bg-white/95 backdrop-blur-md rounded-3xl border border-sky-200/90 shadow-2xl p-6 sm:p-10 lg:p-14 reveal-on-scroll">
+      <div class="bg-gradient-to-br from-white via-purple-50/40 to-amber-50/30 backdrop-blur-md rounded-3xl border-2 border-purple-200/90 shadow-2xl p-6 sm:p-10 lg:p-14 reveal-on-scroll">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-center">
           
           <!-- Portrait du Pasteur -->
           <div class="lg:col-span-5 relative flex justify-center">
-            <div class="relative w-full max-w-xs sm:max-w-sm rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-slate-100">
+            <div class="relative w-full max-w-xs sm:max-w-sm rounded-3xl overflow-hidden shadow-2xl border-4 border-amber-400 ring-4 ring-purple-900/20 bg-brand-purpleDark">
               <img src="assets/images/pastor-odilon.jpg" alt="Portrait officiel du Pasteur Odilon Detchibs - 11e Heure Tabernacle" class="w-full h-72 sm:h-88 md:h-96 lg:h-[460px] object-cover object-top hover:scale-105 transition-transform duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-brand-midnight/70 via-transparent to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/90 via-transparent to-transparent"></div>
               
               <div class="absolute bottom-4 left-4 right-4 text-center text-white">
-                <span class="text-xs uppercase tracking-widest text-sky-300 font-bold">Ministère Pastoral</span>
-                <h3 class="font-serif text-lg sm:text-xl font-bold">Pasteur Odilon Detchibs</h3>
+                <span class="text-xs uppercase tracking-widest text-amber-300 font-heading font-extrabold">Ministère Pastoral</span>
+                <h3 class="font-heading text-lg sm:text-xl font-bold text-white">Pasteur Odilon Detchibs</h3>
               </div>
             </div>
           </div>
 
           <!-- Présentation et Message Pastoral -->
           <div class="lg:col-span-7">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-50 border border-sky-200 text-brand-skyPrimary text-xs font-bold uppercase tracking-wider mb-3">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-purpleSoft border border-amber-300/80 text-brand-purpleDark text-xs font-heading font-extrabold uppercase tracking-wider mb-3 shadow-sm">
               <span>Bergerie & Ministère</span>
             </div>
 
-            <h2 class="font-serif text-3xl sm:text-4xl text-slate-950 font-bold leading-tight mb-2">
+            <h2 class="font-heading text-3xl sm:text-4xl text-brand-purpleDark font-extrabold leading-tight mb-2">
               Pasteur Odilon Detchibs
             </h2>
-            <p class="text-sky-700 font-bold text-base mb-6">
+            <p class="text-amber-600 font-heading font-bold text-base mb-6">
               Pasteur Principal de 11<sup>e</sup> Heure Tabernacle
             </p>
 
@@ -1036,23 +1050,23 @@
               Animé par un profond amour pour l’œuvre du Seigneur et le salut des âmes, le <strong>pasteur Odilon Detchibs</strong> guide l'assemblée de 11e Heure Tabernacle avec fidélité, humilité et ferveur spirituelle à Pointe-Noire.
             </p>
 
-            <!-- Exhortation pastorale -->
-            <div class="p-6 rounded-2xl bg-sky-50 border-l-4 border-brand-skyPrimary mb-8 shadow-sm">
-              <p class="font-serif italic text-slate-950 text-base sm:text-lg leading-relaxed font-medium">
+            <!-- Exhortation pastorale dans cadre pourpre et or -->
+            <div class="p-6 rounded-2xl bg-brand-purpleDark text-white border-l-4 border-amber-400 mb-8 shadow-xl relative overflow-hidden">
+              <p class="font-serif italic text-amber-100 text-base sm:text-lg leading-relaxed font-normal">
                 « Notre prière est que chaque âme qui franchit les portes de cette assemblée découvre la profondeur de l'amour de Dieu, reçoive la force de surmonter les épreuves et soit préparée dans la sanctification pour le retour glorieux de notre Sauveur. »
               </p>
-              <span class="block mt-3 text-xs font-bold text-brand-skyPrimary uppercase tracking-wider">— Pasteur Odilon Detchibs</span>
+              <span class="block mt-3 text-xs font-heading font-extrabold text-amber-300 uppercase tracking-wider">— Pasteur Odilon Detchibs</span>
             </div>
 
-            <!-- Boutons de Contact Direct avec le Pasteur -->
+            <!-- Boutons d'Action Distincts -->
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-              <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold text-sm shadow-md transition-all">
+              <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full btn-whatsapp-emerald text-white font-heading font-bold text-sm shadow-lg transition-all">
                 <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
                 <span>Écrire sur WhatsApp (+242 06 937 69 67)</span>
               </a>
 
-              <a href="tel:+242069376967" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-slate-100 hover:bg-sky-100 text-slate-800 hover:text-brand-skyPrimary font-semibold text-sm transition-all border border-slate-200">
-                <svg class="w-4 h-4 text-brand-skyPrimary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              <a href="tel:+242069376967" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-white hover:bg-purple-50 text-brand-purpleDark font-heading font-bold text-sm transition-all border-2 border-purple-200 hover:border-amber-400 shadow-sm">
+                <svg class="w-4 h-4 text-brand-purpleDark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                 <span>Appeler au téléphone</span>
               </a>
             </div>
@@ -1068,15 +1082,15 @@
   <!-- ========================================================================
        SECTION DYNAMIQUE : QUESTIONS FRÉQUENTES & VIE DE L'ASSEMBLÉE (FAQ)
        ======================================================================== -->
-  <section id="faq" class="py-14 sm:py-20 lg:py-28 content-section-glass relative border-b border-sky-100/70">
+  <section id="faq" class="py-14 sm:py-20 lg:py-28 content-section-glass relative border-b border-amber-400/20">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Titre de la section -->
       <div class="text-center mb-12 sm:mb-16 reveal-on-scroll">
-        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-sky-200 text-brand-skyPrimary text-xs font-bold uppercase tracking-wider mb-3 shadow-sm">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-purpleSoft border border-amber-300/80 text-brand-purpleDark text-xs font-heading font-extrabold uppercase tracking-wider mb-3 shadow-sm">
           Éclairages & Réponses
         </span>
-        <h2 class="font-serif text-3xl sm:text-4xl text-slate-950 font-bold leading-tight mb-4">
+        <h2 class="font-heading text-3xl sm:text-4xl text-brand-purpleDark font-extrabold leading-tight mb-4">
           Questions Fréquentes & Vie de l'Église
         </h2>
         <p class="text-slate-700 text-base sm:text-lg font-normal">
@@ -1090,15 +1104,15 @@
         <!-- Question 1 -->
         <div class="faq-accordion-item open reveal-on-scroll">
           <div class="faq-accordion-header">
-            <h3 class="font-serif text-base sm:text-lg font-bold text-slate-950">
+            <h3 class="font-heading text-base sm:text-lg font-bold text-brand-purpleDark">
               Quelle est la foi et la doctrine proclamée à 11e Heure Tabernacle ?
             </h3>
-            <svg class="w-5 h-5 text-slate-400 faq-chevron shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-amber-500 faq-chevron shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
           </div>
           <div class="faq-accordion-content">
-            <p class="text-slate-700 text-sm leading-relaxed border-t border-sky-100 pt-3 font-normal">
+            <p class="text-slate-700 text-sm leading-relaxed border-t border-purple-100 pt-3 font-normal">
               Notre assemblée est fermement ancrée dans la sainte Bible et la foi apostolique originelle. Conformément à notre mandat spirituel, nous croyons à la restauration de la foi des apôtres, à l'amour divin manifesté par l'effusion du Saint-Esprit, et à la préparation vivante et sanctifiée des croyants dans la glorieuse espérance de l’enlèvement de l'Épouse.
             </p>
           </div>
@@ -1107,15 +1121,15 @@
         <!-- Question : La semence du serpent selon le message de William Branham -->
         <div class="faq-accordion-item reveal-on-scroll delay-100">
           <div class="faq-accordion-header">
-            <h3 class="font-serif text-base sm:text-lg font-bold text-slate-950">
+            <h3 class="font-heading text-base sm:text-lg font-bold text-brand-purpleDark">
               Selon le message de William Branham, quelle est la véritable signification de la semence du serpent dans le jardin d'Éden ?
             </h3>
-            <svg class="w-5 h-5 text-slate-400 faq-chevron shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-amber-500 faq-chevron shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
           </div>
           <div class="faq-accordion-content">
-            <p class="text-slate-700 text-sm leading-relaxed border-t border-sky-100 pt-3 font-normal">
+            <p class="text-slate-700 text-sm leading-relaxed border-t border-purple-100 pt-3 font-normal">
               Selon <strong>William Branham</strong>, la chute dans le jardin d'Éden n'était pas la consommation d'un fruit littéral, mais une union charnelle entre Ève et le serpent, qui était alors une créature humanoïde avant d'être maudite à ramper. De cette relation interdite est né Caïn, introduisant une lignée physique et spirituelle corrompue dans l'humanité (<em>Le Serpent écrasé</em>, 1958 ; <em>La Semence du serpent</em>, 1958).
             </p>
           </div>
@@ -1124,15 +1138,15 @@
         <!-- Question 2 -->
         <div class="faq-accordion-item reveal-on-scroll delay-100">
           <div class="faq-accordion-header">
-            <h3 class="font-serif text-base sm:text-lg font-bold text-slate-950">
+            <h3 class="font-heading text-base sm:text-lg font-bold text-brand-purpleDark">
               Comment se déroule un culte pour une personne qui vient pour la première fois ?
             </h3>
-            <svg class="w-5 h-5 text-slate-400 faq-chevron shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-amber-500 faq-chevron shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
           </div>
           <div class="faq-accordion-content">
-            <p class="text-slate-700 text-sm leading-relaxed border-t border-sky-100 pt-3 font-normal">
+            <p class="text-slate-700 text-sm leading-relaxed border-t border-purple-100 pt-3 font-normal">
               Chaque visiteur est accueilli avec amour et respect fraternel. Nos cultes comportent des moments de louange fervente et d'adoration, des cantiques inspirés, des temps de prière pour les familles et les malades, suivis d'une prédication vivante de la Parole de Dieu. Les portes sont grandes ouvertes à tous sans distinction.
             </p>
           </div>
@@ -1141,15 +1155,15 @@
         <!-- Question 3 -->
         <div class="faq-accordion-item reveal-on-scroll delay-200">
           <div class="faq-accordion-header">
-            <h3 class="font-serif text-base sm:text-lg font-bold text-slate-950">
+            <h3 class="font-heading text-base sm:text-lg font-bold text-brand-purpleDark">
               Y a-t-il un programme dédié aux enfants et à la jeunesse ?
             </h3>
-            <svg class="w-5 h-5 text-slate-400 faq-chevron shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-amber-500 faq-chevron shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
           </div>
           <div class="faq-accordion-content">
-            <p class="text-slate-700 text-sm leading-relaxed border-t border-sky-100 pt-3 font-normal">
+            <p class="text-slate-700 text-sm leading-relaxed border-t border-purple-100 pt-3 font-normal">
               Absolument. Chaque dimanche matin de 08h00 à 09h30, l'<strong>École du Dimanche</strong> accueille les enfants et la jeunesse pour un enseignement biblique structuré, pédagogique et adapté à leur âge, afin de fonder leur vie sur les valeurs chrétiennes.
             </p>
           </div>
@@ -1158,15 +1172,15 @@
         <!-- Question 4 -->
         <div class="faq-accordion-item reveal-on-scroll delay-300">
           <div class="faq-accordion-header">
-            <h3 class="font-serif text-base sm:text-lg font-bold text-slate-950">
+            <h3 class="font-heading text-base sm:text-lg font-bold text-brand-purpleDark">
               Comment solliciter un entretien pastoral ou une prière avec le pasteur Odilon Detchibs ?
             </h3>
-            <svg class="w-5 h-5 text-slate-400 faq-chevron shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-amber-500 faq-chevron shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
           </div>
           <div class="faq-accordion-content">
-            <p class="text-slate-700 text-sm leading-relaxed border-t border-sky-100 pt-3 font-normal">
+            <p class="text-slate-700 text-sm leading-relaxed border-t border-purple-100 pt-3 font-normal">
               Le pasteur <strong>Odilon Detchibs</strong> se tient à la disposition des fidèles et des visiteurs à la fin de chaque culte. Vous pouvez également le joindre directement par appel téléphonique ou message WhatsApp au <strong>+242 06 937 69 67</strong> pour convenir d'un temps d'écoute ou de prière fraternelle.
             </p>
           </div>
@@ -1180,19 +1194,19 @@
   <!-- ========================================================================
        SECTION CONTACT ET LOCALISATION (COORDONNÉES, CARTE ET FORMULAIRE)
        ======================================================================== -->
-  <section id="contact" class="py-14 sm:py-20 lg:py-28 content-section-glass-alt relative">
+  <section id="contact" class="py-14 sm:py-20 lg:py-28 content-section-glass-alt relative border-b border-amber-400/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Titre de section -->
       <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 reveal-on-scroll">
-        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-sky-200 text-brand-skyPrimary text-xs font-bold uppercase tracking-wider mb-3 shadow-sm">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-purpleSoft border border-amber-300/80 text-brand-purpleDark text-xs font-heading font-extrabold uppercase tracking-wider mb-3 shadow-sm">
           Nous Trouver & Nous Joindre
         </span>
-        <h2 class="font-serif text-3xl sm:text-4xl text-slate-950 font-bold leading-tight mb-4">
+        <h2 class="font-heading text-3xl sm:text-4xl text-brand-purpleDark font-extrabold leading-tight mb-4">
           Contact & Emplacement de l'Église
         </h2>
         <p class="text-slate-700 text-base sm:text-lg font-normal">
-          Nous sommes à votre disposition pour vous accueillir, répondre à vos questions et prier avec vous.
+          Nous sommes à votre entière disposition pour vous accueillir, répondre à vos questions et prier avec vous.
         </p>
       </div>
 
@@ -1200,13 +1214,13 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 reveal-on-scroll delay-100">
         
         <!-- Carte Adresse & Repère -->
-        <div class="p-6 rounded-2xl card-high-contrast flex flex-col justify-between card-hover h-full">
+        <div class="p-6 rounded-2xl card-high-contrast flex flex-col justify-between card-hover h-full border border-purple-200/90 shadow-md">
           <div class="flex items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-sky-100 text-brand-skyPrimary flex items-center justify-center shrink-0 shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-brand-purpleDark text-amber-300 ring-2 ring-amber-400/40 flex items-center justify-center shrink-0 shadow-md">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             </div>
             <div>
-              <h3 class="font-bold text-slate-950 text-base">Adresse & Repères</h3>
+              <h3 class="font-heading font-bold text-brand-purpleDark text-base">Adresse & Repères</h3>
               <p class="text-slate-700 text-sm mt-1 leading-relaxed font-normal">
                 <strong>Quartier :</strong> Voungou 1<br>
                 <strong>Repère :</strong> Bank de Vie, arrêt 1<sup>er</sup> Pont, en face d'Emanuel Photo<br>
@@ -1214,57 +1228,57 @@
               </p>
             </div>
           </div>
-          <div class="mt-4 pt-3 border-t border-sky-100/80 text-xs font-bold text-brand-skyPrimary flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-brand-skyPrimary"></span>
+          <div class="mt-4 pt-3 border-t border-purple-100 text-xs font-heading font-bold text-amber-600 flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500 shadow-sm"></span>
             <span>Portes ouvertes à tous</span>
           </div>
         </div>
 
         <!-- Carte Téléphone & WhatsApp -->
-        <div class="p-6 rounded-2xl card-high-contrast flex flex-col justify-between card-hover h-full">
+        <div class="p-6 rounded-2xl card-high-contrast flex flex-col justify-between card-hover h-full border border-purple-200/90 shadow-md">
           <div class="flex items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-green-50 text-green-700 flex items-center justify-center shrink-0 shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 ring-2 ring-emerald-300 flex items-center justify-center shrink-0 shadow-md">
               <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
             </div>
             <div>
-              <h3 class="font-bold text-slate-950 text-base">Ligne Pastorale</h3>
+              <h3 class="font-heading font-bold text-brand-purpleDark text-base">Ligne Pastorale</h3>
               <p class="text-slate-700 text-sm mt-1 font-normal">Disponible pour écoute et prière :</p>
-              <div class="mt-2 text-slate-950 font-bold text-base">
+              <div class="mt-2 text-brand-purpleDark font-heading font-extrabold text-base">
                 +242 06 937 69 67
               </div>
             </div>
           </div>
-          <div class="mt-4 pt-3 border-t border-sky-100/80 flex flex-wrap gap-2">
-            <a href="tel:+242069376967" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-sky-200 text-slate-800 hover:text-brand-skyPrimary font-bold text-xs shadow-sm transition-colors">
-              <svg class="w-3.5 h-3.5 text-brand-skyPrimary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          <div class="mt-4 pt-3 border-t border-purple-100 flex flex-wrap gap-2">
+            <a href="tel:+242069376967" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-purple-200 text-brand-purpleDark hover:bg-purple-50 hover:border-amber-400 font-heading font-bold text-xs shadow-sm transition-colors">
+              <svg class="w-3.5 h-3.5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
               <span>Appeler</span>
             </a>
-            <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-600 text-white hover:bg-green-700 font-bold text-xs shadow-sm transition-colors">
+            <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg btn-whatsapp-emerald font-heading font-bold text-xs shadow-sm transition-colors">
               <span>WhatsApp Direct</span>
             </a>
           </div>
         </div>
 
         <!-- Carte Réseaux Sociaux Officiels -->
-        <div class="p-6 rounded-2xl card-high-contrast flex flex-col justify-between card-hover h-full">
+        <div class="p-6 rounded-2xl card-high-contrast flex flex-col justify-between card-hover h-full border border-purple-200/90 shadow-md">
           <div class="flex items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-sky-100 text-brand-skyPrimary flex items-center justify-center shrink-0 shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-brand-purpleDark text-amber-300 ring-2 ring-amber-400/40 flex items-center justify-center shrink-0 shadow-md">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
             </div>
             <div>
-              <h3 class="font-bold text-slate-950 text-base">Réseaux Sociaux</h3>
+              <h3 class="font-heading font-bold text-brand-purpleDark text-base">Réseaux Sociaux</h3>
               <p class="text-slate-700 text-sm mt-1 font-normal">Prédications & messages vidéo :</p>
             </div>
           </div>
-          <div class="mt-4 pt-3 border-t border-sky-100/80 flex flex-col gap-2">
-            <a href="https://www.facebook.com/search/top?q=Odilon%20Tchibounga" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between px-3.5 py-2 rounded-xl bg-[#1877F2] text-white text-xs font-semibold hover:bg-blue-700 transition-colors shadow-sm">
+          <div class="mt-4 pt-3 border-t border-purple-100 flex flex-col gap-2">
+            <a href="https://www.facebook.com/search/top?q=Odilon%20Tchibounga" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between px-3.5 py-2 rounded-xl bg-[#1877F2] text-white text-xs font-heading font-bold hover:bg-blue-700 transition-colors shadow-sm">
               <div class="flex items-center gap-2">
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                 <span>Facebook : Odilon Tchibounga</span>
               </div>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
             </a>
-            <a href="https://www.youtube.com/results?search_query=odilon+de+tchib" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between px-3.5 py-2 rounded-xl bg-[#FF0000] text-white text-xs font-semibold hover:bg-red-700 transition-colors shadow-sm">
+            <a href="https://www.youtube.com/results?search_query=odilon+de+tchib" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between px-3.5 py-2 rounded-xl bg-[#FF0000] text-white text-xs font-heading font-bold hover:bg-red-700 transition-colors shadow-sm">
               <div class="flex items-center gap-2">
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 <span>YouTube : odilon de tchib</span>
@@ -1277,7 +1291,7 @@
       </div>
 
       <!-- Grande Carte Interactive de Localisation (Pointe-Noire) -->
-      <div class="rounded-3xl overflow-hidden border border-sky-100 shadow-xl h-72 sm:h-88 md:h-96 relative bg-slate-100 mb-8">
+      <div class="rounded-3xl overflow-hidden border-2 border-purple-200/90 shadow-2xl h-72 sm:h-88 md:h-96 relative bg-slate-100 mb-8 ring-4 ring-purple-900/10">
         <iframe 
           title="Localisation Pointe-Noire Congo"
           class="w-full h-full border-0" 
@@ -1285,12 +1299,12 @@
           loading="lazy"
           allowfullscreen>
         </iframe>
-        <div class="absolute bottom-3 left-3 right-3 sm:right-auto bg-white/95 backdrop-blur-md px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-bold text-slate-800 shadow-md border border-sky-100 flex items-center justify-between sm:justify-start gap-3">
+        <div class="absolute bottom-3 left-3 right-3 sm:right-auto bg-brand-purpleDark/95 backdrop-blur-md px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-heading font-bold text-white shadow-xl border border-amber-400/40 flex items-center justify-between sm:justify-start gap-3">
           <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
             <span>📍 11e Heure Tabernacle &bull; Voungou 1</span>
           </div>
-          <a href="https://www.google.com/maps/search/?api=1&query=Pointe-Noire+Voungou+1" target="_blank" rel="noopener noreferrer" class="text-brand-skyPrimary hover:underline text-[11px] sm:text-xs font-extrabold flex items-center gap-1 shrink-0">
+          <a href="https://www.google.com/maps/search/?api=1&query=Pointe-Noire+Voungou+1" target="_blank" rel="noopener noreferrer" class="text-amber-300 hover:underline text-[11px] sm:text-xs font-extrabold flex items-center gap-1 shrink-0">
             <span>Ouvrir GPS</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           </a>
@@ -1311,96 +1325,96 @@
   <!-- ========================================================================
        PIED DE PAGE (FOOTER)
        ======================================================================== -->
-  <footer class="bg-brand-midnight text-white pt-12 sm:pt-16 pb-10 sm:pb-12 border-t border-sky-900/50">
+  <footer class="bg-brand-purpleDark text-white pt-12 sm:pt-16 pb-10 sm:pb-12 border-t-2 border-amber-400/30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-sky-900/50">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-amber-400/20">
         
         <!-- Colonne 1 : Identité & Présentation -->
         <div class="space-y-4">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 flex-shrink-0 rounded-full overflow-hidden shadow-md ring-2 ring-amber-400/50 bg-brand-midnight">
+            <div class="w-12 h-12 flex-shrink-0 rounded-full overflow-hidden shadow-lg ring-2 ring-amber-400 bg-brand-purpleDark">
               <img src="assets/images/logo.png" alt="Logo officiel 11e Heure Tabernacle" class="w-full h-full object-cover">
             </div>
             <div>
               <span class="font-spiritual font-bold text-base tracking-wide text-white block">11<sup>e</sup> HEURE TABERNACLE</span>
-              <span class="text-xs text-sky-400 font-medium">Pointe-Noire &bull; Congo</span>
+              <span class="text-xs text-amber-300 font-heading font-semibold">Pointe-Noire &bull; Congo</span>
             </div>
           </div>
           <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
             Église chrétienne dédiée à la restauration de la foi apostolique, à l'amour divin par le Saint-Esprit et à la préparation vivante à l'enlèvement.
           </p>
-          <p class="text-xs text-sky-300 font-semibold">
+          <p class="text-xs text-amber-300 font-heading font-semibold">
             Pasteur principal : Odilon Detchibs
           </p>
         </div>
 
         <!-- Colonne 2 : Liens Rapides -->
         <div>
-          <h4 class="font-serif font-bold text-base text-white mb-4 flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-brand-skyPrimary"></span>
+          <h4 class="font-heading font-bold text-base text-white mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
             <span>Navigation Rapide</span>
           </h4>
           <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300">
-            <li><a href="#accueil" class="hover:text-brand-skyAccent transition-colors">Accueil</a></li>
-            <li><a href="#apropos" class="hover:text-brand-skyAccent transition-colors">À propos de l'église</a></li>
-            <li><a href="#mission" class="hover:text-brand-skyAccent transition-colors">Notre mission spirituelle</a></li>
-            <li><a href="#horaires" class="hover:text-brand-skyAccent transition-colors">Programmes des cultes</a></li>
-            <li><a href="#verset" class="hover:text-brand-skyAccent transition-colors">Le verset du jour</a></li>
-            <li><a href="#galerie" class="hover:text-brand-skyAccent transition-colors">Galerie photos</a></li>
-            <li><a href="#pasteur" class="hover:text-brand-skyAccent transition-colors">Le Pasteur Odilon Detchibs</a></li>
-            <li><a href="#faq" class="hover:text-brand-skyAccent transition-colors">Questions fréquentes (FAQ)</a></li>
-            <li><a href="#contact" class="hover:text-brand-skyAccent transition-colors">Contact & Localisation</a></li>
+            <li><a href="#accueil" class="hover:text-amber-300 transition-colors">Accueil</a></li>
+            <li><a href="#apropos" class="hover:text-amber-300 transition-colors">À propos de l'église</a></li>
+            <li><a href="#mission" class="hover:text-amber-300 transition-colors">Notre mission spirituelle</a></li>
+            <li><a href="#horaires" class="hover:text-amber-300 transition-colors">Programmes des cultes</a></li>
+            <li><a href="#verset" class="hover:text-amber-300 transition-colors">Le verset du jour</a></li>
+            <li><a href="#galerie" class="hover:text-amber-300 transition-colors">Galerie photos</a></li>
+            <li><a href="#pasteur" class="hover:text-amber-300 transition-colors">Le Pasteur Odilon Detchibs</a></li>
+            <li><a href="#faq" class="hover:text-amber-300 transition-colors">Questions fréquentes (FAQ)</a></li>
+            <li><a href="#contact" class="hover:text-amber-300 transition-colors">Contact & Localisation</a></li>
           </ul>
         </div>
 
         <!-- Colonne 3 : Rendez-vous & Cultes -->
         <div>
-          <h4 class="font-serif font-bold text-base text-white mb-4 flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-brand-skyPrimary"></span>
+          <h4 class="font-heading font-bold text-base text-white mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
             <span>Horaires des Cultes</span>
           </h4>
           <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300">
-            <li class="flex justify-between items-center py-1 border-b border-sky-950/80">
+            <li class="flex justify-between items-center py-1 border-b border-purple-900/80">
               <span class="font-medium">Mardi :</span>
-              <span class="text-sky-300 font-bold">18h00 – 19h30</span>
+              <span class="text-purple-200 font-bold">18h00 – 19h30</span>
             </li>
-            <li class="flex justify-between items-center py-1 border-b border-sky-950/80">
+            <li class="flex justify-between items-center py-1 border-b border-purple-900/80">
               <span class="font-medium">Jeudi :</span>
-              <span class="text-sky-300 font-bold">18h00 – 19h30</span>
+              <span class="text-purple-200 font-bold">18h00 – 19h30</span>
             </li>
-            <li class="flex justify-between items-center py-1 border-b border-sky-950/80">
+            <li class="flex justify-between items-center py-1 border-b border-purple-900/80">
               <span class="font-medium">École du dimanche :</span>
-              <span class="text-sky-300 font-bold">08h00 – 09h30</span>
+              <span class="text-purple-200 font-bold">08h00 – 09h30</span>
             </li>
-            <li class="flex justify-between items-center py-1 border-b border-sky-950/80">
+            <li class="flex justify-between items-center py-1 border-b border-purple-900/80">
               <span class="font-medium">Dimanche matin :</span>
-              <span class="text-yellow-400 font-bold">10h00 – 12h30</span>
+              <span class="text-amber-300 font-heading font-bold">10h00 – 12h30</span>
             </li>
           </ul>
         </div>
 
         <!-- Colonne 4 : Coordonnées & Réseaux Sociaux -->
         <div>
-          <h4 class="font-serif font-bold text-base text-white mb-4 flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-brand-skyPrimary"></span>
+          <h4 class="font-heading font-bold text-base text-white mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
             <span>Rejoignez-nous</span>
           </h4>
           <p class="text-xs sm:text-sm text-slate-300 mb-3 leading-relaxed">
             Voungou 1, Bank de Vie, arrêt 1er Pont, en face d'Emanuel Photo, Pointe-Noire (Congo).
           </p>
-          <p class="text-xs sm:text-sm text-sky-300 font-bold mb-4">
+          <p class="text-xs sm:text-sm text-amber-300 font-heading font-bold mb-4">
             <a href="tel:+242069376967" class="hover:underline">+242 06 937 69 67</a>
           </p>
 
           <div class="flex items-center gap-3">
-            <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-green-600 hover:bg-green-500 flex items-center justify-center text-white transition-all shadow-sm" aria-label="WhatsApp">
+            <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-green-600 hover:bg-green-500 flex items-center justify-center text-white transition-all shadow-md" aria-label="WhatsApp">
               <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
             </a>
-            <a href="https://www.facebook.com/search/top?q=Odilon%20Tchibounga" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-[#1877F2] hover:opacity-90 flex items-center justify-center text-white transition-all shadow-sm" aria-label="Facebook">
+            <a href="https://www.facebook.com/search/top?q=Odilon%20Tchibounga" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-[#1877F2] hover:opacity-90 flex items-center justify-center text-white transition-all shadow-md" aria-label="Facebook">
               <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
-            <a href="https://www.youtube.com/results?search_query=odilon+de+tchib" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-[#FF0000] hover:opacity-90 flex items-center justify-center text-white transition-all shadow-sm" aria-label="YouTube">
+            <a href="https://www.youtube.com/results?search_query=odilon+de+tchib" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-[#FF0000] hover:opacity-90 flex items-center justify-center text-white transition-all shadow-md" aria-label="YouTube">
               <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             </a>
           </div>
@@ -1413,7 +1427,7 @@
         <p>
           &copy; <span id="current-year">2026</span> 11<sup>e</sup> Heure Tabernacle &bull; Pointe-Noire, République du Congo. Tous droits réservés.
         </p>
-        <p class="text-sky-300 font-serif italic text-xs">
+        <p class="text-amber-300 font-spiritual italic text-xs">
           « Que la grâce et la paix du Seigneur Jésus-Christ soient avec vous tous. »
         </p>
       </div>
