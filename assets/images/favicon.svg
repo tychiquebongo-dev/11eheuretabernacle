@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="favSky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="favDeep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a2540"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="#ffffff" stroke="url(#favSky)" stroke-width="3"/>
+  <!-- Highlight 11h marker -->
+  <circle cx="19" cy="11" r="3.5" fill="#eab308"/>
+  <!-- Cross -->
+  <rect x="29" y="14" width="6" height="36" rx="2" fill="url(#favDeep)"/>
+  <rect x="18" y="22" width="28" height="6" rx="2" fill="url(#favDeep)"/>
+  <circle cx="32" cy="25" r="2.5" fill="#facc15"/>
+</svg>

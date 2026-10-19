@@ -1,0 +1,1123 @@
+/* ==========================================================================
+   11e HEURE TABERNACLE - STYLES OFFICIELS & DESIGN SYSTÈME
+   Direction artistique : Blanc pur, Bleu Ciel spirituel, Bleu Profond d'autorité
+   Auteur : Full Stack UI/UX Designer & Développeur Web
+   ========================================================================== */
+
+/* --- Variables CSS & Design Tokens --- */
+:root {
+  --color-white: #ffffff;
+  --color-sky-50: #f0f9ff;
+  --color-sky-100: #e0f2fe;
+  --color-sky-200: #bae6fd;
+  --color-sky-300: #7dd3fc;
+  --color-sky-400: #38bdf8;
+  --color-sky-500: #0ea5e9;
+  --color-sky-600: #0284c7;
+  --color-deep-700: #0369a1;
+  --color-deep-800: #075985;
+  --color-deep-900: #0c4a6e;
+  --color-deep-950: #082f49;
+  --color-midnight: #0a192f;
+  
+  --color-gold-400: #facc15;
+  --color-gold-500: #eab308;
+  --color-gold-600: #ca8a04;
+
+  --color-gray-50: #f8fafc;
+  --color-gray-100: #f1f5f9;
+  --color-gray-200: #e2e8f0;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1e293b;
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+  --font-spiritual: 'Cinzel', serif;
+
+  --shadow-subtle: 0 4px 20px -2px rgba(2, 132, 199, 0.08);
+  --shadow-card: 0 10px 25px -5px rgba(2, 132, 199, 0.1), 0 8px 10px -6px rgba(12, 74, 110, 0.05);
+  --shadow-hover: 0 20px 30px -10px rgba(2, 132, 199, 0.2), 0 10px 10px -5px rgba(12, 74, 110, 0.04);
+  --shadow-glow: 0 0 25px rgba(56, 189, 248, 0.35);
+
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Base & Scroll Behavior --- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-white);
+  color: var(--color-gray-800);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-sky-50);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sky-300);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sky-500);
+}
+
+/* --- Typographies --- */
+.font-spiritual {
+  font-family: var(--font-spiritual);
+}
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* --- Global Fixed Sky Wallpaper (Échelle normale, cadrage 100% naturel sans zoom) --- */
+.fixed-sky-wallpaper {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -20;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fixed-sky-wallpaper-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: blur(2.5px) brightness(1.30) saturate(1.22) contrast(1.06);
+  transform: scale(1); /* Échelle normale 1:1 sans zoom arrière ni zoom avant */
+  will-change: auto;
+}
+
+/* Voile protecteur céleste ultra-lumineux : ciel bleu éclatant, nuages baignés de lumière et texte parfaitement lisible */
+.fixed-sky-wallpaper-scrim {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.45) 0%, rgba(224, 242, 254, 0.20) 45%, transparent 75%),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.10) 0%,
+      rgba(224, 242, 254, 0.25) 25%,
+      rgba(255, 255, 255, 0.40) 60%,
+      rgba(224, 242, 254, 0.28) 100%
+    );
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+}
+
+/* --- Hero Section (Arrière-plan stable à échelle normale) --- */
+.hero-wrapper {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-bg-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/images/ciel-nuages-bg.jpg');
+  background-size: cover;
+  background-position: center center;
+  transform: scale(1); /* Cadrage normal fixe sans zoom arrière ni mouvement perpétuel */
+  animation: none;
+  filter: blur(1.5px) brightness(1.26) saturate(1.20);
+  transform-origin: center center;
+}
+
+/* Hero Overlays: Lumineux, bleu ciel céleste et contrasté */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(4, 20, 44, 0.72) 0%,
+    rgba(2, 132, 199, 0.58) 55%,
+    rgba(56, 189, 248, 0.48) 100%
+  );
+  backdrop-filter: blur(1px);
+}
+
+.hero-overlay-shimmer {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.40) 0%, rgba(186, 230, 253, 0.22) 45%, transparent 80%);
+  pointer-events: none;
+}
+
+/* --- High-Legibility & Glassmorphism System --- */
+.content-section-glass {
+  background-color: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.content-section-glass-alt {
+  background-color: rgba(235, 248, 255, 0.60) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.card-high-contrast {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(186, 230, 253, 0.9) !important;
+  box-shadow: 0 8px 25px -4px rgba(2, 132, 199, 0.08), 0 4px 6px -2px rgba(12, 74, 110, 0.03) !important;
+}
+
+.card-high-contrast:hover {
+  border-color: rgba(56, 189, 248, 0.95) !important;
+  box-shadow: 0 16px 35px -6px rgba(2, 132, 199, 0.16) !important;
+}
+
+/* --- MAGNIFICENT NAVBAR: Royal Midnight-Sapphire, Glassmorphism & Gold Aura --- */
+.glass-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 25, 48, 0.94) 0%,
+    rgba(10, 36, 72, 0.91) 48%,
+    rgba(14, 46, 88, 0.94) 100%
+  );
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border-bottom: 1px solid rgba(234, 179, 8, 0.38);
+  box-shadow: 0 4px 30px rgba(4, 16, 36, 0.55), 0 0 25px rgba(56, 189, 248, 0.12);
+  transition: all var(--transition-normal);
+}
+
+.glass-header.scrolled {
+  background: linear-gradient(
+    135deg,
+    rgba(5, 17, 34, 0.98) 0%,
+    rgba(7, 28, 56, 0.97) 50%,
+    rgba(9, 36, 72, 0.98) 100%
+  );
+  border-bottom: 1px solid rgba(250, 204, 21, 0.6);
+  box-shadow: 0 10px 35px -5px rgba(2, 12, 28, 0.75), 0 0 30px rgba(234, 179, 8, 0.22);
+}
+
+/* Hairline Dynamic Scroll Progress Bar under the navbar */
+.nav-scroll-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2.5px;
+  width: 0%;
+  background: linear-gradient(90deg, #38bdf8 0%, #eab308 50%, #facc15 100%);
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.9), 0 0 6px rgba(56, 189, 248, 0.9);
+  transition: width 0.08s ease-out;
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* Desktop Nav Links in magnificent navbar */
+.desktop-nav-link {
+  color: rgba(241, 245, 249, 0.88);
+  border-radius: 9999px;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.desktop-nav-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.08);
+}
+
+.desktop-nav-link.active {
+  color: #fef08a !important; /* bright gold */
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.25), rgba(56, 189, 248, 0.2)) !important;
+  border: 1px solid rgba(250, 204, 21, 0.6) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 16px rgba(250, 204, 21, 0.32) !important;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(224, 242, 254, 0.9);
+  box-shadow: var(--shadow-card);
+}
+
+.glass-badge {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: var(--color-white);
+}
+
+/* --- Dynamic Scroll Reveal Animations --- */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+
+/* Dynamic Floating Back-to-Top Button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 850;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0c4a6e, #0284c7);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px -4px rgba(2, 132, 199, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px) scale(0.9);
+  transition: all var(--transition-normal);
+}
+
+.back-to-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.back-to-top-btn:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 14px 28px -4px rgba(2, 132, 199, 0.65);
+  background: linear-gradient(135deg, #0284c7, #38bdf8);
+}
+
+@media (max-width: 768px) {
+  .back-to-top-btn {
+    bottom: max(1.25rem, env(safe-area-inset-bottom, 1.25rem));
+    left: 1.25rem;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Dynamic Toast Notification */
+.toast-notification {
+  position: fixed;
+  bottom: 5.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: linear-gradient(135deg, #082f49, #0c4a6e);
+  color: #f8fafc;
+  padding: 0.85rem 1.75rem;
+  border-radius: 9999px;
+  box-shadow: 0 15px 35px -5px rgba(2, 44, 89, 0.5), 0 0 20px rgba(234, 179, 8, 0.3);
+  border: 1px solid rgba(250, 204, 21, 0.5);
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 1050;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.toast-notification.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* FAQ Interactive Accordion */
+.faq-accordion-item {
+  border: 1px solid rgba(224, 242, 254, 0.9);
+  border-radius: 1.25rem;
+  background: #ffffff;
+  overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.faq-accordion-item:hover {
+  border-color: var(--color-sky-300);
+  box-shadow: var(--shadow-card);
+}
+
+.faq-accordion-item.open {
+  border-color: var(--color-sky-400);
+  box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.12);
+}
+
+.faq-accordion-header {
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  user-select: none;
+  transition: background-color var(--transition-fast);
+}
+
+.faq-accordion-header:hover {
+  background-color: rgba(240, 249, 255, 0.6);
+}
+
+.faq-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  opacity: 0;
+  padding: 0 1.5rem;
+}
+
+.faq-accordion-item.open .faq-accordion-content {
+  max-height: 400px;
+  opacity: 1;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.faq-chevron {
+  transition: transform 0.3s ease;
+}
+
+.faq-accordion-item.open .faq-chevron {
+  transform: rotate(180deg);
+  color: var(--color-sky-500);
+}
+
+/* --- Card Hover & Interactive Effects --- */
+.card-hover {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-sky-300);
+}
+
+/* --- Spiritual Glow & Accents --- */
+.glow-sky {
+  box-shadow: 0 0 35px -5px rgba(56, 189, 248, 0.45);
+}
+
+.glow-text-gold {
+  text-shadow: 0 2px 10px rgba(234, 179, 8, 0.35);
+}
+
+/* --- Section Dividers --- */
+.curved-divider-bottom {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.curved-divider-bottom svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 48px;
+}
+
+/* --- Modernized Gallery & Lightbox Styles --- */
+.gallery-tab {
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.gallery-tab:hover {
+  transform: translateY(-1px);
+}
+
+.gallery-tab.active {
+  background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%) !important;
+  color: #ffffff !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 4px 12px rgba(3, 105, 161, 0.35) !important;
+}
+
+.gallery-tab .count-badge {
+  transition: background-color var(--transition-fast);
+}
+
+.gallery-tab.active .count-badge {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.gallery-card-modern {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: #0f172a;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery-card-modern:hover {
+  transform: translateY(-6px);
+  border-color: rgba(56, 189, 248, 0.7);
+  box-shadow: 0 25px 35px -10px rgba(14, 165, 233, 0.25), 0 12px 16px -8px rgba(14, 165, 233, 0.15);
+}
+
+.gallery-card-modern img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-card-modern:hover img {
+  transform: scale(1.04);
+}
+
+/* Lightbox Modal High-End UI */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.94) 0%, rgba(3, 10, 20, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+}
+
+.lightbox-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 1100px;
+  width: 100%;
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: lightboxScaleUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes lightboxScaleUp {
+  0% { transform: scale(0.96); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.lightbox-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: #020617;
+  max-height: 68vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.lightbox-image {
+  display: block;
+  max-width: 100%;
+  max-height: 68vh;
+  object-fit: contain;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.lightbox-nav-btn {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all var(--transition-fast);
+  z-index: 1020;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.lightbox-nav-btn:hover {
+  background: #38bdf8;
+  color: #0369a1;
+  border-color: #38bdf8;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+}
+
+.lightbox-prev {
+  left: max(1rem, env(safe-area-inset-left, 1rem));
+}
+
+.lightbox-next {
+  right: max(1rem, env(safe-area-inset-right, 1rem));
+}
+
+.lightbox-top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding: 0 0.5rem;
+  color: #ffffff;
+}
+
+.lightbox-close {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.lightbox-close:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  transform: rotate(90deg) scale(1.08);
+}
+
+.lightbox-caption-bar {
+  margin-top: 0.85rem;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0.85rem 1.5rem;
+  border-radius: 1.25rem;
+  color: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 640px) {
+  .lightbox-caption-bar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* --- Floating WhatsApp Quick-Action Button --- */
+.floating-whatsapp {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #25D366;
+  color: #ffffff;
+  padding: 0.85rem 1.25rem;
+  border-radius: 9999px;
+  box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.5), 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition-normal);
+  animation: pulseGlow 3s infinite;
+}
+
+.floating-whatsapp:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 30px -5px rgba(37, 211, 102, 0.65);
+  color: #ffffff;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.45);
+  }
+  50% {
+    box-shadow: 0 10px 35px 2px rgba(37, 211, 102, 0.7);
+  }
+}
+
+/* --- Verse Card Shimmer & Pulse Animation --- */
+.verse-container {
+  position: relative;
+  background: #ffffff;
+  border: 2px solid var(--color-sky-200);
+  border-radius: 1.25rem;
+  box-shadow: 0 12px 35px -8px rgba(2, 132, 199, 0.12);
+  transition: all var(--transition-normal);
+  overflow: hidden;
+}
+
+.verse-container:hover {
+  border-color: var(--color-sky-400);
+  box-shadow: 0 20px 40px -10px rgba(2, 132, 199, 0.2);
+}
+
+.verse-accent-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #38bdf8, #0284c7, #eab308);
+}
+
+/* Subtle Shimmer for Loading State */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* --- Gallery Filter Buttons --- */
+.gallery-tab {
+  transition: all var(--transition-fast);
+}
+
+.gallery-tab.active {
+  background-color: var(--color-deep-800);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(7, 89, 133, 0.35);
+}
+
+/* --- Mobile Menu Drawer Animation --- */
+#mobile-menu {
+  transition: max-height 0.35s ease-in-out, opacity 0.25s ease-in-out;
+}
+
+/* ==========================================================================
+   DYNAMIC PAGE ANIMATIONS & INTERACTIVE COMPONENTS
+   ========================================================================== */
+
+/* --- Scroll-Reveal Micro-Animations (Fade-up & subtle scale) --- */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 0.1s; }
+.delay-150 { transition-delay: 0.15s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+
+/* --- FAQ Accordion Modern & Fluid --- */
+.faq-accordion-item {
+  background: #ffffff;
+  border: 1px solid rgba(224, 242, 254, 0.95);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px -3px rgba(2, 132, 199, 0.05);
+}
+
+.faq-accordion-item:hover {
+  border-color: rgba(56, 189, 248, 0.8);
+  box-shadow: 0 8px 25px -5px rgba(2, 132, 199, 0.12);
+  transform: translateY(-2px);
+}
+
+.faq-accordion-item.open {
+  border-color: rgba(2, 132, 199, 0.8);
+  background: linear-gradient(to bottom, #ffffff 0%, #f0f9ff 100%);
+  box-shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.15);
+}
+
+.faq-accordion-header {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  gap: 1rem;
+}
+
+.faq-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+  padding: 0 1.5rem;
+}
+
+.faq-accordion-item.open .faq-accordion-content {
+  max-height: 600px;
+  padding: 0 1.5rem 1.25rem 1.5rem;
+}
+
+.faq-chevron {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+}
+
+.faq-accordion-item.open .faq-chevron {
+  transform: rotate(180deg);
+  color: var(--color-sky-600);
+}
+
+/* --- Floating Back-to-Top Button (Left side, complementary to WhatsApp on right) --- */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 850;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #082f49 0%, #0c4a6e 100%);
+  color: #facc15;
+  border: 1px solid rgba(250, 204, 21, 0.5);
+  box-shadow: 0 8px 25px rgba(8, 47, 73, 0.45), 0 0 15px rgba(234, 179, 8, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.back-to-top-btn:hover {
+  background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);
+  color: #ffffff;
+  border-color: #facc15;
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 12px 30px rgba(8, 47, 73, 0.6), 0 0 20px rgba(250, 204, 21, 0.4);
+}
+
+.back-to-top-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.back-to-top-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* --- Floating Dynamic Toast Notification --- */
+.toast-notification {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: linear-gradient(135deg, rgba(8, 25, 48, 0.96) 0%, rgba(14, 46, 88, 0.96) 100%);
+  border: 1px solid rgba(250, 204, 21, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  box-shadow: 0 12px 35px rgba(4, 16, 36, 0.6), 0 0 20px rgba(250, 204, 21, 0.25);
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 1200;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.toast-notification.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- Reduced Motion Accessibility (prefers-reduced-motion) --- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-bg-media {
+    animation: none !important;
+    transform: none !important;
+  }
+  .floating-whatsapp {
+    animation: none !important;
+  }
+  .card-hover,
+  .gallery-tab,
+  .lightbox-modal,
+  .lightbox-image,
+  .lightbox-close,
+  .lightbox-nav-btn {
+    transition: none !important;
+  }
+}
+
+/* --- Global Touch & Responsive Utilities --- */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* --- Responsive Adjustments: Mobile, Tablette, PC & Écrans Larges --- */
+
+/* Smartphone (<= 768px) */
+@media (max-width: 768px) {
+  /* Tiroir mobile sécurisé pour petits écrans */
+  #mobile-menu {
+    max-height: calc(100dvh - 5rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Bouton WhatsApp flottant compact & circulaire */
+  .floating-whatsapp {
+    width: 52px;
+    height: 52px;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    bottom: max(1.25rem, env(safe-area-inset-bottom, 1.25rem)) !important;
+    right: max(1.25rem, env(safe-area-inset-right, 1.25rem)) !important;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.45);
+  }
+  .floating-whatsapp span {
+    display: none !important;
+  }
+  .floating-whatsapp svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Bouton retour en haut flottant compact sur mobile */
+  .back-to-top-btn {
+    width: 44px;
+    height: 44px;
+    bottom: max(1.25rem, env(safe-area-inset-bottom, 1.25rem)) !important;
+    left: max(1.25rem, env(safe-area-inset-left, 1.25rem)) !important;
+  }
+
+  /* Visionneuse (Lightbox) adaptée aux écrans tactiles */
+  .lightbox-modal {
+    padding: 0.75rem;
+  }
+  .lightbox-content {
+    max-height: 92vh;
+    max-height: 92dvh;
+    width: 100%;
+  }
+  .lightbox-image-container {
+    max-height: 60vh;
+    max-height: 60dvh;
+    border-radius: 0.75rem;
+  }
+  .lightbox-image {
+    max-height: 60vh;
+    max-height: 60dvh;
+  }
+  .lightbox-close {
+    top: max(0.85rem, env(safe-area-inset-top, 0.85rem));
+    right: max(0.85rem, env(safe-area-inset-right, 0.85rem));
+    width: 40px;
+    height: 40px;
+  }
+  .lightbox-nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .lightbox-prev {
+    left: max(0.5rem, env(safe-area-inset-left, 0.5rem));
+  }
+  .lightbox-next {
+    right: max(0.5rem, env(safe-area-inset-right, 0.5rem));
+  }
+  .lightbox-caption-bar {
+    font-size: 0.8rem;
+    gap: 0.5rem;
+    padding: 0.5rem 0.85rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 1rem;
+    text-align: center;
+    margin-top: 0.75rem;
+    max-width: 95vw;
+  }
+
+  /* Galerie sur mobile : Scrim élégant en bas de photo (laisse le haut de l'image 100% visible) */
+  .gallery-item .absolute.inset-0 {
+    opacity: 1 !important;
+    top: auto !important;
+    bottom: 0 !important;
+    height: 55% !important;
+    background: linear-gradient(to top, rgba(8, 47, 73, 0.95) 0%, rgba(8, 47, 73, 0.6) 65%, transparent 100%) !important;
+    padding: 1rem !important;
+    justify-content: flex-end !important;
+  }
+  .gallery-item .absolute.top-4.right-4 {
+    opacity: 0.85 !important;
+    top: 0.6rem !important;
+    right: 0.6rem !important;
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+/* Très petits écrans mobiles (<= 480px, ex: iPhone SE, Galaxy A, Pixel Fold) */
+@media (max-width: 480px) {
+  html {
+    scroll-padding-top: 76px;
+  }
+  .hero-wrapper {
+    min-height: calc(100vh - 76px);
+    min-height: calc(100dvh - 76px);
+  }
+  .verse-container {
+    padding: 1.25rem !important;
+    border-radius: 1rem;
+  }
+  .gallery-tab {
+    padding: 0.4rem 0.85rem !important;
+    font-size: 0.75rem !important;
+  }
+  .glass-card {
+    border-radius: 1rem !important;
+  }
+}
+
+/* Écrans minuscules (<= 360px) */
+@media (max-width: 360px) {
+  .hero-wrapper h1 {
+    font-size: 1.65rem !important;
+    line-height: 1.2 !important;
+  }
+  .hero-wrapper p {
+    font-size: 0.85rem !important;
+  }
+  .floating-whatsapp {
+    width: 46px !important;
+    height: 46px !important;
+    bottom: 1rem !important;
+    right: 1rem !important;
+  }
+}
+
+/* Tablettes (768px à 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-wrapper {
+    min-height: 85vh;
+    min-height: 85dvh;
+  }
+}
+
+/* Laptops & PC écrans moyens (1024px à 1280px) : Ajustement fin des liens de navigation */
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .desktop-nav-link {
+    padding-left: 0.45rem !important;
+    padding-right: 0.45rem !important;
+    font-size: 0.8125rem !important;
+  }
+}
+
+/* Ordinateurs de bureau & PC Grands Écrans (>= 1024px) */
+@media (min-width: 1024px) {
+  .hero-wrapper {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  .card-hover:hover {
+    transform: translateY(-8px);
+  }
+  /* Animation Ken Burns fluide sur écrans larges */
+  .hero-bg-media {
+    animation-duration: 30s;
+  }
+}
+
+/* PC Ultra-larges & 4K (>= 1440px) */
+@media (min-width: 1440px) {
+  .hero-wrapper {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  .hero-wrapper .max-w-5xl {
+    max-width: 72rem;
+  }
+}
