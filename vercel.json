@@ -15,6 +15,10 @@
       "dest": "/api/$1"
     },
     {
+      "src": "/\\..*",
+      "status": 404
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }

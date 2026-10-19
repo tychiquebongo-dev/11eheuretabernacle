@@ -1,11 +1,17 @@
 // Vercel Serverless Function: POST /api/upload
-// Téléversement sécurisé vers ImgBB sans exposer la clé API au client
+// Téléversement sécurisé vers ImgBB avec vérification d'authentification pastorale
+
+const crypto = require('crypto');
+
+function getExpectedToken() {
+  const secret = process.env.ADMIN_PASSWORD || '11eheure';
+  return crypto.createHash('sha256').update(secret + '_tabernacle_salt_2026').digest('hex');
+}
 
 module.exports = async (req, res) => {
-  // En-têtes CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
     return res.status(204).end();
@@ -15,11 +21,21 @@ module.exports = async (req, res) => {
     return res.status(405).json({ success: false, error: 'Méthode non autorisée' });
   }
 
+  // Vérification de sécurité du token d'administration
+  const authHeader = req.headers['authorization'] || '';
+  const expectedToken = getExpectedToken();
+  if (!authHeader.includes(expectedToken)) {
+    return res.status(401).json({
+      success: false,
+      error: 'Non autorisé : Session pastorale requise pour téléverser des photos.'
+    });
+  }
+
   const apiKey = process.env.IMGBB_API_KEY;
   if (!apiKey) {
     return res.status(500).json({
       success: false,
-      error: 'La variable IMGBB_API_KEY n\'est pas configurée dans le fichier .env ou dans les paramètres Vercel.'
+      error: 'La variable IMGBB_API_KEY n\'est pas configurée dans les paramètres Vercel.'
     });
   }
 
@@ -30,7 +46,6 @@ module.exports = async (req, res) => {
       return res.status(400).json({ success: false, error: 'Aucune image reçue' });
     }
 
-    // Nettoyer le préfixe data:image/...;base64, si présent
     const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
 
     const params = new URLSearchParams();

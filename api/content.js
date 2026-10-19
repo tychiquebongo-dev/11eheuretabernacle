@@ -1,14 +1,20 @@
 // Vercel Serverless Function: /api/content
-// Permet la lecture et la mise à jour automatique de data/content.json sur GitHub
+// Permet la lecture et la mise à jour automatique de data/content.json sur GitHub avec vérification d'authentification
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
+
+function getExpectedToken() {
+  const secret = process.env.ADMIN_PASSWORD || '11eheure';
+  return crypto.createHash('sha256').update(secret + '_tabernacle_salt_2026').digest('hex');
+}
 
 module.exports = async (req, res) => {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
     return res.status(204).end();
@@ -19,7 +25,7 @@ module.exports = async (req, res) => {
   const branch = process.env.GITHUB_BRANCH || 'main';
   const filePath = 'data/content.json';
 
-  // GET /api/content
+  // GET /api/content (Public)
   if (req.method === 'GET') {
     const localFile = path.join(process.cwd(), 'data', 'content.json');
     if (fs.existsSync(localFile)) {
@@ -52,8 +58,18 @@ module.exports = async (req, res) => {
     return res.status(404).json({ error: 'Fichier content.json introuvable' });
   }
 
-  // POST /api/content (Mise à jour automatique sur GitHub)
+  // POST /api/content (Sécurisé : Authentification obligatoire)
   if (req.method === 'POST') {
+    // Vérification de sécurité du token d'administration
+    const authHeader = req.headers['authorization'] || '';
+    const expectedToken = getExpectedToken();
+    if (!authHeader.includes(expectedToken)) {
+      return res.status(401).json({
+        success: false,
+        error: 'Non autorisé : Session pastorale invalide ou expirée. Veuillez vous reconnecter.'
+      });
+    }
+
     const newContent = req.body;
     if (!newContent) {
       return res.status(400).json({ success: false, error: 'Données vides' });
@@ -65,7 +81,7 @@ module.exports = async (req, res) => {
       return res.status(200).json({
         success: true,
         synced: false,
-        message: 'Modifications enregistrées localement. Ajoutez GITHUB_TOKEN dans vos variables Vercel pour la mise en ligne automatique pour tous les fidèles.'
+        message: 'Modifications enregistrées. Ajoutez GITHUB_TOKEN dans vos variables Vercel pour la mise en ligne automatique pour tous les fidèles.'
       });
     }
 

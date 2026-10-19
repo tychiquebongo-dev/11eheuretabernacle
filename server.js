@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 // Chargement automatique du fichier .env
 const ENV_FILE = path.join(__dirname, '.env');
@@ -17,6 +18,11 @@ if (fs.existsSync(ENV_FILE)) {
       }
     }
   });
+}
+
+function getExpectedToken() {
+  const secret = process.env.ADMIN_PASSWORD || '11eheure';
+  return crypto.createHash('sha256').update(secret + '_tabernacle_salt_2026').digest('hex');
 }
 
 const PORT = 3000;
@@ -39,11 +45,37 @@ const server = http.createServer(async (req, res) => {
   // CORS Headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
     res.writeHead(204);
     res.end();
+    return;
+  }
+
+  // API Endpoint: POST /api/auth (Authentification Pastorale)
+  if (req.url === '/api/auth' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const { password } = JSON.parse(body || '{}');
+        const validPass = process.env.ADMIN_PASSWORD || '11eheure';
+        const validPin = process.env.ADMIN_PIN || '1177';
+
+        if (password && (password === validPass || password === validPin)) {
+          const token = getExpectedToken();
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: true, token, message: 'Authentification pastorale réussie' }));
+        } else {
+          res.writeHead(401, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: false, error: 'Code d\'accès pastoral incorrect' }));
+        }
+      } catch (e) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: 'Format JSON invalide' }));
+      }
+    });
     return;
   }
 
@@ -57,7 +89,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // API Endpoint: GET /api/content
+  // API Endpoint: GET /api/content (Public)
   if (req.url === '/api/content' && req.method === 'GET') {
     if (fs.existsSync(DATA_FILE)) {
       res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -69,8 +101,16 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // API Endpoint: POST /api/content
+  // API Endpoint: POST /api/content (Sécurisé par Token)
   if (req.url === '/api/content' && req.method === 'POST') {
+    // Vérification d'authentification
+    const authHeader = req.headers['authorization'] || '';
+    if (!authHeader.includes(getExpectedToken())) {
+      res.writeHead(401, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: 'Session non autorisée. Veuillez vous connecter.' }));
+      return;
+    }
+
     let body = '';
     req.on('data', chunk => {
       body += chunk;
@@ -143,8 +183,16 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // API Endpoint: POST /api/upload (Téléversement sécurisé via clé .env)
+  // API Endpoint: POST /api/upload (Sécurisé par Token)
   if (req.url === '/api/upload' && req.method === 'POST') {
+    // Vérification d'authentification
+    const authHeader = req.headers['authorization'] || '';
+    if (!authHeader.includes(getExpectedToken())) {
+      res.writeHead(401, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: 'Session requise pour téléverser.' }));
+      return;
+    }
+
     let body = '';
     req.on('data', chunk => {
       body += chunk;
@@ -186,7 +234,6 @@ const server = http.createServer(async (req, res) => {
             return;
           } else {
             console.warn('Erreur ImgBB:', json);
-            // Si ImgBB échoue, on bascule sur l'enregistrement local
           }
         }
 
@@ -221,7 +268,14 @@ const server = http.createServer(async (req, res) => {
   let reqPath = decodeURI(req.url.split('?')[0]);
   if (reqPath === '/' || reqPath === '') reqPath = '/index.html';
   if (reqPath === '/admin') reqPath = '/admin.html';
-  const filePath = path.join(__dirname, reqPath);
+  const filePath = path.normalize(path.join(__dirname, reqPath));
+
+  // Protection de sécurité : Bloquer l'accès aux fichiers cachés (.env, .git, etc.) et directory traversal
+  if (!filePath.startsWith(__dirname) || path.basename(filePath).startsWith('.') || reqPath.includes('/.')) {
+    res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('403 Accès interdit : Fichier protégé.');
+    return;
+  }
 
   if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
     const ext = path.extname(filePath).toLowerCase();
@@ -241,5 +295,8 @@ server.listen(PORT, () => {
     console.log(`[Config] Clé IMGBB_API_KEY détectée dans le .env`);
   } else {
     console.log(`[Config] Aucune clé IMGBB_API_KEY dans le .env (mode stockage local actif)`);
+  }
+  if (process.env.GITHUB_TOKEN) {
+    console.log(`[Config] Token GITHUB_TOKEN détecté dans le .env (Option A active)`);
   }
 });

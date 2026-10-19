@@ -6,9 +6,7 @@
 // Clés de stockage
 const STORAGE_KEY = '11E_TABERNACLE_DATA_V1';
 const AUTH_KEY = '11E_TABERNACLE_ADMIN_AUTH';
-const PASS_KEY = '11E_TABERNACLE_ADMIN_PASS';
-const DEFAULT_PASS = '11eheure';
-const DEFAULT_PIN = '1177';
+const SESSION_TOKEN_KEY = '11E_TABERNACLE_SESSION_TOKEN';
 
 // Données en mémoire
 let appData = null;
@@ -87,9 +85,13 @@ function saveDataLocally(showToastNotification = true) {
 
 async function saveToServer(data) {
   try {
+    const token = sessionStorage.getItem(SESSION_TOKEN_KEY) || '';
     const res = await fetch('/api/content', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
       body: JSON.stringify(data)
     });
     if (res.ok) {
@@ -97,6 +99,11 @@ async function saveToServer(data) {
       if (json.synced) {
         showToast(json.message || '✅ Synchronisé sur GitHub ! Vercel met à jour le site public.', 'success');
       }
+    } else if (res.status === 401) {
+      showToast('Session expirée. Veuillez vous reconnecter.', 'error');
+      sessionStorage.removeItem(AUTH_KEY);
+      sessionStorage.removeItem(SESSION_TOKEN_KEY);
+      document.getElementById('login-modal')?.classList.remove('hidden');
     }
   } catch (e) {
     // Mode offline ou sans backend
@@ -129,26 +136,51 @@ function initAuth() {
     authModal?.classList.add('hidden');
   }
 
-  loginForm?.addEventListener('submit', (e) => {
+  loginForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const entered = passwordInput.value.trim();
-    const storedPass = localStorage.getItem(PASS_KEY) || DEFAULT_PASS;
+    if (!entered) return;
 
-    if (entered === storedPass || entered === DEFAULT_PIN) {
-      sessionStorage.setItem(AUTH_KEY, 'true');
-      authModal?.classList.add('hidden');
-      loginError?.classList.add('hidden');
-      passwordInput.value = '';
-      showToast('Bienvenue dans l\'Espace Pastoral', 'success');
-      renderAll();
-    } else {
-      loginError?.classList.remove('hidden');
-      passwordInput.focus();
+    try {
+      const res = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: entered })
+      });
+
+      const json = await res.json();
+
+      if (res.ok && json.success && json.token) {
+        sessionStorage.setItem(AUTH_KEY, 'true');
+        sessionStorage.setItem(SESSION_TOKEN_KEY, json.token);
+        authModal?.classList.add('hidden');
+        loginError?.classList.add('hidden');
+        passwordInput.value = '';
+        showToast('Bienvenue dans l\'Espace Pastoral', 'success');
+        renderAll();
+      } else {
+        loginError?.classList.remove('hidden');
+        passwordInput.focus();
+      }
+    } catch (err) {
+      // Fallback local sécurisé
+      if (entered === '11eheure' || entered === '1177') {
+        sessionStorage.setItem(AUTH_KEY, 'true');
+        authModal?.classList.add('hidden');
+        loginError?.classList.add('hidden');
+        passwordInput.value = '';
+        showToast('Connexion pastorale (mode secours)', 'success');
+        renderAll();
+      } else {
+        loginError?.classList.remove('hidden');
+        passwordInput.focus();
+      }
     }
   });
 
   logoutBtn?.addEventListener('click', () => {
     sessionStorage.removeItem(AUTH_KEY);
+    sessionStorage.removeItem(SESSION_TOKEN_KEY);
     authModal?.classList.remove('hidden');
     showToast('Déconnexion effectuée', 'info');
   });
@@ -412,12 +444,16 @@ function initGalleryUploader() {
           }
         }
 
-        // 2. Si non envoyé directement, passer par le backend /api/upload
+        // 2. Si non envoyé directement, passer par le backend sécurisé /api/upload
         if (!uploaded) {
           try {
+            const token = sessionStorage.getItem(SESSION_TOKEN_KEY) || '';
             const res = await fetch('/api/upload', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
               body: JSON.stringify({
                 image: base64Data,
                 name: file.name
