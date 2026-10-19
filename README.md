@@ -46,7 +46,7 @@ Site web vitrine moderne, responsive, élégant et spirituellement inspirant pou
    - Bloc solennel avec typographie expressive et cartes pour les 3 axes fondateurs.
 4. **Horaires et Programmes des Cultes Officiels :**
    - **Mardi :** 18h00 – 19h30 *(Culte en semaine & enseignement)*
-   - **Jeudi :** 18h00 – 19h30 *(Prière & intercession)*
+   - **Jeudi :** 18h00 – 19h30 *(Culte de la semaine)*
    - **Dimanche (École du dimanche) :** 08h00 – 09h30 *(Jeunesse & Enfants)*
    - **Dimanche (Culte principal) :** 10h00 – 12h30 *(Célébration & Sainte Cène)*
 5. **Verset Biblique du Jour (API HelloAO + Fuseau Pointe-Noire) :**

@@ -131,7 +131,7 @@ function initLiveWorshipTicker() {
     { day: 0, startH: 8, startM: 0, endH: 9, endM: 30, name: "École du Dimanche" },
     { day: 0, startH: 10, startM: 0, endH: 12, endM: 30, name: "Culte Principal d'Adoration" },
     { day: 2, startH: 18, startM: 0, endH: 19, endM: 30, name: "Culte en Semaine" },
-    { day: 4, startH: 18, startM: 0, endH: 19, endM: 30, name: "Prière & Combat Spirituel" }
+    { day: 4, startH: 18, startM: 0, endH: 19, endM: 30, name: "Culte de la Semaine" }
   ];
 
   const DAYS_FR = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
