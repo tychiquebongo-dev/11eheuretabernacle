@@ -1,6 +1,6 @@
 # 11e Heure Tabernacle — Site Web Vitrine Officiel
 
-Site web vitrine moderne, responsive, élégant et spirituellement inspirant pour l'église chrétienne **11e Heure Tabernacle**, située à Pointe-Noire en République du Congo, sous la conduite pastorale du **Pasteur Odilon Detchibs**.
+Site web vitrine moderne, responsive, élégant et spirituellement inspirant pour l'Église du Message du Temps de la Fin **11e Heure Tabernacle**, située à Pointe-Noire en République du Congo, sous la conduite pastorale du **Pasteur Odilon Detchibs**.
 
 ---
 

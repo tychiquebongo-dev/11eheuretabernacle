@@ -1,6 +1,6 @@
 /**
  * 11e HEURE TABERNACLE - LOGIQUE INTERACTIVE & API
- * Église chrétienne de réveil & de restauration - Pointe-Noire, Congo
+ * Église du Message du Temps de la Fin - Pointe-Noire, Congo
  * Auteur : Développeur Full Stack & UI/UX
  */
 
