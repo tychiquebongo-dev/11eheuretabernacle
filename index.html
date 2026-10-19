@@ -159,68 +159,85 @@
     <!-- Image de fond panoramique avec animation Ken Burns -->
     <div class="hero-bg-media" aria-hidden="true"></div>
     
+    <!-- Portrait du Pasteur Odilon à gauche du fond d'écran sans bordure (Fondu céleste professionnel) -->
+    <div class="hero-pastor-backdrop" aria-hidden="true">
+      <div class="hero-pastor-mask-wrapper">
+        <img src="assets/images/pastor-odilon-ministries.jpg" alt="Pasteur Odilon Detchibs - 11e Heure Tabernacle" class="hero-pastor-img">
+        <div class="hero-pastor-gradient-overlay"></div>
+      </div>
+    </div>
+
     <!-- Superposition dégradé bleu ciel et blanc pour contraste et clarté optimale -->
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-overlay-shimmer" aria-hidden="true"></div>
 
-    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 text-center text-white">
-      
-      <!-- Badge Dynamique : Prochain Culte / En Direct (Pointe-Noire UTC+1) -->
-      <div class="flex justify-center mb-5">
-        <div id="live-worship-ticker" class="inline-flex items-center gap-2.5 px-4 sm:px-5 py-2 rounded-full bg-slate-950/80 border border-amber-400/60 text-white shadow-xl shadow-sky-950/50 backdrop-blur-md text-xs sm:text-sm font-semibold cursor-pointer hover:border-amber-300 hover:scale-105 transition-all group" onclick="document.getElementById('horaires').scrollIntoView({behavior: 'smooth'})" title="Cliquez pour consulter le programme complet des cultes">
-          <span id="live-worship-dot" class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping shrink-0"></span>
-          <span id="live-worship-text" class="text-sky-100 group-hover:text-amber-300 transition-colors">Calcul du prochain culte en direct...</span>
-          <svg class="w-4 h-4 text-amber-400 ml-1 group-hover:translate-x-0.5 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 5l7 7-7 7"/></svg>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 md:py-16 lg:py-20 text-white w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-12">
+        
+        <!-- Colonne gauche vide sur desktop : laisse le portrait du pasteur visible et sublimé -->
+        <div class="hidden lg:block lg:col-span-5 pointer-events-none"></div>
+
+        <!-- Colonne droite : Contenu Hero Principal -->
+        <div class="lg:col-span-7 text-center lg:text-left">
+          
+          <!-- Badge Dynamique : Prochain Culte / En Direct (Pointe-Noire UTC+1) -->
+          <div class="flex justify-center lg:justify-start mb-5">
+            <div id="live-worship-ticker" class="inline-flex items-center gap-2.5 px-4 sm:px-5 py-2 rounded-full bg-slate-950/80 border border-amber-400/60 text-white shadow-xl shadow-sky-950/50 backdrop-blur-md text-xs sm:text-sm font-semibold cursor-pointer hover:border-amber-300 hover:scale-105 transition-all group" onclick="document.getElementById('horaires').scrollIntoView({behavior: 'smooth'})" title="Cliquez pour consulter le programme complet des cultes">
+              <span id="live-worship-dot" class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping shrink-0"></span>
+              <span id="live-worship-text" class="text-sky-100 group-hover:text-amber-300 transition-colors">Calcul du prochain culte en direct...</span>
+              <svg class="w-4 h-4 text-amber-400 ml-1 group-hover:translate-x-0.5 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+
+          <!-- En-tête : Emblème officiel et Badge Spirituel -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-5 sm:mb-6">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden shadow-2xl ring-4 ring-amber-400/80 p-0.5 bg-brand-midnight/80 backdrop-blur-md shrink-0">
+              <img src="assets/images/logo.png" alt="Emblème officiel 11e Heure Tabernacle" class="w-full h-full object-cover rounded-full">
+            </div>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-badge text-[11px] sm:text-xs font-semibold tracking-wide uppercase">
+              <span class="w-2 h-2 rounded-full bg-sky-300 animate-ping"></span>
+              <span>Église Chrétienne de Réveil &bull; Pointe-Noire, Congo</span>
+            </div>
+          </div>
+
+          <!-- Nom de l'église -->
+          <h1 class="font-spiritual text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-white mb-2 sm:mb-3 drop-shadow-md">
+            11<sup>e</sup> HEURE TABERNACLE
+          </h1>
+
+          <!-- Nom du pasteur -->
+          <p class="text-sky-200 text-xs sm:text-base md:text-lg lg:text-xl font-medium tracking-wide mb-3 sm:mb-5">
+            Sous la direction pastorale du <span class="font-bold text-white border-b-2 border-sky-400 pb-0.5">Pasteur Odilon Detchibs</span>
+          </p>
+
+          <!-- Slogan officiel -->
+          <div class="mb-5 sm:mb-6">
+            <p class="font-serif italic text-base sm:text-lg md:text-xl lg:text-2xl text-sky-100 font-normal leading-relaxed drop-shadow">
+              « Une foi restaurée, un amour renouvelé, une espérance vivante. »
+            </p>
+          </div>
+
+          <!-- Court texte de bienvenue -->
+          <p class="text-xs sm:text-sm md:text-base text-slate-200 font-light mb-7 sm:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+            Bienvenue dans la maison du Seigneur à Pointe-Noire. Venez expérimenter l'amour divin, la communion fraternelle sincère et la puissance vivifiante du Saint-Esprit.
+          </p>
+
+          <!-- Deux Boutons d'Action Clés -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full">
+            <a href="#apropos" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-white text-brand-midnight font-bold text-sm sm:text-base hover:bg-sky-50 hover:shadow-xl hover:shadow-sky-500/20 hover:-translate-y-0.5 transition-all duration-200">
+              <span>Découvrir notre église</span>
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-brand-skyPrimary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+              </svg>
+            </a>
+            <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-green-500 hover:bg-green-600 text-white font-bold text-sm sm:text-base shadow-lg shadow-green-600/30 hover:-translate-y-0.5 transition-all duration-200">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+              <span>Nous contacter sur WhatsApp</span>
+            </a>
+          </div>
+
         </div>
-      </div>
 
-      <!-- Emblème officiel 11e Heure Tabernacle -->
-      <div class="flex justify-center mb-5 sm:mb-6">
-        <div class="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full overflow-hidden shadow-2xl ring-4 ring-amber-400/80 p-0.5 bg-brand-midnight/80 backdrop-blur-md transform hover:scale-105 transition-transform duration-300">
-          <img src="assets/images/logo.png" alt="Emblème officiel 11e Heure Tabernacle" class="w-full h-full object-cover rounded-full">
-        </div>
-      </div>
-
-      <!-- Badge spirituel -->
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-badge mb-4 sm:mb-6 text-[11px] sm:text-xs md:text-sm font-semibold tracking-wide uppercase">
-        <span class="w-2 h-2 rounded-full bg-sky-300 animate-ping"></span>
-        <span>Église Chrétienne de Réveil &bull; Pointe-Noire, Congo</span>
-      </div>
-
-      <!-- Nom de l'église -->
-      <h1 class="font-spiritual text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-2 sm:mb-3 drop-shadow-md">
-        11<sup>e</sup> HEURE TABERNACLE
-      </h1>
-
-      <!-- Nom du pasteur -->
-      <p class="text-sky-200 text-xs sm:text-base md:text-lg lg:text-xl font-medium tracking-wide mb-3 sm:mb-5">
-        Sous la direction pastorale du <span class="font-bold text-white border-b-2 border-sky-400 pb-0.5">Pasteur Odilon Detchibs</span>
-      </p>
-
-      <!-- Slogan officiel -->
-      <div class="max-w-3xl mx-auto mb-5 sm:mb-7">
-        <p class="font-serif italic text-base sm:text-xl md:text-2xl lg:text-3xl text-sky-100 font-normal leading-relaxed drop-shadow">
-          « Une foi restaurée, un amour renouvelé, une espérance vivante. »
-        </p>
-      </div>
-
-      <!-- Court texte de bienvenue -->
-      <p class="max-w-2xl mx-auto text-xs sm:text-base md:text-lg text-slate-200 font-light mb-7 sm:mb-9 leading-relaxed px-2">
-        Bienvenue dans la maison du Seigneur à Pointe-Noire. Venez expérimenter l'amour divin, la communion fraternelle sincère et la puissance vivifiante du Saint-Esprit.
-      </p>
-
-      <!-- Deux Boutons d'Action Clés -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-sm sm:max-w-none mx-auto w-full">
-        <a href="#apropos" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-white text-brand-midnight font-bold text-sm sm:text-base hover:bg-sky-50 hover:shadow-xl hover:shadow-sky-500/20 hover:-translate-y-0.5 transition-all duration-200">
-          <span>Découvrir notre église</span>
-          <svg class="w-4 h-4 sm:w-5 sm:h-5 text-brand-skyPrimary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-          </svg>
-        </a>
-        <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-green-500 hover:bg-green-600 text-white font-bold text-sm sm:text-base shadow-lg shadow-green-600/30 hover:-translate-y-0.5 transition-all duration-200">
-          <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-          <span>Nous contacter sur WhatsApp</span>
-        </a>
       </div>
 
     </div>
