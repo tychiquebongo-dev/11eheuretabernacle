@@ -14,10 +14,22 @@ const DEFAULT_PIN = '1177';
 let appData = null;
 let currentEditingPhotoId = null;
 let currentEditingProgramId = null;
+let serverConfig = null;
+
+async function loadServerConfig() {
+  try {
+    const res = await fetch('/api/config');
+    if (res.ok) {
+      serverConfig = await res.json();
+    }
+  } catch (e) {
+    // Mode offline
+  }
+}
 
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', async () => {
-  await loadData();
+  await Promise.all([loadData(), loadServerConfig()]);
   initAuth();
   initNavigation();
   initModals();
@@ -75,13 +87,19 @@ function saveDataLocally(showToastNotification = true) {
 
 async function saveToServer(data) {
   try {
-    await fetch('/api/content', {
+    const res = await fetch('/api/content', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
+    if (res.ok) {
+      const json = await res.json();
+      if (json.synced) {
+        showToast(json.message || '✅ Synchronisé sur GitHub ! Vercel met à jour le site public.', 'success');
+      }
+    }
   } catch (e) {
-    // Mode statique sans serveur Node, normal sur Vercel
+    // Mode offline ou sans backend
   }
 }
 
@@ -372,24 +390,47 @@ function initGalleryUploader() {
       try {
         const base64Data = await readFileAsBase64(file);
         let finalImageUrl = base64Data;
+        let uploaded = false;
 
-        // Appel de l'API /api/upload (qui utilise la clé IMGBB_API_KEY depuis le .env)
-        try {
-          const res = await fetch('/api/upload', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              image: base64Data,
-              name: file.name
-            })
-          });
-
-          const json = await res.json();
-          if (json.success && json.url) {
-            finalImageUrl = json.url;
+        // 1. Tenter l'envoi direct depuis le navigateur vers ImgBB avec la clé du .env
+        const imgKey = serverConfig?.imgbbKey || '';
+        if (imgKey && imgKey.trim() && imgKey !== 'votre_cle_api_imgbb_ici') {
+          try {
+            const form = new FormData();
+            form.append('image', file);
+            const directRes = await fetch(`https://api.imgbb.com/1/upload?key=${encodeURIComponent(imgKey.trim())}`, {
+              method: 'POST',
+              body: form
+            });
+            const directJson = await directRes.json();
+            if (directJson.success && directJson.data) {
+              finalImageUrl = directJson.data.url || directJson.data.display_url;
+              uploaded = true;
+            }
+          } catch (directErr) {
+            console.warn('Upload direct échoué, passage par /api/upload', directErr);
           }
-        } catch (apiErr) {
-          console.warn('API /api/upload indisponible, conservation en mémoire locale', apiErr);
+        }
+
+        // 2. Si non envoyé directement, passer par le backend /api/upload
+        if (!uploaded) {
+          try {
+            const res = await fetch('/api/upload', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                image: base64Data,
+                name: file.name
+              })
+            });
+
+            const json = await res.json();
+            if (json.success && json.url) {
+              finalImageUrl = json.url;
+            }
+          } catch (apiErr) {
+            console.warn('API /api/upload indisponible, conservation en mémoire locale', apiErr);
+          }
         }
 
         const cleanName = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ').trim();

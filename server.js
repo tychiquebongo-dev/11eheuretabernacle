@@ -47,6 +47,16 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // API Endpoint: GET /api/config
+  if (req.url === '/api/config' && req.method === 'GET') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      imgbbKey: process.env.IMGBB_API_KEY || '',
+      hasGithubToken: !!(process.env.GITHUB_TOKEN && process.env.GITHUB_TOKEN.trim())
+    }));
+    return;
+  }
+
   // API Endpoint: GET /api/content
   if (req.url === '/api/content' && req.method === 'GET') {
     if (fs.existsSync(DATA_FILE)) {
@@ -69,16 +79,62 @@ const server = http.createServer(async (req, res) => {
       }
     });
 
-    req.on('end', () => {
+    req.on('end', async () => {
       try {
         const parsed = JSON.parse(body);
         const dataDir = path.dirname(DATA_FILE);
         if (!fs.existsSync(dataDir)) {
           fs.mkdirSync(dataDir, { recursive: true });
         }
-        fs.writeFileSync(DATA_FILE, JSON.stringify(parsed, null, 2), 'utf-8');
+        const jsonFormatted = JSON.stringify(parsed, null, 2);
+        fs.writeFileSync(DATA_FILE, jsonFormatted, 'utf-8');
+
+        // Synchronisation GitHub si GITHUB_TOKEN est configuré
+        let synced = false;
+        let commitMsg = 'Modifications enregistrées localement';
+        const token = process.env.GITHUB_TOKEN;
+        const repo = process.env.GITHUB_REPO || 'tychiquebongo-dev/11eheuretabernacle';
+        const branch = process.env.GITHUB_BRANCH || 'main';
+
+        if (token && token.trim() && token !== 'votre_personal_access_token_github') {
+          try {
+            const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/data/content.json?ref=${branch}`, {
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/vnd.github+json',
+                'User-Agent': '11e-Heure-Tabernacle-App'
+              }
+            });
+            if (getRes.ok) {
+              const getData = await getRes.json();
+              const base64Payload = Buffer.from(jsonFormatted, 'utf-8').toString('base64');
+              const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/data/content.json`, {
+                method: 'PUT',
+                headers: {
+                  'Authorization': `Bearer ${token}`,
+                  'Accept': 'application/vnd.github+json',
+                  'User-Agent': '11e-Heure-Tabernacle-App',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  message: 'chore(content): mise a jour du site depuis le Back Office pastoral',
+                  content: base64Payload,
+                  sha: getData.sha,
+                  branch: branch
+                })
+              });
+              if (putRes.ok) {
+                synced = true;
+                commitMsg = 'Synchronisé sur GitHub ! Vercel redéploie le site public.';
+              }
+            }
+          } catch (gitErr) {
+            console.warn('Erreur synchro GitHub depuis le serveur local:', gitErr.message);
+          }
+        }
+
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: true, message: 'Content saved successfully' }));
+        res.end(JSON.stringify({ success: true, synced, message: commitMsg }));
       } catch (err) {
         res.writeHead(400, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: false, error: 'Invalid JSON' }));
