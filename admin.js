@@ -213,36 +213,8 @@ function renderDashboardStats() {
 }
 
 /* ==========================================================================
-   5. GESTION DE LA GALERIE PHOTOS (TÉLÉVERSEMENT DIRECT SUR IMGBB SANS FORMULAIRE)
+   5. GESTION DE LA GALERIE PHOTOS (TÉLÉVERSEMENT TRANSPARENT VIA .ENV)
    ========================================================================== */
-const IMGBB_STORAGE_KEY = '11E_TABERNACLE_IMGBB_KEY';
-
-function getImgbbKey() {
-  return localStorage.getItem(IMGBB_STORAGE_KEY) || appData?.siteInfo?.imgbbKey || '';
-}
-
-function saveImgbbKey() {
-  const input = document.getElementById('imgbb-api-key');
-  if (!input) return;
-  const key = input.value.trim();
-  if (!key) {
-    alert('Veuillez entrer une clé API ImgBB valide.');
-    return;
-  }
-  localStorage.setItem(IMGBB_STORAGE_KEY, key);
-  if (!appData.siteInfo) appData.siteInfo = {};
-  appData.siteInfo.imgbbKey = key;
-  saveDataLocally(false);
-  showToast('Clé API ImgBB enregistrée avec succès !', 'success');
-}
-
-function initImgbbKeyInput() {
-  const input = document.getElementById('imgbb-api-key');
-  if (input) {
-    input.value = getImgbbKey();
-  }
-}
-
 function renderGalleryList() {
   const container = document.getElementById('gallery-items-container');
   const countLabel = document.getElementById('gallery-count-label');
@@ -322,11 +294,9 @@ function initGalleryUploader() {
   const statusPercent = document.getElementById('upload-status-percent');
   const progressBar = document.getElementById('upload-progress-bar');
 
-  initImgbbKeyInput();
-
   if (!dropzone || !fileInput) return;
 
-  // Clic sur la dropzone ouvre le sélecteur de fichier (sauf si on clique sur un lien/input interne)
+  // Clic sur la dropzone ouvre le sélecteur de fichier
   dropzone.addEventListener('click', (e) => {
     if (e.target.closest('a') || e.target.closest('button') || e.target.closest('input')) return;
     fileInput.click();
@@ -363,25 +333,16 @@ function initGalleryUploader() {
     }
   });
 
-  async function handleFilesUpload(fileList) {
-    let key = getImgbbKey();
-    if (!key) {
-      const enteredKey = prompt(
-        "Pour téléverser vos photos sur le Cloud ImgBB gratuitement et sans limite :\n\n" +
-        "Veuillez coller votre clé API ImgBB (obtenez-la en 1 clic sur https://api.imgbb.com) :"
-      );
-      if (enteredKey && enteredKey.trim()) {
-        key = enteredKey.trim();
-        localStorage.setItem(IMGBB_STORAGE_KEY, key);
-        if (!appData.siteInfo) appData.siteInfo = {};
-        appData.siteInfo.imgbbKey = key;
-        initImgbbKeyInput();
-      } else {
-        alert("La clé API ImgBB est nécessaire pour l'hébergement cloud permanent. Rendez-vous sur api.imgbb.com pour l'obtenir gratuitement.");
-        return;
-      }
-    }
+  function readFileAsBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
 
+  async function handleFilesUpload(fileList) {
     const files = Array.from(fileList).filter(f => f.type.startsWith('image/'));
     if (files.length === 0) {
       alert('Veuillez sélectionner au moins un fichier image valide (JPG, PNG, WEBP).');
@@ -402,57 +363,61 @@ function initGalleryUploader() {
       if (statusText) {
         statusText.innerHTML = `
           <svg class="w-4 h-4 animate-spin text-amber-400" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-          Envoi vers ImgBB de la photo ${i + 1} sur ${total}...
+          Téléversement de la photo ${i + 1} sur ${total}...
         `;
       }
       if (statusPercent) statusPercent.textContent = `${percent}%`;
       if (progressBar) progressBar.style.width = `${percent}%`;
 
       try {
-        const formData = new FormData();
-        formData.append('image', file);
+        const base64Data = await readFileAsBase64(file);
+        let finalImageUrl = base64Data;
 
-        const response = await fetch(`https://api.imgbb.com/1/upload?key=${encodeURIComponent(key)}`, {
-          method: 'POST',
-          body: formData
-        });
+        // Appel de l'API /api/upload (qui utilise la clé IMGBB_API_KEY depuis le .env)
+        try {
+          const res = await fetch('/api/upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              image: base64Data,
+              name: file.name
+            })
+          });
 
-        const json = await response.json();
-
-        if (json.success && json.data) {
-          const directUrl = json.data.url || json.data.display_url;
-          const cleanName = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ').trim();
-
-          const newPhoto = {
-            id: 'gal_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
-            title: cleanName || "11e Heure Tabernacle",
-            category: "assemblee",
-            badge: "Photo",
-            subtitle: "Pointe-Noire • Congo",
-            caption: "",
-            image: directUrl,
-            deleteUrl: json.data.delete_url || "",
-            date: new Date().toISOString().split('T')[0]
-          };
-
-          if (!appData.gallery) appData.gallery = [];
-          appData.gallery.unshift(newPhoto);
-          successCount++;
-        } else {
-          const err = json.error?.message || 'Échec du téléversement ImgBB';
-          console.error(`Erreur pour ${file.name}:`, err);
-          showToast(`Erreur (${file.name}) : ${err}`, 'error');
+          const json = await res.json();
+          if (json.success && json.url) {
+            finalImageUrl = json.url;
+          }
+        } catch (apiErr) {
+          console.warn('API /api/upload indisponible, conservation en mémoire locale', apiErr);
         }
-      } catch (uploadErr) {
-        console.error('Erreur réseau lors de l\'upload ImgBB:', uploadErr);
-        showToast(`Erreur réseau pour ${file.name}`, 'error');
+
+        const cleanName = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ').trim();
+        const newPhoto = {
+          id: 'gal_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+          title: cleanName || "11e Heure Tabernacle",
+          category: "assemblee",
+          badge: "Photo",
+          subtitle: "Pointe-Noire • Congo",
+          caption: "",
+          image: finalImageUrl,
+          date: new Date().toISOString().split('T')[0]
+        };
+
+        if (!appData.gallery) appData.gallery = [];
+        appData.gallery.unshift(newPhoto);
+        successCount++;
+
+      } catch (err) {
+        console.error('Erreur lecture fichier:', err);
+        showToast(`Erreur (${file.name})`, 'error');
       }
     }
 
     if (progressBar) progressBar.style.width = '100%';
     if (statusPercent) statusPercent.textContent = '100%';
     if (statusText) {
-      statusText.innerHTML = `✅ ${successCount} photo(s) téléversée(s) avec succès sur ImgBB !`;
+      statusText.innerHTML = `✅ ${successCount} photo(s) ajoutée(s) avec succès !`;
     }
 
     saveDataLocally();
@@ -462,7 +427,7 @@ function initGalleryUploader() {
     setTimeout(() => {
       if (statusContainer) statusContainer.classList.add('hidden');
       if (fileInput) fileInput.value = '';
-    }, 2500);
+    }, 2000);
 
     if (successCount > 0) {
       showToast(`${successCount} photo(s) ajoutée(s) à la galerie !`, 'success');
