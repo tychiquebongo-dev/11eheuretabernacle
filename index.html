@@ -506,7 +506,7 @@
       </div>
 
       <!-- Grille des Horaires Officiels -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 reveal-on-scroll delay-100">
+      <div id="horaires-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 reveal-on-scroll delay-100">
         
         <!-- Mardi -->
         <div class="bg-white/95 backdrop-blur-sm rounded-2xl border-2 border-purple-100 hover:border-purple-600 p-5 sm:p-6 shadow-md card-hover flex flex-col justify-between h-full">
@@ -1422,11 +1422,19 @@
 
       </div>
 
-      <!-- Mention de Copyright & Actualisation JS -->
+      <!-- Mention de Copyright, Espace Pastoral & Actualisation JS -->
       <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4 text-center sm:text-left">
         <p>
           &copy; <span id="current-year">2026</span> 11<sup>e</sup> Heure Tabernacle &bull; Pointe-Noire, République du Congo. Tous droits réservés.
         </p>
+
+        <div class="flex items-center gap-3">
+          <a href="admin.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-purpleDeep border border-amber-400/40 text-amber-300 text-[11px] font-heading font-semibold hover:bg-amber-400 hover:text-purple-950 transition-all shadow-sm" title="Accéder au Back Office de gestion du site">
+            <svg class="w-3.5 h-3.5 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <span>Espace Pastoral (Back Office)</span>
+          </a>
+        </div>
+
         <p class="text-amber-300 font-spiritual italic text-xs">
           « Que la grâce et la paix du Seigneur Jésus-Christ soient avec vous tous. »
         </p>

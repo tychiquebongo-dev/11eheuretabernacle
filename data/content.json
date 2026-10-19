@@ -1,0 +1,215 @@
+{
+  "siteInfo": {
+    "name": "11e HEURE TABERNACLE",
+    "city": "Pointe-Noire, Congo",
+    "slogan": "« Au Temps du Soir, la Lumière Paraîtra » • Zacharie 14:7",
+    "hookSubtitle": "Sous la direction pastorale du Pasteur Odilon Detchibs",
+    "hookDescription": "Église du Message du Temps de la Fin • Pointe-Noire, Congo. Un sanctuaire de révélation, de foi apostolique, de communion fraternelle et d'adoration en Esprit et en Vérité.",
+    "phone": "+242 06 937 69 67",
+    "phoneRaw": "242069376967",
+    "addressQuarter": "Voungou 1",
+    "addressLandmark": "Bank de Vie, arrêt 1er Pont, en face d'Emanuel Photo",
+    "addressCity": "Pointe-Noire, République du Congo",
+    "facebookUrl": "https://www.facebook.com/search/top?q=Odilon%20Tchibounga",
+    "facebookName": "Odilon Tchibounga",
+    "youtubeUrl": "https://www.youtube.com/results?search_query=odilon+de+tchib",
+    "youtubeName": "odilon de tchib"
+  },
+  "announcement": {
+    "active": false,
+    "badge": "Annonce Spéciale",
+    "message": "Bienvenue à tous nos frères et visiteurs pour nos cultes de réveil spirituel et d'édification fraternelle !",
+    "linkText": "Consulter les horaires",
+    "linkUrl": "#horaires"
+  },
+  "apropos": {
+    "badge": "Fondement & Identité",
+    "title": "Un Sanctuaire Bâti sur le Roc de la Parole Vivante",
+    "paragraph1": "Située à <strong>Pointe-Noire</strong> au quartier <strong>Voungou 1</strong> (Bank de Vie, arrêt 1er Pont), l'assemblée de <strong>11e Heure Tabernacle</strong> est une communauté chrétienne fervente engagée dans la proclamation intégrale de la Parole de Dieu.",
+    "paragraph2": "Sous la direction pastorale du <strong>pasteur Odilon Detchibs</strong>, notre communauté réunit des hommes, des femmes et des jeunes animés d'un même zèle : vivre la foi chrétienne dans sa pureté apostolique originelle.",
+    "scriptureQuote": "« Vous avez été édifiés sur le fondement des apôtres et des prophètes, Jésus-Christ lui-même étant la pierre angulaire. »",
+    "scriptureRef": "Éphésiens 2:20",
+    "pillars": [
+      {
+        "id": "foi",
+        "title": "Foi Apostolique",
+        "description": "L'attachement absolu aux Écritures sacrées et au message de restauration pour le temps de la fin."
+      },
+      {
+        "id": "amour",
+        "title": "Amour & Communion",
+        "description": "Une fraternité chaleureuse où chaque croyant est soutenu, fortifié et encouragé dans la marche chrétienne."
+      },
+      {
+        "id": "esperance",
+        "title": "Espérance de l'Enlèvement",
+        "description": "La sanctification quotidienne et la préparation vivante dans l'attente du retour glorieux de notre Sauveur."
+      }
+    ]
+  },
+  "mission": {
+    "badge": "Vision Apostolique & Préparation",
+    "title": "Notre Mission : Préparer un Peuple Prêt pour l'Époux",
+    "quote": "« Que celui qui a des oreilles entende ce que l'Esprit dit aux Églises. » — Apocalypse 3:22",
+    "paragraph1": "Notre mission à <strong>11e Heure Tabernacle</strong> s'enracine dans la conviction profonde que nous vivons à l'heure la plus solennelle de l'histoire humaine : <em>la onzième heure</em>, temps où la grâce souveraine appelle les âmes à revenir à la Parole de Dieu pure et sans compromis.",
+    "paragraph2": "Nous œuvrons sans relâche à l'évangélisation, au perfectionnement des saints par l'enseignement doctrinal, à l'édification de notre sanctuaire à <strong>Voungou 1</strong> et à l'épanouissement de chaque famille dans la sanctification."
+  },
+  "horaires": [
+    {
+      "id": "mardi",
+      "day": "Mardi Soir",
+      "time": "18h00 – 19h30",
+      "type": "Culte de Prière",
+      "title": "Prière & Intercession",
+      "description": "Moments de ferveur pour rechercher la face de Dieu, la délivrance et le réveil des familles.",
+      "isHighlighted": false
+    },
+    {
+      "id": "jeudi",
+      "day": "Jeudi Soir",
+      "time": "18h00 – 19h30",
+      "type": "Étude Biblique",
+      "title": "Enseignement & Doctrine",
+      "description": "Approfondissement des vérités bibliques pour l'enracinement de chaque croyant dans la sainte doctrine.",
+      "isHighlighted": false
+    },
+    {
+      "id": "dimanche-ecole",
+      "day": "Dimanche Matin",
+      "time": "08h00 – 09h30",
+      "type": "Jeunesse & Enfants",
+      "title": "École du Dimanche",
+      "description": "Formation spirituelle et biblique structurée adaptée aux enfants et aux adolescents.",
+      "isHighlighted": false
+    },
+    {
+      "id": "dimanche-culte",
+      "day": "Dimanche Matin",
+      "time": "10h00 – 12h30",
+      "type": "Rassemblement Solennel",
+      "title": "Grand Culte d'Adoration",
+      "description": "Célébration générale, louange fervente, cantiques d'édification et proclamation vivante de la Parole.",
+      "isHighlighted": true
+    }
+  ],
+  "pasteur": {
+    "name": "Pasteur Odilon Detchibs",
+    "role": "Pasteur Principal de 11e Heure Tabernacle",
+    "badge": "Bergerie & Ministère",
+    "bio": "Animé par un profond amour pour l’œuvre du Seigneur et le salut des âmes, le pasteur Odilon Detchibs guide l'assemblée de 11e Heure Tabernacle avec fidélité, humilité et ferveur spirituelle à Pointe-Noire.",
+    "quote": "« Notre prière est que chaque âme qui franchit les portes de cette assemblée découvre la profondeur de l'amour de Dieu, reçoive la force de surmonter les épreuves et soit préparée dans la sanctification pour le retour glorieux de notre Sauveur. »",
+    "photo": "assets/images/pastor-odilon.jpg"
+  },
+  "gallery": [
+    {
+      "id": "gal-1",
+      "title": "L'Assemblée & le Pasteur Odilon",
+      "category": "assemblee",
+      "badge": "Assemblée Locale",
+      "subtitle": "Pointe-Noire • Voungou 1",
+      "caption": "Frères et serviteurs réunis autour du pasteur Odilon Detchibs à 11e Heure Tabernacle, Pointe-Noire (Voungou 1).",
+      "image": "assets/images/assemblee-pasteur-odilon.jpg",
+      "date": "2026-10-19"
+    },
+    {
+      "id": "gal-2",
+      "title": "Odilon De Tchib Ministries",
+      "category": "ministere",
+      "badge": "Ministère Pastoral",
+      "subtitle": "Parole de Dieu Vivante",
+      "caption": "Odilon De Tchib Ministries — Ministère pastoral consacré à la prédication fidèle de la Parole de Dieu et du Message de restauration.",
+      "image": "assets/images/pastor-odilon-ministries.jpg",
+      "date": "2026-10-19"
+    },
+    {
+      "id": "gal-3",
+      "title": "« N'oublions pas la vision »",
+      "category": "ministere",
+      "badge": "YouTube • Chant",
+      "subtitle": "Sortie Officielle • Chaîne YouTube",
+      "caption": "« N'oublions pas la vision » — Chant d'adoration et d'édification spirituelle par le pasteur Odilon Detchibs, disponible sur YouTube (+242 06 937 69 67).",
+      "image": "assets/images/chant-noublions-pas-la-vision.jpg",
+      "date": "2026-10-19"
+    },
+    {
+      "id": "gal-4",
+      "title": "Les Bâtisseurs du Tabernacle",
+      "category": "travaux",
+      "badge": "Chantier & Travaux",
+      "subtitle": "Travaux du Sanctuaire • Voungou 1",
+      "caption": "Édification de la maison de l'Éternel : le pasteur Odilon Detchibs aux côtés des fidèles ouvriers bâtisseurs à Voungou 1, Pointe-Noire.",
+      "image": "assets/images/travaux-construction-pasteur.jpg",
+      "date": "2026-10-19"
+    },
+    {
+      "id": "gal-5",
+      "title": "Chantier de 11e Heure Tabernacle",
+      "category": "travaux",
+      "badge": "Maison de Prière",
+      "subtitle": "Arrêt 1er Pont • Pointe-Noire",
+      "caption": "Vue de l'édification du sanctuaire de 11e Heure Tabernacle à Voungou 1, Bank de Vie (arrêt 1er Pont). Un sanctuaire dédié à la gloire de Dieu.",
+      "image": "assets/images/chantier-tabernacle-voungou.jpg",
+      "date": "2026-10-19"
+    },
+    {
+      "id": "gal-6",
+      "title": "Unité & Communion des Frères",
+      "category": "assemblee",
+      "badge": "Communion Fraternelle",
+      "subtitle": "Pointe-Noire • Vie de l'Église",
+      "caption": "Les serviteurs de Dieu et frères de l'assemblée réunis dans une chaleureuse communion fraternelle et spirituelle à Pointe-Noire.",
+      "image": "assets/images/communion-fraternelle-ouvriers.jpg",
+      "date": "2026-10-19"
+    },
+    {
+      "id": "gal-7",
+      "title": "Pasteur Odilon Detchibs",
+      "category": "assemblee",
+      "badge": "Ministère Pastoral",
+      "subtitle": "Conducteur Spirituel",
+      "caption": "Pasteur Odilon Detchibs — Berger principal et conducteur spirituel de 11e Heure Tabernacle à Pointe-Noire.",
+      "image": "assets/images/pastor-odilon.jpg",
+      "date": "2026-10-19"
+    },
+    {
+      "id": "gal-8",
+      "title": "La Colonne de Feu",
+      "category": "message",
+      "badge": "Signe Surnaturel",
+      "subtitle": "Houston, Texas • 1950",
+      "caption": "William Marrion Branham et la Colonne de Feu surnaturelle au-dessus de sa tête (Houston, Texas - Janvier 1950).",
+      "image": "assets/images/colonne-de-feu-branham.jpg",
+      "date": "2026-10-19"
+    },
+    {
+      "id": "gal-9",
+      "title": "Hébreux 13:8",
+      "category": "message",
+      "badge": "Parole Infaillible",
+      "subtitle": "Message du Temps de la Fin",
+      "caption": "Hébreux 13:8 — Jésus-Christ est le même hier, aujourd'hui et éternellement : la continuité du ministère apostolique.",
+      "image": "assets/images/hebreux-13-8-message.jpg",
+      "date": "2026-10-19"
+    },
+    {
+      "id": "gal-10",
+      "title": "La Nuée de Gloire",
+      "category": "message",
+      "badge": "28 Février 1963",
+      "subtitle": "Signe Céleste • Arizona",
+      "caption": "La Nuée de Gloire surnaturelle du 28 Février 1963 — L'apparition céleste prophétique et l'ouverture des mystères.",
+      "image": "assets/images/nuee-de-gloire-1963.jpg",
+      "date": "2026-10-19"
+    },
+    {
+      "id": "gal-11",
+      "title": "Stature d'un Homme Parfait",
+      "category": "enseignements",
+      "badge": "2 Pierre 1:5-7",
+      "subtitle": "Foi de l'Enlèvement",
+      "caption": "La Stature d'un Homme Parfait (2 Pierre 1:5-7) — Pyramide des vertus chrétiennes et des sept âges de l'Église pour la foi de l'enlèvement.",
+      "image": "assets/images/stature-homme-parfait.jpg",
+      "date": "2026-10-19"
+    }
+  ]
+}

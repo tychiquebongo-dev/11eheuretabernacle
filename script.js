@@ -4,7 +4,8 @@
  * Auteur : Développeur Full Stack & UI/UX
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await initContentSync();
   initNavbar();
   initScrollProgressBar();
   initLiveWorshipTicker();
@@ -997,4 +998,202 @@ function initSmoothScrollSpy() {
   });
 
   sections.forEach(section => observer.observe(section));
+}
+
+/* ==========================================================================
+   10. SYNCHRONISATION DU CONTENU DU BACK OFFICE (LOCALSTORAGE / JSON SEED)
+   ========================================================================== */
+const CHURCH_STORAGE_KEY = '11E_TABERNACLE_DATA_V1';
+
+async function initContentSync() {
+  let churchData = null;
+
+  // 1. Lire depuis le stockage local (Back Office)
+  const localData = localStorage.getItem(CHURCH_STORAGE_KEY);
+  if (localData) {
+    try {
+      churchData = JSON.parse(localData);
+    } catch (e) {
+      console.warn('Erreur lecture données locales', e);
+    }
+  }
+
+  // 2. Si pas de modifications locales, charger data/content.json
+  if (!churchData) {
+    try {
+      const res = await fetch('data/content.json');
+      if (res.ok) {
+        churchData = await res.json();
+      }
+    } catch (e) {
+      // mode statique
+    }
+  }
+
+  if (!churchData) return;
+
+  // 3. Bannière d'alerte / annonce urgente
+  if (churchData.announcement && churchData.announcement.active && churchData.announcement.message) {
+    renderPublicAnnouncement(churchData.announcement);
+  }
+
+  // 4. Synchronisation de la Galerie Photos
+  if (churchData.gallery && Array.isArray(churchData.gallery) && churchData.gallery.length > 0) {
+    syncPublicGallery(churchData.gallery);
+  }
+
+  // 5. Synchronisation des Programmes et Horaires
+  if (churchData.horaires && Array.isArray(churchData.horaires) && churchData.horaires.length > 0) {
+    syncPublicHoraires(churchData.horaires);
+  }
+
+  // 6. Synchronisation de la Section À Propos
+  if (churchData.apropos) {
+    syncPublicApropos(churchData.apropos);
+  }
+
+  // 7. Synchronisation de la Section Pasteur
+  if (churchData.pasteur) {
+    syncPublicPasteur(churchData.pasteur);
+  }
+
+  // 8. Synchronisation des Coordonnées
+  if (churchData.siteInfo) {
+    syncPublicSiteInfo(churchData.siteInfo);
+  }
+}
+
+function renderPublicAnnouncement(ann) {
+  const existing = document.getElementById('urgent-announcement-banner');
+  if (existing) existing.remove();
+
+  const banner = document.createElement('div');
+  banner.id = 'urgent-announcement-banner';
+  banner.className = 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 px-4 py-2.5 text-center text-xs font-heading font-extrabold flex flex-wrap items-center justify-center gap-2 sm:gap-3 shadow-lg relative z-40';
+  banner.innerHTML = `
+    <span class="px-2.5 py-0.5 rounded-full bg-purple-950 text-amber-300 text-[10px] uppercase font-bold tracking-wider">${escapeHtml(ann.badge || 'Annonce Spéciale')}</span>
+    <span class="leading-snug">${escapeHtml(ann.message)}</span>
+    ${ann.linkText ? `<a href="${escapeHtml(ann.linkUrl || '#horaires')}" class="inline-flex items-center gap-1 underline font-black text-purple-950 hover:text-white transition-colors">${escapeHtml(ann.linkText)} &rarr;</a>` : ''}
+  `;
+  document.body.prepend(banner);
+}
+
+function syncPublicGallery(photos) {
+  const grid = document.getElementById('gallery-grid');
+  if (!grid || !Array.isArray(photos) || photos.length === 0) return;
+
+  grid.innerHTML = photos.map(photo => `
+    <div class="gallery-item gallery-card-modern group h-72 sm:h-80" data-category="${escapeHtml(photo.category || 'assemblee')}" data-badge="${escapeHtml(photo.badge || 'Galerie')}" data-title="${escapeHtml(photo.title)}" data-caption="${escapeHtml(photo.caption || '')}">
+      <img src="${escapeHtml(photo.image)}" alt="${escapeHtml(photo.title)}" class="w-full h-full object-cover">
+      <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-brand-purpleDark/90 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-heading font-bold uppercase tracking-wider shadow-md">
+        ${escapeHtml(photo.badge || 'Photo')}
+      </div>
+      <div class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-brand-purpleDark shadow-md backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-t from-brand-purpleDark/95 via-brand-purpleDark/40 to-transparent flex flex-col justify-end p-5 text-white">
+        <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wide font-heading">${escapeHtml(photo.subtitle || '11e Heure Tabernacle')}</span>
+        <h4 class="font-heading text-lg font-bold leading-tight mt-0.5 text-white">${escapeHtml(photo.title)}</h4>
+        <p class="text-xs text-purple-100/90 mt-1 line-clamp-1">${escapeHtml(photo.caption || '')}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function syncPublicHoraires(horaires) {
+  const grid = document.getElementById('horaires-grid');
+  if (!grid || !Array.isArray(horaires) || horaires.length === 0) return;
+
+  grid.innerHTML = horaires.map(item => {
+    if (item.isHighlighted) {
+      return `
+        <div class="bg-gradient-to-b from-[#1a0b36] via-[#240d4a] to-[#1a0b36] rounded-2xl border-2 border-amber-400 p-5 sm:p-6 shadow-2xl card-hover flex flex-col justify-between h-full relative overflow-hidden text-white">
+          <div class="absolute top-0 right-0 bg-amber-400 text-purple-950 text-[10px] font-black uppercase px-3.5 py-1 rounded-bl-xl tracking-wider font-heading shadow-md">
+            Culte Principal
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-extrabold uppercase font-heading">${escapeHtml(item.type || 'Célébration')}</span>
+              <div class="w-10 h-10 rounded-full bg-amber-400/20 border border-amber-400/30 shadow-sm flex items-center justify-center text-amber-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+              </div>
+            </div>
+            <h3 class="font-heading text-2xl font-extrabold text-white mb-2">${escapeHtml(item.title || item.day)}</h3>
+            <div class="text-amber-300 font-extrabold text-2xl mb-3 font-heading drop-shadow">
+              ${escapeHtml(item.time)}
+            </div>
+            <p class="text-purple-100/90 text-sm leading-relaxed mb-6 font-normal">
+              ${escapeHtml(item.description)}
+            </p>
+          </div>
+          <a href="#contact" class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl btn-gold-primary text-xs font-extrabold shadow-lg transition-transform">
+            <span>Comment nous rejoindre</span>
+            <svg class="w-4 h-4 text-purple-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="bg-white/95 backdrop-blur-sm rounded-2xl border-2 border-purple-100 hover:border-purple-600 p-5 sm:p-6 shadow-md card-hover flex flex-col justify-between h-full">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 rounded-full bg-purple-100 text-purple-900 text-xs font-extrabold uppercase font-heading">${escapeHtml(item.type || 'Culte')}</span>
+            <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-800 shadow-inner">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+          </div>
+          <h3 class="font-heading text-2xl font-bold text-slate-950 mb-2">${escapeHtml(item.title || item.day)}</h3>
+          <div class="text-purple-800 font-extrabold text-lg mb-3 font-heading">
+            ${escapeHtml(item.time)}
+          </div>
+          <p class="text-slate-700 text-sm leading-relaxed mb-6 font-normal">
+            ${escapeHtml(item.description)}
+          </p>
+        </div>
+        <a href="#contact" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-purple-50 hover:bg-purple-900 text-purple-950 hover:text-white font-bold text-xs font-heading transition-colors">
+          <span>Comment nous rejoindre</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+    `;
+  }).join('');
+}
+
+function syncPublicApropos(p) {
+  const titleEl = document.querySelector('#apropos h2');
+  if (titleEl && p.title) titleEl.textContent = p.title;
+
+  const quoteEl = document.querySelector('#apropos blockquote');
+  if (quoteEl && p.scriptureQuote) quoteEl.textContent = `« ${p.scriptureQuote.replace(/^[«"]|[»"]$/g, '').trim()} »`;
+}
+
+function syncPublicPasteur(p) {
+  const quoteEl = document.querySelector('#pasteur blockquote, #pasteur .font-serif.italic');
+  if (quoteEl && p.quote) {
+    quoteEl.textContent = `« ${p.quote.replace(/^[«"]|[»"]$/g, '').trim()} »`;
+  }
+}
+
+function syncPublicSiteInfo(s) {
+  if (s.phone) {
+    document.querySelectorAll('a[href^="tel:"]').forEach(a => {
+      a.href = `tel:${s.phone.replace(/\s+/g, '')}`;
+    });
+  }
+  if (s.phoneRaw) {
+    document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a => {
+      a.href = `https://wa.me/${s.phoneRaw}`;
+    });
+  }
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
