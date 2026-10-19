@@ -59,14 +59,6 @@
 <body class="bg-sky-50/30 text-slate-900 antialiased selection:bg-sky-200 selection:text-sky-900">
 
   <!-- ========================================================================
-       FOND D'ÉCRAN GLOBAL CÉLESTE (CIEL & NUAGES FLOU & VOILE PROTECTEUR DE CONTRASTE)
-       ======================================================================== -->
-  <div class="fixed-sky-wallpaper" aria-hidden="true">
-    <img src="assets/images/ciel-nuages-bg.jpg" alt="" class="fixed-sky-wallpaper-img">
-    <div class="fixed-sky-wallpaper-scrim"></div>
-  </div>
-
-  <!-- ========================================================================
        BARRE DE NAVIGATION PRINCIPALE (HEADER)
        ======================================================================== -->
   <header id="main-header" class="fixed top-0 left-0 right-0 z-50 glass-header transition-all duration-300">
@@ -93,31 +85,21 @@
           </div>
         </a>
 
-        <!-- Navigation Bureau (Desktop) -->
-        <nav class="hidden lg:flex items-center gap-0.5 xl:gap-1.5" aria-label="Navigation principale">
-          <a href="#accueil" class="desktop-nav-link active px-2.5 xl:px-3 py-1.5 xl:py-2 text-[13px] xl:text-sm font-semibold transition-colors">Accueil</a>
-          <a href="#apropos" class="desktop-nav-link px-2.5 xl:px-3 py-1.5 xl:py-2 text-[13px] xl:text-sm font-medium transition-colors">À propos</a>
-          <a href="#mission" class="desktop-nav-link px-2.5 xl:px-3 py-1.5 xl:py-2 text-[13px] xl:text-sm font-medium transition-colors">Notre mission</a>
-          <a href="#horaires" class="desktop-nav-link px-2.5 xl:px-3 py-1.5 xl:py-2 text-[13px] xl:text-sm font-medium transition-colors">Programmes</a>
-          <a href="#verset" class="desktop-nav-link px-2.5 xl:px-3 py-1.5 xl:py-2 text-[13px] xl:text-sm font-medium transition-colors">Verset du jour</a>
-          <a href="#galerie" class="desktop-nav-link px-2.5 xl:px-3 py-1.5 xl:py-2 text-[13px] xl:text-sm font-medium transition-colors">Galerie</a>
-          <a href="#pasteur" class="desktop-nav-link px-2.5 xl:px-3 py-1.5 xl:py-2 text-[13px] xl:text-sm font-medium transition-colors">Pasteur</a>
-          <a href="#faq" class="desktop-nav-link px-2.5 xl:px-3 py-1.5 xl:py-2 text-[13px] xl:text-sm font-medium transition-colors">FAQ</a>
-          <a href="#contact" class="desktop-nav-link px-2.5 xl:px-3 py-1.5 xl:py-2 text-[13px] xl:text-sm font-medium transition-colors">Contact</a>
-        </nav>
-
-        <!-- Bouton d'action CTA Desktop (Or Majestueux) -->
-        <div class="hidden sm:flex lg:hidden xl:flex items-center gap-3">
-          <a href="#horaires" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 text-sm font-extrabold shadow-lg shadow-amber-500/30 ring-1 ring-amber-300/80 hover:brightness-110 hover:shadow-xl hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
-            <span>Nous rejoindre</span>
+        <!-- Navigation Bureau (Desktop : Uniquement Accueil, À propos, Galerie, Rejoins-nous) -->
+        <nav class="hidden md:flex items-center gap-2 lg:gap-3 xl:gap-5" aria-label="Navigation principale">
+          <a href="#accueil" class="desktop-nav-link active px-3.5 xl:px-4 py-2 text-sm xl:text-base font-semibold transition-colors">Accueil</a>
+          <a href="#apropos" class="desktop-nav-link px-3.5 xl:px-4 py-2 text-sm xl:text-base font-medium transition-colors">À propos</a>
+          <a href="#galerie" class="desktop-nav-link px-3.5 xl:px-4 py-2 text-sm xl:text-base font-medium transition-colors">Galerie</a>
+          <a href="#contact" class="desktop-nav-link nav-cta-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-slate-950 text-sm font-extrabold shadow-lg shadow-amber-500/30 ring-1 ring-amber-300/80 hover:brightness-110 hover:shadow-xl hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 ml-1">
+            <span>Rejoins-nous</span>
             <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
             </svg>
           </a>
-        </div>
+        </nav>
 
         <!-- Bouton Menu Hamburger Mobile -->
-        <button id="mobile-menu-btn" type="button" class="lg:hidden p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-amber-400" aria-label="Ouvrir le menu de navigation" aria-expanded="false">
+        <button id="mobile-menu-btn" type="button" class="md:hidden p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-amber-400" aria-label="Ouvrir le menu de navigation" aria-expanded="false">
           <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
@@ -129,18 +111,16 @@
       </div>
     </div>
 
-    <!-- Tiroir Navigation Mobile (Thème Nuit Saphir & Or Céleste) -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-gradient-to-b from-[#081a33]/98 via-[#051326]/98 to-[#030c18]/98 backdrop-blur-2xl border-b border-amber-400/30 shadow-2xl px-4 pt-3 pb-6 text-white">
-      <div class="flex flex-col space-y-1.5">
-        <a href="#accueil" class="mobile-nav-link px-4 py-2.5 rounded-xl text-base font-semibold text-amber-300 bg-white/10 border border-amber-400/25">Accueil</a>
-        <a href="#apropos" class="mobile-nav-link px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">À propos</a>
-        <a href="#mission" class="mobile-nav-link px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">Notre mission</a>
-        <a href="#horaires" class="mobile-nav-link px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">Programmes de cultes</a>
-        <a href="#verset" class="mobile-nav-link px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">Verset du jour</a>
-        <a href="#galerie" class="mobile-nav-link px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">Galerie photos</a>
-        <a href="#pasteur" class="mobile-nav-link px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">Le Pasteur</a>
-        <a href="#faq" class="mobile-nav-link px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">Questions Fréquentes (FAQ)</a>
-        <a href="#contact" class="mobile-nav-link px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">Contact & Localisation</a>
+    <!-- Tiroir Navigation Mobile (Uniquement Accueil, À propos, Galerie, Rejoins-nous) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-gradient-to-b from-[#081a33]/98 via-[#051326]/98 to-[#030c18]/98 backdrop-blur-2xl border-b border-amber-400/30 shadow-2xl px-4 pt-3 pb-6 text-white">
+      <div class="flex flex-col space-y-2">
+        <a href="#accueil" class="mobile-nav-link px-4 py-3 rounded-xl text-base font-semibold text-amber-300 bg-white/10 border border-amber-400/25">Accueil</a>
+        <a href="#apropos" class="mobile-nav-link px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">À propos</a>
+        <a href="#galerie" class="mobile-nav-link px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">Galerie</a>
+        <a href="#contact" class="mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-base font-bold bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 shadow-lg shadow-amber-500/25">
+          <span>Rejoins-nous</span>
+          <svg class="w-5 h-5 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
         
         <div class="pt-3 border-t border-white/15">
           <a href="https://wa.me/242069376967" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold text-sm shadow-lg shadow-green-600/30">

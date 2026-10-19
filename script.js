@@ -88,9 +88,9 @@ function initNavbar() {
       }
     });
 
-    // Reset when resizing window to desktop breakpoint (>= 1024px)
+    // Reset when resizing window to desktop/tablet breakpoint (>= 768px)
     window.addEventListener('resize', () => {
-      if (window.innerWidth >= 1024) {
+      if (window.innerWidth >= 768) {
         closeMobileDrawer();
       }
     }, { passive: true });

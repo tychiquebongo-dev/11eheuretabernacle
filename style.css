@@ -84,43 +84,7 @@ body {
   font-family: var(--font-serif);
 }
 
-/* --- Global Fixed Sky Wallpaper (Échelle normale, cadrage 100% naturel sans zoom) --- */
-.fixed-sky-wallpaper {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -20;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.fixed-sky-wallpaper-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  filter: blur(2.5px) brightness(1.30) saturate(1.22) contrast(1.06);
-  transform: scale(1); /* Échelle normale 1:1 sans zoom arrière ni zoom avant */
-  will-change: auto;
-}
-
-/* Voile protecteur céleste ultra-lumineux : ciel bleu éclatant, nuages baignés de lumière et texte parfaitement lisible */
-.fixed-sky-wallpaper-scrim {
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.45) 0%, rgba(224, 242, 254, 0.20) 45%, transparent 75%),
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.10) 0%,
-      rgba(224, 242, 254, 0.25) 25%,
-      rgba(255, 255, 255, 0.40) 60%,
-      rgba(224, 242, 254, 0.28) 100%
-    );
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
-}
+/* --- Fond d'écran céleste unique sur la section Accueil (#accueil) --- */
 
 /* --- Hero Section (Arrière-plan stable à échelle normale) --- */
 .hero-wrapper {
@@ -236,17 +200,13 @@ body {
   }
 }
 
-/* --- High-Legibility & Glassmorphism System --- */
+/* --- High-Legibility & Clean Section Styles (Fond ciel uniquement sur Accueil) --- */
 .content-section-glass {
-  background-color: rgba(255, 255, 255, 0.65) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
+  background-color: #ffffff !important;
 }
 
 .content-section-glass-alt {
-  background-color: rgba(235, 248, 255, 0.60) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
+  background-color: #f8fafc !important;
 }
 
 .card-high-contrast {
@@ -327,6 +287,29 @@ body {
   border: 1px solid rgba(250, 204, 21, 0.6) !important;
   font-weight: 700 !important;
   box-shadow: 0 0 16px rgba(250, 204, 21, 0.32) !important;
+}
+
+/* Bouton Spécial 'Rejoins-nous' dans la barre de navigation */
+.nav-cta-btn {
+  background: linear-gradient(135deg, #f59e0b 0%, #eab308 50%, #d97706 100%) !important;
+  color: #020617 !important;
+  border: 1px solid rgba(254, 240, 138, 0.8) !important;
+  box-shadow: 0 4px 18px rgba(234, 179, 8, 0.35) !important;
+  font-weight: 800 !important;
+}
+
+.nav-cta-btn:hover {
+  filter: brightness(1.12) !important;
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 8px 25px rgba(234, 179, 8, 0.5) !important;
+  color: #020617 !important;
+}
+
+.nav-cta-btn.active {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%) !important;
+  color: #020617 !important;
+  border: 1.5px solid #ffffff !important;
+  box-shadow: 0 0 22px rgba(250, 204, 21, 0.7) !important;
 }
 
 .glass-card {
