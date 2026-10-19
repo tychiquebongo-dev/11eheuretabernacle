@@ -200,6 +200,85 @@ body {
   }
 }
 
+/* --- Flamme Surnaturelle / Colonne de Feu Céleste en haut à droite (Sans bordure, fondu céleste) --- */
+.hero-fire-pillar-backdrop {
+  position: absolute;
+  top: 85px;
+  right: 2%;
+  width: 290px;
+  max-width: 26vw;
+  aspect-ratio: 3 / 4;
+  z-index: 6;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mix-blend-mode: screen; /* Le noir devient 100% transparent et la flamme se fond parfaitement dans le ciel */
+}
+
+.hero-fire-pillar-mask-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Masque radial ultra-doux éliminant toute bordure résiduelle */
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 1) 32%, rgba(0, 0, 0, 0.85) 52%, rgba(0, 0, 0, 0) 75%);
+  mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 1) 32%, rgba(0, 0, 0, 0.85) 52%, rgba(0, 0, 0, 0) 75%);
+}
+
+.hero-fire-pillar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(1.22) contrast(1.18) drop-shadow(0 0 35px rgba(245, 158, 11, 0.7));
+  animation: celestialFirePulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes celestialFirePulse {
+  0% {
+    transform: scale(0.96) rotate(0deg);
+    filter: brightness(1.15) contrast(1.12) drop-shadow(0 0 25px rgba(245, 158, 11, 0.5));
+  }
+  50% {
+    transform: scale(1.04) rotate(1deg);
+    filter: brightness(1.35) contrast(1.22) drop-shadow(0 0 45px rgba(251, 191, 36, 0.85));
+  }
+  100% {
+    transform: scale(0.98) rotate(-0.8deg);
+    filter: brightness(1.2) contrast(1.15) drop-shadow(0 0 30px rgba(245, 158, 11, 0.6));
+  }
+}
+
+@media (min-width: 1536px) {
+  .hero-fire-pillar-backdrop {
+    top: 95px;
+    right: 4%;
+    width: 360px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-fire-pillar-backdrop {
+    top: 90px;
+    right: 1%;
+    width: 220px;
+    max-width: 32vw;
+    opacity: 0.82;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-fire-pillar-backdrop {
+    top: 80px;
+    right: -10px;
+    width: 150px;
+    max-width: 42vw;
+    opacity: 0.65;
+  }
+}
+
 /* --- High-Legibility & Clean Section Styles (Fond ciel uniquement sur Accueil) --- */
 .content-section-glass {
   background-color: #ffffff !important;
