@@ -4,8 +4,12 @@
 const crypto = require('crypto');
 
 function getExpectedToken() {
-  const secret = process.env.ADMIN_PASSWORD || '11eheure';
-  return crypto.createHash('sha256').update(secret + '_tabernacle_salt_2026').digest('hex');
+  const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
+  const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
+  const secretKey = (configuredPass || configuredPin)
+    ? `${configuredPass}|${configuredPin}`
+    : '11eheure_tabernacle_2026_default';
+  return crypto.createHash('sha256').update(secretKey + '_tabernacle_salt_2026').digest('hex');
 }
 
 module.exports = async (req, res) => {

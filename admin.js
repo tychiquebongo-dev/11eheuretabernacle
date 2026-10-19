@@ -163,18 +163,9 @@ function initAuth() {
         passwordInput.focus();
       }
     } catch (err) {
-      // Fallback local sécurisé
-      if (entered === '11eheure' || entered === '1177') {
-        sessionStorage.setItem(AUTH_KEY, 'true');
-        authModal?.classList.add('hidden');
-        loginError?.classList.add('hidden');
-        passwordInput.value = '';
-        showToast('Connexion pastorale (mode secours)', 'success');
-        renderAll();
-      } else {
-        loginError?.classList.remove('hidden');
-        passwordInput.focus();
-      }
+      console.warn('Erreur lors de la tentative d\'authentification:', err);
+      loginError?.classList.remove('hidden');
+      passwordInput.focus();
     }
   });
 

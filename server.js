@@ -3,26 +3,36 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-// Chargement automatique du fichier .env
+// Chargement automatique et dynamique du fichier .env
 const ENV_FILE = path.join(__dirname, '.env');
-if (fs.existsSync(ENV_FILE)) {
-  const envContent = fs.readFileSync(ENV_FILE, 'utf-8');
-  envContent.split(/\r?\n/).forEach(line => {
-    line = line.trim();
-    if (line && !line.startsWith('#') && line.includes('=')) {
-      const idx = line.indexOf('=');
-      const key = line.slice(0, idx).trim();
-      const val = line.slice(idx + 1).trim().replace(/^['"]|['"]$/g, '');
-      if (key && !process.env[key]) {
-        process.env[key] = val;
-      }
-    }
-  });
+function loadEnv() {
+  if (fs.existsSync(ENV_FILE)) {
+    try {
+      const envContent = fs.readFileSync(ENV_FILE, 'utf-8');
+      envContent.split(/\r?\n/).forEach(line => {
+        line = line.trim();
+        if (line && !line.startsWith('#') && line.includes('=')) {
+          const idx = line.indexOf('=');
+          const key = line.slice(0, idx).trim();
+          const val = line.slice(idx + 1).trim().replace(/^['"]|['"]$/g, '');
+          if (key) {
+            process.env[key] = val;
+          }
+        }
+      });
+    } catch (e) {}
+  }
 }
+loadEnv();
 
 function getExpectedToken() {
-  const secret = process.env.ADMIN_PASSWORD || '11eheure';
-  return crypto.createHash('sha256').update(secret + '_tabernacle_salt_2026').digest('hex');
+  loadEnv();
+  const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
+  const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
+  const secretKey = (configuredPass || configuredPin)
+    ? `${configuredPass}|${configuredPin}`
+    : '11eheure_tabernacle_2026_default';
+  return crypto.createHash('sha256').update(secretKey + '_tabernacle_salt_2026').digest('hex');
 }
 
 const PORT = 3000;
@@ -42,6 +52,9 @@ const MIME_TYPES = {
 const DATA_FILE = path.join(__dirname, 'data', 'content.json');
 
 const server = http.createServer(async (req, res) => {
+  // Rafraîchir les variables .env à chaque requête si modifié
+  loadEnv();
+
   // CORS Headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -60,16 +73,24 @@ const server = http.createServer(async (req, res) => {
     req.on('end', () => {
       try {
         const { password } = JSON.parse(body || '{}');
-        const validPass = process.env.ADMIN_PASSWORD || '11eheure';
-        const validPin = process.env.ADMIN_PIN || '1177';
+        const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
+        const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
 
-        if (password && (password === validPass || password === validPin)) {
+        let isAuthorized = false;
+        if (configuredPass || configuredPin) {
+          if (configuredPass && password === configuredPass) isAuthorized = true;
+          if (configuredPin && password === configuredPin) isAuthorized = true;
+        } else {
+          if (password === '11eheure' || password === '1177') isAuthorized = true;
+        }
+
+        if (isAuthorized) {
           const token = getExpectedToken();
           res.writeHead(200, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({ success: true, token, message: 'Authentification pastorale réussie' }));
         } else {
           res.writeHead(401, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: false, error: 'Code d\'accès pastoral incorrect' }));
+          res.end(JSON.stringify({ success: false, error: 'Code d\'accès ou mot de passe pastoral incorrect' }));
         }
       } catch (e) {
         res.writeHead(400, { 'Content-Type': 'application/json' });

@@ -4,8 +4,12 @@
 const crypto = require('crypto');
 
 function getExpectedToken() {
-  const secret = process.env.ADMIN_PASSWORD || '11eheure';
-  return crypto.createHash('sha256').update(secret + '_tabernacle_salt_2026').digest('hex');
+  const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
+  const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
+  const secretKey = (configuredPass || configuredPin)
+    ? `${configuredPass}|${configuredPin}`
+    : '11eheure_tabernacle_2026_default';
+  return crypto.createHash('sha256').update(secretKey + '_tabernacle_salt_2026').digest('hex');
 }
 
 module.exports = async (req, res) => {
@@ -23,10 +27,18 @@ module.exports = async (req, res) => {
 
   try {
     const { password } = req.body || {};
-    const validPass = process.env.ADMIN_PASSWORD || '11eheure';
-    const validPin = process.env.ADMIN_PIN || '1177';
+    const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
+    const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
 
-    if (password && (password === validPass || password === validPin)) {
+    let isAuthorized = false;
+    if (configuredPass || configuredPin) {
+      if (configuredPass && password === configuredPass) isAuthorized = true;
+      if (configuredPin && password === configuredPin) isAuthorized = true;
+    } else {
+      if (password === '11eheure' || password === '1177') isAuthorized = true;
+    }
+
+    if (isAuthorized) {
       const token = getExpectedToken();
       return res.status(200).json({
         success: true,
