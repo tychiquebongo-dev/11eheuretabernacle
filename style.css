@@ -46,7 +46,8 @@
   --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
-  --font-spiritual: 'Cinzel', serif;
+  --font-spiritual: 'Cinzel Decorative', 'Cinzel', serif;
+  --font-spiritual-classic: 'Cinzel', serif;
 
   /* Ombres & Lueurs Spirituelles */
   --shadow-subtle: 0 4px 20px -2px rgba(46, 16, 101, 0.08);
@@ -1284,4 +1285,145 @@ body {
   .hero-wrapper .max-w-5xl {
     max-width: 72rem;
   }
+}
+
+/* ==========================================================================
+   TYPOGRAPHIE MAJESTUEUSE & PROFESSIONNELLE DE LA HERO SECTION
+   ========================================================================== */
+.hero-brand-title {
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  text-rendering: optimizeLegibility;
+  margin-bottom: 0.75rem;
+}
+
+.hero-brand-line-1 {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.6rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-brand-line-1 {
+    justify-content: flex-start;
+  }
+}
+
+.hero-brand-numeral {
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+  font-weight: 900;
+  background: linear-gradient(135deg, #FFFDF7 0%, #FEF08A 25%, #FBBF24 55%, #F59E0B 80%, #B45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 30px rgba(245, 158, 11, 0.55));
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.hero-brand-sup {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 0.44em;
+  vertical-align: super;
+  margin-left: 2px;
+  color: #FCD34D;
+  -webkit-text-fill-color: #FCD34D;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8));
+}
+
+.hero-brand-word-heure {
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+  font-weight: 900;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 45%, #E2E8F0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 32px rgba(255, 255, 255, 0.4));
+  letter-spacing: 0.05em;
+}
+
+.hero-brand-line-2 {
+  display: block;
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+  font-weight: 900;
+  background: linear-gradient(135deg, #FFFDF7 0%, #FEF3C7 20%, #FDE047 50%, #F59E0B 80%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 45px rgba(251, 191, 36, 0.6));
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-top: 0.15rem;
+}
+
+/* Diviseur ornemental royal sous le grand titre */
+.hero-sacred-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-sacred-divider {
+    justify-content: flex-start;
+  }
+}
+
+.hero-sacred-line {
+  height: 2px;
+  width: 60px;
+  background: linear-gradient(90deg, transparent, #FBBF24, transparent);
+  border-radius: 9999px;
+}
+
+.hero-sacred-gem {
+  width: 7px;
+  height: 7px;
+  background: #FBBF24;
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px #FBBF24, 0 0 18px #F59E0B;
+}
+
+/* ==========================================================================
+   SECTION ANNONCES DE L'ÉGLISE (ESPACE COMMUNICATION & VIE DU TABERNACLE)
+   ========================================================================== */
+.announcement-main-card {
+  background: linear-gradient(135deg, rgba(30, 11, 54, 0.95) 0%, rgba(45, 18, 84, 0.92) 50%, rgba(18, 7, 43, 0.98) 100%);
+  border: 1.5px solid rgba(251, 191, 36, 0.55);
+  box-shadow: 0 20px 40px -10px rgba(18, 7, 43, 0.8), 0 0 30px rgba(245, 158, 11, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+}
+
+.announcement-main-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #F59E0B, #FDE047, #F59E0B);
+}
+
+.announcement-subcard {
+  background: rgba(26, 11, 54, 0.75);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.announcement-subcard:hover {
+  background: rgba(45, 18, 84, 0.9);
+  border-color: rgba(251, 191, 36, 0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px -5px rgba(18, 7, 43, 0.6), 0 0 20px rgba(245, 158, 11, 0.2);
 }

@@ -1064,19 +1064,58 @@ async function initContentSync() {
 }
 
 function renderPublicAnnouncement(ann) {
+  // 1. Mise à jour de la bannière supérieure optionnelle
   const existing = document.getElementById('urgent-announcement-banner');
   if (existing) existing.remove();
 
-  const banner = document.createElement('div');
-  banner.id = 'urgent-announcement-banner';
-  banner.className = 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 px-4 py-2.5 text-center text-xs font-heading font-extrabold flex flex-wrap items-center justify-center gap-2 sm:gap-3 shadow-lg relative z-40';
-  banner.innerHTML = `
-    <span class="px-2.5 py-0.5 rounded-full bg-purple-950 text-amber-300 text-[10px] uppercase font-bold tracking-wider">${escapeHtml(ann.badge || 'Annonce Spéciale')}</span>
-    <span class="leading-snug">${escapeHtml(ann.message)}</span>
-    ${ann.linkText ? `<a href="${escapeHtml(ann.linkUrl || '#horaires')}" class="inline-flex items-center gap-1 underline font-black text-purple-950 hover:text-white transition-colors">${escapeHtml(ann.linkText)} &rarr;</a>` : ''}
-  `;
-  document.body.prepend(banner);
+  if (ann.active && ann.message) {
+    const banner = document.createElement('div');
+    banner.id = 'urgent-announcement-banner';
+    banner.className = 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-purple-950 px-4 py-2.5 text-center text-xs font-heading font-extrabold flex flex-wrap items-center justify-center gap-2 sm:gap-3 shadow-lg relative z-40';
+    banner.innerHTML = `
+      <span class="px-2.5 py-0.5 rounded-full bg-purple-950 text-amber-300 text-[10px] uppercase font-bold tracking-wider">${escapeHtml(ann.badge || 'Annonce Spéciale')}</span>
+      <span class="leading-snug">${escapeHtml(ann.message)}</span>
+      ${ann.linkText ? `<a href="${escapeHtml(ann.linkUrl || '#annonces')}" class="inline-flex items-center gap-1 underline font-black text-purple-950 hover:text-white transition-colors">${escapeHtml(ann.linkText)} &rarr;</a>` : ''}
+    `;
+    document.body.prepend(banner);
+  }
+
+  // 2. Mise à jour de l'Espace Annonces dédié sur la page d'accueil
+  const cardContainer = document.getElementById('church-featured-announcement');
+  const badgeEl = document.getElementById('announcement-live-badge');
+  const msgEl = document.getElementById('announcement-live-message');
+  const linkEl = document.getElementById('announcement-live-link');
+  const linkTextEl = document.getElementById('announcement-live-link-text');
+
+  if (ann.active && ann.message) {
+    if (cardContainer) cardContainer.classList.remove('hidden');
+    if (badgeEl) badgeEl.textContent = ann.badge || 'Annonce Pastorale';
+    if (msgEl) msgEl.textContent = ann.message;
+    if (linkEl) linkEl.setAttribute('href', ann.linkUrl || '#horaires');
+    if (linkTextEl) linkTextEl.textContent = ann.linkText || 'Consulter les horaires';
+  } else {
+    // Si désactivée dans le Back Office, afficher un message d'accueil fraternel standard
+    if (badgeEl) badgeEl.textContent = 'Vie de l\'Église';
+    if (msgEl) msgEl.textContent = 'Tous nos cultes d\'adoration et d\'édification se déroulent aux horaires habituels à Voungou 1 (Mardi 18h, Jeudi 18h, Dimanche 08h & 10h). Bienvenue à tous !';
+    if (linkTextEl) linkTextEl.textContent = 'Découvrir nos cultes';
+  }
 }
+
+// Fonction de partage d'annonce sur WhatsApp
+function shareAnnouncementOnWhatsApp() {
+  const msgEl = document.getElementById('announcement-live-message');
+  const badgeEl = document.getElementById('announcement-live-badge');
+  const badge = badgeEl ? badgeEl.textContent.trim() : 'Annonce Pastorale';
+  const message = msgEl ? msgEl.textContent.trim() : 'Rassemblement chrétien à 11e Heure Tabernacle';
+  const siteUrl = window.location.origin + window.location.pathname;
+
+  const shareText = `🕊️ *11e HEURE TABERNACLE — ${badge.toUpperCase()}*\n\n« ${message} »\n\n📍 Pointe-Noire (Voungou 1, Bank de Vie, arrêt 1er Pont)\n📖 Église du Message du Temps de la Fin\n🔗 Consultez les annonces et cultes sur notre site officiel :\n${siteUrl}#annonces`;
+
+  const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+  window.open(waUrl, '_blank');
+}
+window.shareAnnouncementOnWhatsApp = shareAnnouncementOnWhatsApp;
+
 
 function syncPublicGallery(photos) {
   const grid = document.getElementById('gallery-grid');
