@@ -112,24 +112,47 @@ Puis accédez à `http://localhost:8000` dans votre navigateur.
 
 ---
 
-## 🌐 Déploiement en Ligne (Production)
+---
 
-Ce site statique haute performance peut être hébergé gratuitement et en quelques secondes sur :
-- **Vercel :** Glissez-déposez simplement le dossier dans le dashboard Vercel.
-- **Netlify :** Drag & drop du dossier dans [app.netlify.com/drop](https://app.netlify.com/drop).
-- **GitHub Pages :** Poussez les fichiers sur une branche `main` et activez GitHub Pages dans les paramètres du dépôt.
-- **Hébergement cPanel / Apache / Nginx :** Copiez tous les fichiers du dossier dans `public_html`.
+## 🏛️ Back Office Pastoral & Administration (`/admin`)
+
+Le site dispose d'un espace d'administration privé dédié à l'équipe pastorale et média :
+- **Accès :** `http://localhost:3000/admin` ou `https://votre-domaine.vercel.app/admin`
+- **Sécurisation :** Protégé par mot de passe ou code PIN configurables dans `.env`.
+- **Galerie Photos :** Téléversement direct en glisser-déposer vers **ImgBB** sans formulaires superflus.
+- **Gestion Complète :** Mise à jour en temps réel des cultes, horaires, présentation pastorale, confession de foi et bannières d'annonces.
+- **Persistance à Vie (Option A) :** Chaque modification enregistrée depuis le Back Office effectue automatiquement un commit vers le dépôt GitHub pour déclencher un redéploiement transparent sur Vercel.
 
 ---
 
-## ✏️ Personnalisation Simple
+## ⚙️ Configuration & Variables d'Environnement (`.env`)
 
-1. **Remplacer les photos par les photos réelles de l'église :**
-   Il suffit de déposer vos photos dans `assets/images/` en conservant les mêmes noms de fichiers (`hero-bg.jpg`, `pastor-odilon.jpg`, etc.) ou en modifiant les chemins dans `index.html`.
-2. **Mettre à jour les liens des réseaux sociaux :**
-   Dans `index.html`, recherchez les balises `<a>` relatives à Facebook et YouTube pour insérer les liens exacts de vos pages/chaînes officielles dès que vous les aurez validés.
+Créez un fichier `.env` à la racine (voir [`.env.example`](.env.example)) :
+
+```env
+# 1. Clé ImgBB pour l'hébergement des photos de la galerie
+IMGBB_API_KEY=votre_cle_api_imgbb
+
+# 2. Token GitHub (PAT) pour sauvegarder automatiquement les modifications à vie en production
+GITHUB_TOKEN=github_pat_votre_token_personnel
+GITHUB_REPO=tychiquebongo-dev/11eheuretabernacle
+GITHUB_BRANCH=main
+
+# 3. Sécurité & Authentification du Back Office pastoral
+ADMIN_PASSWORD=votre_mot_de_passe_secret
+ADMIN_PIN=1177
+```
+
+### Configuration des variables sur Vercel (Production) :
+1. Rendez-vous sur votre projet **Vercel** &rarr; **Settings** &rarr; **Environment Variables**.
+2. Renseignez :
+   - `IMGBB_API_KEY`
+   - `GITHUB_TOKEN`
+   - `ADMIN_PASSWORD`
+   - `ADMIN_PIN`
 
 ---
 
 *Que toute la gloire revienne à Dieu.*  
 *11e Heure Tabernacle — Pointe-Noire, République du Congo.*
+
