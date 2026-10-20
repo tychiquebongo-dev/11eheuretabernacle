@@ -6,9 +6,10 @@ const crypto = require('crypto');
 function getExpectedToken() {
   const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
   const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
-  const secretKey = (configuredPass || configuredPin)
-    ? `${configuredPass}|${configuredPin}`
-    : '11eheure_tabernacle_2026_default';
+  if (!configuredPass && !configuredPin) {
+    return null; // Aucun token possible si les variables d'environnement ne sont pas définies
+  }
+  const secretKey = `${configuredPass}|${configuredPin}`;
   return crypto.createHash('sha256').update(secretKey + '_tabernacle_salt_2026').digest('hex');
 }
 
@@ -30,13 +31,17 @@ module.exports = async (req, res) => {
     const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
     const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
 
-    let isAuthorized = false;
-    if (configuredPass || configuredPin) {
-      if (configuredPass && password === configuredPass) isAuthorized = true;
-      if (configuredPin && password === configuredPin) isAuthorized = true;
-    } else {
-      if (password === '11eheure' || password === '1177') isAuthorized = true;
+    // Sécurité stricte : Si aucune variable n'est définie sur Vercel, refuser toute connexion (aucun mot de passe par défaut)
+    if (!configuredPass && !configuredPin) {
+      return res.status(503).json({
+        success: false,
+        error: 'Accès impossible : Les variables ADMIN_PASSWORD ou ADMIN_PIN ne sont pas encore configurées sur Vercel. Le Back Office est verrouillé par sécurité.'
+      });
     }
+
+    let isAuthorized = false;
+    if (configuredPass && password === configuredPass) isAuthorized = true;
+    if (configuredPin && password === configuredPin) isAuthorized = true;
 
     if (isAuthorized) {
       const token = getExpectedToken();

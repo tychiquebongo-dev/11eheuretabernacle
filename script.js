@@ -1008,26 +1008,14 @@ const CHURCH_STORAGE_KEY = '11E_TABERNACLE_DATA_V1';
 async function initContentSync() {
   let churchData = null;
 
-  // 1. Lire depuis le stockage local (Back Office)
-  const localData = localStorage.getItem(CHURCH_STORAGE_KEY);
-  if (localData) {
-    try {
-      churchData = JSON.parse(localData);
-    } catch (e) {
-      console.warn('Erreur lecture données locales', e);
+  // Chargement exclusif du contenu officiel validé depuis le serveur (zéro fuite locale)
+  try {
+    const res = await fetch('data/content.json?t=' + Date.now());
+    if (res.ok) {
+      churchData = await res.json();
     }
-  }
-
-  // 2. Si pas de modifications locales, charger data/content.json
-  if (!churchData) {
-    try {
-      const res = await fetch('data/content.json');
-      if (res.ok) {
-        churchData = await res.json();
-      }
-    } catch (e) {
-      // mode statique
-    }
+  } catch (e) {
+    console.warn('Impossible de charger data/content.json', e);
   }
 
   if (!churchData) return;

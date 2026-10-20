@@ -29,9 +29,10 @@ function getExpectedToken() {
   loadEnv();
   const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
   const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
-  const secretKey = (configuredPass || configuredPin)
-    ? `${configuredPass}|${configuredPin}`
-    : '11eheure_tabernacle_2026_default';
+  if (!configuredPass && !configuredPin) {
+    return null; // Aucun token possible si les variables ne sont pas configurées
+  }
+  const secretKey = `${configuredPass}|${configuredPin}`;
   return crypto.createHash('sha256').update(secretKey + '_tabernacle_salt_2026').digest('hex');
 }
 
@@ -76,13 +77,19 @@ const server = http.createServer(async (req, res) => {
         const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
         const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
 
-        let isAuthorized = false;
-        if (configuredPass || configuredPin) {
-          if (configuredPass && password === configuredPass) isAuthorized = true;
-          if (configuredPin && password === configuredPin) isAuthorized = true;
-        } else {
-          if (password === '11eheure' || password === '1177') isAuthorized = true;
+        // Verrouillage absolu sans variable de sécurité
+        if (!configuredPass && !configuredPin) {
+          res.writeHead(503, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({
+            success: false,
+            error: 'Accès impossible : Les variables ADMIN_PASSWORD ou ADMIN_PIN ne sont pas configurées. Le Back Office est verrouillé par sécurité.'
+          }));
+          return;
         }
+
+        let isAuthorized = false;
+        if (configuredPass && password === configuredPass) isAuthorized = true;
+        if (configuredPin && password === configuredPin) isAuthorized = true;
 
         if (isAuthorized) {
           const token = getExpectedToken();
@@ -104,6 +111,8 @@ const server = http.createServer(async (req, res) => {
   if (req.url === '/api/config' && req.method === 'GET') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
+      isConfigured: !!((process.env.ADMIN_PASSWORD && process.env.ADMIN_PASSWORD.trim()) || (process.env.ADMIN_PIN && process.env.ADMIN_PIN.trim())),
+      hasImgbbKey: !!(process.env.IMGBB_API_KEY && process.env.IMGBB_API_KEY.trim()),
       imgbbKey: process.env.IMGBB_API_KEY || '',
       hasGithubToken: !!(process.env.GITHUB_TOKEN && process.env.GITHUB_TOKEN.trim())
     }));
@@ -126,7 +135,8 @@ const server = http.createServer(async (req, res) => {
   if (req.url === '/api/content' && req.method === 'POST') {
     // Vérification d'authentification
     const authHeader = req.headers['authorization'] || '';
-    if (!authHeader.includes(getExpectedToken())) {
+    const expectedToken = getExpectedToken();
+    if (!expectedToken || !authHeader.includes(expectedToken)) {
       res.writeHead(401, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: false, error: 'Session non autorisée. Veuillez vous connecter.' }));
       return;
@@ -208,7 +218,8 @@ const server = http.createServer(async (req, res) => {
   if (req.url === '/api/upload' && req.method === 'POST') {
     // Vérification d'authentification
     const authHeader = req.headers['authorization'] || '';
-    if (!authHeader.includes(getExpectedToken())) {
+    const expectedToken = getExpectedToken();
+    if (!expectedToken || !authHeader.includes(expectedToken)) {
       res.writeHead(401, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: false, error: 'Session requise pour téléverser.' }));
       return;

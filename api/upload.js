@@ -6,9 +6,10 @@ const crypto = require('crypto');
 function getExpectedToken() {
   const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
   const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
-  const secretKey = (configuredPass || configuredPin)
-    ? `${configuredPass}|${configuredPin}`
-    : '11eheure_tabernacle_2026_default';
+  if (!configuredPass && !configuredPin) {
+    return null; // Aucun token si non configuré
+  }
+  const secretKey = `${configuredPass}|${configuredPin}`;
   return crypto.createHash('sha256').update(secretKey + '_tabernacle_salt_2026').digest('hex');
 }
 
@@ -28,7 +29,7 @@ module.exports = async (req, res) => {
   // Vérification de sécurité du token d'administration
   const authHeader = req.headers['authorization'] || '';
   const expectedToken = getExpectedToken();
-  if (!authHeader.includes(expectedToken)) {
+  if (!expectedToken || !authHeader.includes(expectedToken)) {
     return res.status(401).json({
       success: false,
       error: 'Non autorisé : Session pastorale requise pour téléverser des photos.'
@@ -37,9 +38,9 @@ module.exports = async (req, res) => {
 
   const apiKey = process.env.IMGBB_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({
+    return res.status(503).json({
       success: false,
-      error: 'La variable IMGBB_API_KEY n\'est pas configurée dans les paramètres Vercel.'
+      error: 'Échec du téléversement : La variable IMGBB_API_KEY n\'est pas configurée dans les paramètres Vercel.'
     });
   }
 

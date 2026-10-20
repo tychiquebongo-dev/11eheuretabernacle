@@ -9,6 +9,8 @@ module.exports = (req, res) => {
   }
 
   res.status(200).json({
+    isConfigured: !!((process.env.ADMIN_PASSWORD && process.env.ADMIN_PASSWORD.trim()) || (process.env.ADMIN_PIN && process.env.ADMIN_PIN.trim())),
+    hasImgbbKey: !!(process.env.IMGBB_API_KEY && process.env.IMGBB_API_KEY.trim()),
     imgbbKey: process.env.IMGBB_API_KEY || '',
     hasGithubToken: !!(process.env.GITHUB_TOKEN && process.env.GITHUB_TOKEN.trim())
   });

@@ -3,8 +3,7 @@
  * Gestion du contenu : Galerie, Horaires, À propos, Pasteur, Annonces
  */
 
-// Clés de stockage
-const STORAGE_KEY = '11E_TABERNACLE_DATA_V1';
+// Clés de session
 const AUTH_KEY = '11E_TABERNACLE_ADMIN_AUTH';
 const SESSION_TOKEN_KEY = '11E_TABERNACLE_SESSION_TOKEN';
 
@@ -39,22 +38,10 @@ document.addEventListener('DOMContentLoaded', async () => {
    1. CHARGEMENT ET SAUVEGARDE DES DONNÉES
    ========================================================================== */
 async function loadData() {
-  const localData = localStorage.getItem(STORAGE_KEY);
-  if (localData) {
-    try {
-      appData = JSON.parse(localData);
-      return;
-    } catch (e) {
-      console.warn('Erreur lecture localStorage, tentative via seed JSON');
-    }
-  }
-
-  // Tenter de charger data/content.json
   try {
-    const res = await fetch('data/content.json');
+    const res = await fetch('data/content.json?t=' + Date.now());
     if (res.ok) {
       appData = await res.json();
-      saveDataLocally(false);
       return;
     }
   } catch (err) {
@@ -63,29 +50,31 @@ async function loadData() {
 
   // Fallback de sécurité
   appData = getFallbackData();
-  saveDataLocally(false);
 }
 
-function saveDataLocally(showToastNotification = true) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+async function saveDataLocally(showToastNotification = true) {
+  const serverResult = await saveToServer(appData);
+  if (serverResult && serverResult.success) {
     updateLastSavedIndicator();
-    
-    // Tenter également de sauvegarder sur le serveur Node si disponible
-    saveToServer(appData);
-
     if (showToastNotification) {
-      showToast('Modifications enregistrées avec succès !', 'success');
+      showToast(serverResult.message || 'Modifications enregistrées et synchronisées avec succès !', 'success');
     }
-  } catch (e) {
-    console.error('Erreur sauvegarde locale', e);
-    showToast('Erreur lors de la sauvegarde locale', 'error');
+  } else if (serverResult && !serverResult.success) {
+    showToast(serverResult.error || 'Erreur lors de l\'enregistrement sur le serveur.', 'error');
   }
 }
 
 async function saveToServer(data) {
+  const token = sessionStorage.getItem(SESSION_TOKEN_KEY) || '';
+  if (!token) {
+    showToast('Session expirée ou non autorisée. Veuillez vous reconnecter.', 'error');
+    sessionStorage.removeItem(AUTH_KEY);
+    sessionStorage.removeItem(SESSION_TOKEN_KEY);
+    document.getElementById('login-modal')?.classList.remove('hidden');
+    return { success: false, error: 'Session non autorisée' };
+  }
+
   try {
-    const token = sessionStorage.getItem(SESSION_TOKEN_KEY) || '';
     const res = await fetch('/api/content', {
       method: 'POST',
       headers: {
@@ -94,19 +83,20 @@ async function saveToServer(data) {
       },
       body: JSON.stringify(data)
     });
-    if (res.ok) {
-      const json = await res.json();
-      if (json.synced) {
-        showToast(json.message || '✅ Synchronisé sur GitHub ! Vercel met à jour le site public.', 'success');
-      }
+
+    const json = await res.json();
+    if (res.ok && json.success) {
+      return { success: true, message: json.message || 'Synchronisé avec succès !' };
     } else if (res.status === 401) {
-      showToast('Session expirée. Veuillez vous reconnecter.', 'error');
       sessionStorage.removeItem(AUTH_KEY);
       sessionStorage.removeItem(SESSION_TOKEN_KEY);
       document.getElementById('login-modal')?.classList.remove('hidden');
+      return { success: false, error: json.error || 'Session expirée. Veuillez vous reconnecter.' };
+    } else {
+      return { success: false, error: json.error || 'Impossible d\'enregistrer sur le serveur.' };
     }
   } catch (e) {
-    // Mode offline ou sans backend
+    return { success: false, error: 'Serveur indisponible : ' + e.message };
   }
 }
 
@@ -127,8 +117,15 @@ function initAuth() {
   const passwordInput = document.getElementById('admin-password');
   const loginError = document.getElementById('login-error');
   const logoutBtn = document.getElementById('logout-btn');
+  const configWarning = document.getElementById('login-config-warning');
 
-  const isAuthenticated = sessionStorage.getItem(AUTH_KEY) === 'true';
+  // Si le serveur indique qu'aucune variable de sécurité n'est configurée sur Vercel
+  if (serverConfig && serverConfig.isConfigured === false) {
+    configWarning?.classList.remove('hidden');
+  }
+
+  const token = sessionStorage.getItem(SESSION_TOKEN_KEY);
+  const isAuthenticated = sessionStorage.getItem(AUTH_KEY) === 'true' && !!token;
 
   if (!isAuthenticated) {
     authModal?.classList.remove('hidden');
@@ -160,11 +157,19 @@ function initAuth() {
         renderAll();
       } else {
         loginError?.classList.remove('hidden');
+        const errSpan = loginError?.querySelector('span');
+        if (errSpan) {
+          errSpan.textContent = json.error || 'Code d\'accès ou mot de passe pastoral incorrect.';
+        }
         passwordInput.focus();
       }
     } catch (err) {
       console.warn('Erreur lors de la tentative d\'authentification:', err);
       loginError?.classList.remove('hidden');
+      const errSpan = loginError?.querySelector('span');
+      if (errSpan) {
+        errSpan.textContent = 'Serveur inaccessible ou non configuré.';
+      }
       passwordInput.focus();
     }
   });
@@ -412,7 +417,7 @@ function initGalleryUploader() {
 
       try {
         const base64Data = await readFileAsBase64(file);
-        let finalImageUrl = base64Data;
+        let finalImageUrl = null;
         let uploaded = false;
 
         // 1. Tenter l'envoi direct depuis le navigateur vers ImgBB avec la clé du .env
@@ -431,33 +436,36 @@ function initGalleryUploader() {
               uploaded = true;
             }
           } catch (directErr) {
-            console.warn('Upload direct échoué, passage par /api/upload', directErr);
+            console.warn('Upload direct échoué, tentative via /api/upload', directErr);
           }
         }
 
         // 2. Si non envoyé directement, passer par le backend sécurisé /api/upload
         if (!uploaded) {
-          try {
-            const token = sessionStorage.getItem(SESSION_TOKEN_KEY) || '';
-            const res = await fetch('/api/upload', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-              },
-              body: JSON.stringify({
-                image: base64Data,
-                name: file.name
-              })
-            });
+          const token = sessionStorage.getItem(SESSION_TOKEN_KEY) || '';
+          const res = await fetch('/api/upload', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              image: base64Data,
+              name: file.name
+            })
+          });
 
-            const json = await res.json();
-            if (json.success && json.url) {
-              finalImageUrl = json.url;
-            }
-          } catch (apiErr) {
-            console.warn('API /api/upload indisponible, conservation en mémoire locale', apiErr);
+          const json = await res.json();
+          if (res.ok && json.success && json.url) {
+            finalImageUrl = json.url;
+            uploaded = true;
+          } else {
+            throw new Error(json.message || "Échec d'hébergement. Vérifiez la variable IMGBB_API_KEY sur Vercel.");
           }
+        }
+
+        if (!uploaded || !finalImageUrl) {
+          throw new Error("L'image n'a pas pu être hébergée sur ImgBB.");
         }
 
         const cleanName = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ').trim();
@@ -477,29 +485,35 @@ function initGalleryUploader() {
         successCount++;
 
       } catch (err) {
-        console.error('Erreur lecture fichier:', err);
-        showToast(`Erreur (${file.name})`, 'error');
+        console.error('Erreur téléversement fichier:', err);
+        showToast(err.message || `Erreur (${file.name})`, 'error');
       }
     }
 
     if (progressBar) progressBar.style.width = '100%';
     if (statusPercent) statusPercent.textContent = '100%';
-    if (statusText) {
-      statusText.innerHTML = `✅ ${successCount} photo(s) ajoutée(s) avec succès !`;
-    }
 
-    saveDataLocally();
-    renderGalleryList();
-    renderDashboardStats();
+    if (successCount > 0) {
+      if (statusText) {
+        statusText.innerHTML = `✅ ${successCount} photo(s) téléversée(s) avec succès ! Synchronisation en cours...`;
+      }
+      renderGalleryList();
+      renderDashboardStats();
+      const saved = await saveDataLocally();
+      if (saved) {
+        showToast(`${successCount} photo(s) ajoutée(s) et synchronisée(s) !`, 'success');
+      }
+    } else {
+      if (statusText) {
+        statusText.innerHTML = `❌ Échec du téléversement : clé IMGBB_API_KEY manquante ou non configurée.`;
+      }
+      showToast("Aucune image n'a pu être téléversée. Configurez IMGBB_API_KEY dans Vercel.", 'error');
+    }
 
     setTimeout(() => {
       if (statusContainer) statusContainer.classList.add('hidden');
       if (fileInput) fileInput.value = '';
-    }, 2000);
-
-    if (successCount > 0) {
-      showToast(`${successCount} photo(s) ajoutée(s) à la galerie !`, 'success');
-    }
+    }, 3500);
   }
 }
 
@@ -874,27 +888,13 @@ function initModals() {
   });
 
   // Réinitialisation aux valeurs par défaut
-  document.getElementById('reset-defaults-btn')?.addEventListener('click', () => {
-    if (confirm('Attention : Cette action réinitialisera toutes vos modifications personnalisées avec les valeurs initiales. Confirmer ?')) {
-      localStorage.removeItem(STORAGE_KEY);
+  document.getElementById('reset-defaults-btn')?.addEventListener('click', async () => {
+    if (confirm('Attention : Cette action réinitialisera toutes vos modifications avec les valeurs initiales du site. Confirmer ?')) {
       appData = getFallbackData();
-      saveDataLocally();
+      await saveDataLocally();
       renderAll();
       showToast('Données réinitialisées aux valeurs initiales', 'info');
     }
-  });
-
-  // Changement de mot de passe admin
-  document.getElementById('change-pass-form')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const newPass = document.getElementById('new-admin-password').value.trim();
-    if (newPass.length < 4) {
-      alert('Le mot de passe doit comporter au moins 4 caractères.');
-      return;
-    }
-    localStorage.setItem(PASS_KEY, newPass);
-    document.getElementById('new-admin-password').value = '';
-    showToast('Mot de passe administrateur modifié avec succès', 'success');
   });
 }
 

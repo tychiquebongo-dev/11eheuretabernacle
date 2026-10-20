@@ -8,9 +8,10 @@ const crypto = require('crypto');
 function getExpectedToken() {
   const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
   const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
-  const secretKey = (configuredPass || configuredPin)
-    ? `${configuredPass}|${configuredPin}`
-    : '11eheure_tabernacle_2026_default';
+  if (!configuredPass && !configuredPin) {
+    return null; // Aucun token si les variables de sécurité ne sont pas définies
+  }
+  const secretKey = `${configuredPass}|${configuredPin}`;
   return crypto.createHash('sha256').update(secretKey + '_tabernacle_salt_2026').digest('hex');
 }
 
@@ -67,7 +68,7 @@ module.exports = async (req, res) => {
     // Vérification de sécurité du token d'administration
     const authHeader = req.headers['authorization'] || '';
     const expectedToken = getExpectedToken();
-    if (!authHeader.includes(expectedToken)) {
+    if (!expectedToken || !authHeader.includes(expectedToken)) {
       return res.status(401).json({
         success: false,
         error: 'Non autorisé : Session pastorale invalide ou expirée. Veuillez vous reconnecter.'
@@ -82,10 +83,10 @@ module.exports = async (req, res) => {
     const contentStr = typeof newContent === 'string' ? newContent : JSON.stringify(newContent, null, 2);
 
     if (!token) {
-      return res.status(200).json({
-        success: true,
+      return res.status(503).json({
+        success: false,
         synced: false,
-        message: 'Modifications enregistrées. Ajoutez GITHUB_TOKEN dans vos variables Vercel pour la mise en ligne automatique pour tous les fidèles.'
+        error: 'Échec de la sauvegarde : La variable GITHUB_TOKEN n\'est pas configurée dans Vercel. Aucune modification ne peut être enregistrée en production.'
       });
     }
 
