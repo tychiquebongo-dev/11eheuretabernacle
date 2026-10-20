@@ -11,22 +11,10 @@ const SESSION_TOKEN_KEY = '11E_TABERNACLE_SESSION_TOKEN';
 let appData = null;
 let currentEditingPhotoId = null;
 let currentEditingProgramId = null;
-let serverConfig = null;
-
-async function loadServerConfig() {
-  try {
-    const res = await fetch('/api/config');
-    if (res.ok) {
-      serverConfig = await res.json();
-    }
-  } catch (e) {
-    // Mode offline
-  }
-}
 
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', async () => {
-  await Promise.all([loadData(), loadServerConfig()]);
+  await loadData();
   initAuth();
   initNavigation();
   initModals();
@@ -117,13 +105,6 @@ function initAuth() {
   const passwordInput = document.getElementById('admin-password');
   const loginError = document.getElementById('login-error');
   const logoutBtn = document.getElementById('logout-btn');
-  const configWarning = document.getElementById('login-config-warning');
-
-  // Si le serveur indique qu'aucune variable de sécurité n'est configurée sur Vercel
-  if (serverConfig && serverConfig.isConfigured === false) {
-    configWarning?.classList.remove('hidden');
-  }
-
   const token = sessionStorage.getItem(SESSION_TOKEN_KEY);
   const isAuthenticated = sessionStorage.getItem(AUTH_KEY) === 'true' && !!token;
 
@@ -420,52 +401,30 @@ function initGalleryUploader() {
         let finalImageUrl = null;
         let uploaded = false;
 
-        // 1. Tenter l'envoi direct depuis le navigateur vers ImgBB avec la clé du .env
-        const imgKey = serverConfig?.imgbbKey || '';
-        if (imgKey && imgKey.trim() && imgKey !== 'votre_cle_api_imgbb_ici') {
-          try {
-            const form = new FormData();
-            form.append('image', file);
-            const directRes = await fetch(`https://api.imgbb.com/1/upload?key=${encodeURIComponent(imgKey.trim())}`, {
-              method: 'POST',
-              body: form
-            });
-            const directJson = await directRes.json();
-            if (directJson.success && directJson.data) {
-              finalImageUrl = directJson.data.url || directJson.data.display_url;
-              uploaded = true;
-            }
-          } catch (directErr) {
-            console.warn('Upload direct échoué, tentative via /api/upload', directErr);
-          }
-        }
+        // Téléversement sécurisé via /api/upload (protégé par jeton d'authentification)
+        const token = sessionStorage.getItem(SESSION_TOKEN_KEY) || '';
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            image: base64Data,
+            name: file.name
+          })
+        });
 
-        // 2. Si non envoyé directement, passer par le backend sécurisé /api/upload
-        if (!uploaded) {
-          const token = sessionStorage.getItem(SESSION_TOKEN_KEY) || '';
-          const res = await fetch('/api/upload', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-              image: base64Data,
-              name: file.name
-            })
-          });
-
-          const json = await res.json();
-          if (res.ok && json.success && json.url) {
-            finalImageUrl = json.url;
-            uploaded = true;
-          } else {
-            throw new Error(json.message || "Échec d'hébergement. Vérifiez la variable IMGBB_API_KEY sur Vercel.");
-          }
+        const json = await res.json();
+        if (res.ok && json.success && json.url) {
+          finalImageUrl = json.url;
+          uploaded = true;
+        } else {
+          throw new Error(json.error || json.message || "Échec du téléversement de l'image.");
         }
 
         if (!uploaded || !finalImageUrl) {
-          throw new Error("L'image n'a pas pu être hébergée sur ImgBB.");
+          throw new Error("L'image n'a pas pu être hébergée.");
         }
 
         const cleanName = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ').trim();
@@ -505,9 +464,9 @@ function initGalleryUploader() {
       }
     } else {
       if (statusText) {
-        statusText.innerHTML = `❌ Échec du téléversement : clé IMGBB_API_KEY manquante ou non configurée.`;
+        statusText.innerHTML = `❌ Échec du téléversement. Service temporairement indisponible.`;
       }
-      showToast("Aucune image n'a pu être téléversée. Configurez IMGBB_API_KEY dans Vercel.", 'error');
+      showToast("Aucune image n'a pu être téléversée.", 'error');
     }
 
     setTimeout(() => {

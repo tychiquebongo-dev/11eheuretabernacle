@@ -31,11 +31,11 @@ module.exports = async (req, res) => {
     const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
     const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
 
-    // Sécurité stricte : Si aucune variable n'est définie sur Vercel, refuser toute connexion (aucun mot de passe par défaut)
+    // Sécurité stricte : Si aucune variable n'est définie, refuser immédiatement sans divulguer d'information
     if (!configuredPass && !configuredPin) {
-      return res.status(503).json({
+      return res.status(401).json({
         success: false,
-        error: 'Accès impossible : Les variables ADMIN_PASSWORD ou ADMIN_PIN ne sont pas encore configurées sur Vercel. Le Back Office est verrouillé par sécurité.'
+        error: "Code d'accès ou mot de passe incorrect."
       });
     }
 

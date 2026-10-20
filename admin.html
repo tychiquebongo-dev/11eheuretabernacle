@@ -93,13 +93,6 @@
       <h2 class="font-spiritual text-2xl font-bold text-white mb-1">11<sup>e</sup> Heure Tabernacle</h2>
       <p class="text-xs text-purple-200 mb-6 font-sans">Espace sécurisé de gestion pastorale et mise à jour du site web</p>
 
-      <div id="login-config-warning" class="hidden p-3.5 rounded-xl bg-red-950/90 border border-red-500/70 text-xs text-red-200 mb-4 flex items-start gap-2.5">
-        <svg class="w-5 h-5 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-        <div>
-          <strong class="font-bold text-red-100 block mb-0.5">Accès Verrouillé par Sécurité</strong>
-          <span>La variable <code class="bg-black/50 px-1 py-0.5 rounded text-amber-300 font-mono">ADMIN_PASSWORD</code> n'est pas encore définie dans Vercel. L'accès est totalement bloqué pour empêcher toute intrusion.</span>
-        </div>
-      </div>
 
       <form id="login-form" class="space-y-4 text-left">
         <div>
@@ -711,36 +704,24 @@
             </div>
           </div>
 
-          <!-- Carte Sécurité / Variables d'environnement -->
+          <!-- Carte Sécurité & Confidentialité Pastorale -->
           <div class="p-6 rounded-2xl admin-glass-panel space-y-4">
             <h3 class="font-heading font-bold text-base text-amber-300 flex items-center gap-2">
               <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-              Sécurité & Authentification (.env)
+              Protection & Confidentialité Pastorale
             </h3>
             <p class="text-xs text-slate-300 leading-relaxed">
-              Pour une sécurité maximale, le mot de passe pastoral n'est plus stocké dans le navigateur. Il est contrôlé côté serveur via vos variables secrètes :
+              L'accès à cet espace pastoral ainsi que les sauvegardes sont strictement sécurisés côté serveur par chiffrement cryptographique. Aucun mot de passe ni identifiant sensible n'est enregistré dans le navigateur.
             </p>
-            <div class="space-y-2 text-xs bg-slate-900/80 p-3.5 rounded-xl border border-purple-500/20 font-mono text-slate-300">
-              <div class="flex justify-between items-center">
-                <span class="text-amber-400 font-bold">ADMIN_PASSWORD</span>
-                <span class="text-slate-400 text-[10px]">Mot de passe secret</span>
+            <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-500/20 text-xs text-slate-300 space-y-2">
+              <div class="flex items-center gap-2 text-emerald-400 font-semibold">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                <span>Chiffrement et intégrité actifs</span>
               </div>
-              <div class="flex justify-between items-center">
-                <span class="text-amber-400 font-bold">ADMIN_PIN</span>
-                <span class="text-slate-400 text-[10px]">Code PIN numérique</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-amber-400 font-bold">GITHUB_TOKEN</span>
-                <span class="text-slate-400 text-[10px]">Sauvegarde GitHub</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-amber-400 font-bold">IMGBB_API_KEY</span>
-                <span class="text-slate-400 text-[10px]">Stockage photos</span>
-              </div>
+              <p class="text-slate-400 text-[11px] leading-relaxed">
+                Les autorisations sont vérifiées en temps réel pour chaque action. Pour modifier les accès, consultez la documentation technique confidentielle.
+              </p>
             </div>
-            <p class="text-[11px] text-slate-400 leading-relaxed">
-              💡 <em>Pour changer de mot de passe ou de PIN à tout moment, mettez à jour la variable correspondante dans le tableau de bord Vercel (<strong>Settings &gt; Environment Variables</strong>).</em>
-            </p>
           </div>
 
         </div>

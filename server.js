@@ -77,12 +77,12 @@ const server = http.createServer(async (req, res) => {
         const configuredPass = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
         const configuredPin = process.env.ADMIN_PIN ? process.env.ADMIN_PIN.trim() : '';
 
-        // Verrouillage absolu sans variable de sécurité
+        // Verrouillage absolu sans variable de sécurité (réponse 401 identique pour ne donner aucun indice)
         if (!configuredPass && !configuredPin) {
-          res.writeHead(503, { 'Content-Type': 'application/json' });
+          res.writeHead(401, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({
             success: false,
-            error: 'Accès impossible : Les variables ADMIN_PASSWORD ou ADMIN_PIN ne sont pas configurées. Le Back Office est verrouillé par sécurité.'
+            error: "Code d'accès ou mot de passe incorrect."
           }));
           return;
         }
@@ -94,28 +94,16 @@ const server = http.createServer(async (req, res) => {
         if (isAuthorized) {
           const token = getExpectedToken();
           res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: true, token, message: 'Authentification pastorale réussie' }));
+          res.end(JSON.stringify({ success: true, token, message: 'Authentification réussie' }));
         } else {
           res.writeHead(401, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: false, error: 'Code d\'accès ou mot de passe pastoral incorrect' }));
+          res.end(JSON.stringify({ success: false, error: "Code d'accès ou mot de passe incorrect." }));
         }
       } catch (e) {
         res.writeHead(400, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: false, error: 'Format JSON invalide' }));
       }
     });
-    return;
-  }
-
-  // API Endpoint: GET /api/config
-  if (req.url === '/api/config' && req.method === 'GET') {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({
-      isConfigured: !!((process.env.ADMIN_PASSWORD && process.env.ADMIN_PASSWORD.trim()) || (process.env.ADMIN_PIN && process.env.ADMIN_PIN.trim())),
-      hasImgbbKey: !!(process.env.IMGBB_API_KEY && process.env.IMGBB_API_KEY.trim()),
-      imgbbKey: process.env.IMGBB_API_KEY || '',
-      hasGithubToken: !!(process.env.GITHUB_TOKEN && process.env.GITHUB_TOKEN.trim())
-    }));
     return;
   }
 

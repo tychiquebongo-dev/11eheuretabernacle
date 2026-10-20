@@ -86,7 +86,7 @@ module.exports = async (req, res) => {
       return res.status(503).json({
         success: false,
         synced: false,
-        error: 'Échec de la sauvegarde : La variable GITHUB_TOKEN n\'est pas configurée dans Vercel. Aucune modification ne peut être enregistrée en production.'
+        error: "Échec de la sauvegarde : Service distant momentanément indisponible."
       });
     }
 

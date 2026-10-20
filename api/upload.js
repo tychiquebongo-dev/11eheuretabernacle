@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
   if (!apiKey) {
     return res.status(503).json({
       success: false,
-      error: 'Échec du téléversement : La variable IMGBB_API_KEY n\'est pas configurée dans les paramètres Vercel.'
+      error: "Échec du téléversement : Service de stockage d'images momentanément indisponible."
     });
   }
 
